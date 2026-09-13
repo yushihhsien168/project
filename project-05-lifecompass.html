@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人生羅盤 LifeCompass｜專案詳細介紹</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:#0c1830;color:#e8edf5;line-height:1.9}
+a{color:inherit}
+.topnav{max-width:1100px;margin:0 auto;padding:24px 6% 0}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:#c9a14b;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid #c9a14b;padding-bottom:2px}
+.hero{position:relative;max-width:1100px;margin:20px auto 0;padding:0 6%}
+.hero-img-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid #2a3d6b;height:340px}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8)}
+.hero-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#0c1830 100%)}
+.hero-num{position:absolute;top:18px;left:18px;background:rgba(201,161,75,.95);color:#0c1830;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;z-index:2}
+.hero-cat{position:absolute;top:18px;right:18px;background:rgba(12,24,48,.85);color:#c9a14b;padding:7px 14px;border-radius:4px;font-size:12px;letter-spacing:2px;font-weight:700;z-index:2}
+.hero-title-wrap{position:absolute;bottom:24px;left:28px;right:28px;z-index:2}
+.hero-title-wrap h1{font-size:34px;color:#fff;font-weight:900;line-height:1.3;margin-bottom:8px}
+.hero-title-wrap .value-line{color:#c9a14b;font-size:15px;font-weight:700}
+main{max-width:900px;margin:0 auto;padding:50px 6% 20px}
+.section{margin-bottom:52px}
+.section h2{font-size:22px;color:#c9a14b;font-weight:800;letter-spacing:1px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #2a3d6b;display:flex;align-items:center;gap:10px}
+.section h2::before{content:"";width:6px;height:22px;background:#c9a14b;border-radius:2px;display:inline-block}
+.section p{color:#dbe3f3;font-size:16px;margin-bottom:14px}
+.persona{background:#142850;border:1px solid #2a3d6b;border-left:4px solid #c9a14b;border-radius:8px;padding:22px 26px;margin-bottom:20px}
+.persona .persona-name{color:#c9a14b;font-weight:800;font-size:16px;margin-bottom:10px}
+.persona p{margin-bottom:0;font-size:15px;color:#dbe3f3}
+ul.plain-list{list-style:none;padding:0}
+ul.plain-list li{position:relative;padding-left:24px;margin-bottom:14px;color:#dbe3f3;font-size:16px}
+ul.plain-list li::before{content:"›";position:absolute;left:0;color:#c9a14b;font-weight:900;font-size:18px}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tags span{font-size:12px;background:#142850;color:#c9a14b;padding:6px 14px;border-radius:4px;border:1px solid #c9a14b}
+.cta-box{background:linear-gradient(135deg,#142850,#0c1830);border:1px solid #c9a14b;border-radius:12px;padding:36px 34px;text-align:center;margin-top:10px}
+.cta-box h2{color:#fff;font-size:24px;font-weight:900;margin-bottom:12px;line-height:1.4}
+.cta-box p{color:#a8b8d4;font-size:15px;margin-bottom:22px}
+.cta-box .cta{display:inline-flex;align-items:center;gap:10px;background:#c9a14b;color:#0c1830;font-weight:800;padding:12px 30px;border-radius:6px;text-decoration:none;font-size:15px;letter-spacing:1px}
+footer{background:#070d1c;padding:50px 6%;text-align:center;border-top:1px solid #2a3d6b;color:#5e7099;font-size:13px;letter-spacing:1px;margin-top:40px}
+@media(max-width:820px){.hero-img-wrap{height:220px}.hero-title-wrap h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a href="index.html" class="back-link">← 返回作品集總覽</a>
+</div>
+
+<div class="hero">
+  <div class="hero-img-wrap">
+    <div class="hero-num">05</div>
+    <div class="hero-cat">WELL-BEING AI</div>
+    <img src="assets/05-lifecompass.png" alt="人生羅盤 LifeCompass">
+    <div class="hero-title-wrap">
+      <h1>人生羅盤 LifeCompass</h1>
+      <div class="value-line">企業價值：低成本 EAP 員工協助方案</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="tech-tags"><span>自我覺察</span><span>溝通教練</span><span>團隊脈動</span><span>留才溫度</span></div>
+
+  <section class="section">
+    <h2>商業價值</h2>
+    <p>我們常常對外人客氣，卻對最親近的人說出最傷人的話；我們渴望被理解，卻不知道如何開口說出真正的感受。人生羅盤想陪伴的，正是這些說不出口的時刻——透過人格傾向測驗、依戀類型測驗、核心價值觀盤點，幫助使用者先看懂自己；再透過溝通教練、情境範例產生器、CBT 自信重建、ABC 行為紀錄，把「看懂自己」轉化為「更好地與人相處」的具體練習。特別是「善意練習所」與「一致性檢查」這類功能，回應的是現代人越來越普遍的內在渴望：不是要變成另一個人，而是活得更誠實、更靠近自己真正相信的價值。對企業而言，內建的「團隊脈動（企業版）」與好友配對分析，讓這套工具能延伸成為員工協助方案（EAP）或團隊建立活動的載體——當一個組織願意投資員工的自我覺察，往往也是留住人才最溫柔卻最有效的方式。</p>
+  </section>
+
+  <section class="section">
+    <h2>人物故事｜這個工具主要幫誰解決問題</h2>
+    <div class="persona"><div class="persona-name">思穎，總是在關係中說出傷人話語卻不明白為什麼的人</div><p>思穎每次吵架後都很後悔——明明不是真心那樣想，話一出口卻總是最傷人的那句。她不知道自己為什麼會這樣，只覺得越親近的人，越容易成為她情緒的出口。做完依戀類型測驗後，她第一次看懂自己在關係中「害怕被拋棄所以先攻擊」的模式，再透過溝通教練練習如何把真實感受說出口而不是用刺人的話包裝。她沒有變成另一個人，只是終於能誠實地說：「我剛剛其實是在害怕」——這句話，改變了她跟伴侶之間很多次差點爆炸的對話。</p></div><div class="persona"><div class="persona-name">怡君，想低成本照顧員工心理健康的 HR 主管</div><p>怡君所在的公司規模不大，沒有預算聘請專職心理諮商師，但她親眼看著幾位優秀同仁因為壓力與人際摩擦陸續離職，心裡很不是滋味。用人生羅盤的企業版「團隊脈動」功能，她讓團隊成員自願參與測驗與溝通練習，用不高的成本為團隊提供了一個自我覺察與溝通改善的起點。半年後，她發現團隊內部的摩擦少了，同仁也更願意主動表達需求——這讓她相信，關心員工的心理狀態，不一定需要龐大的預算，而是願不願意開始。</p></div>
+  </section>
+
+  <section class="section">
+    <h2>適用範圍</h2>
+    <ul class="plain-list"><li>**一般大眾**：在感情、職涯、人際關係中感到困惑，渴望自我理解與成長的每一個人</li><li>**企業 HR 與教育訓練部門**：想為員工提供心理健康與溝通能力提升資源、打造更有溫度組織文化的團隊</li><li>**伴侶與好友**：透過合盤配對分析，理解彼此差異、減少不必要的衝突與誤解</li><li>**心理諮商輔助情境**：作為諮商前的自我覺察暖身工具（非醫療診斷，仍需專業心理師介入判斷）</li></ul>
+  </section>
+
+  <section class="section">
+    <h2>投資亮點｜為什麼值得投入</h2>
+    <ul class="plain-list"><li>**留才議題的溫柔解方**：員工因壓力與摩擦離職的成本遠高於任何工具——投資自我覺察，是最划算的留才方式</li><li>**EAP 的普惠化機會**：多數中小企業負擔不起專職諮商師，人生羅盤以極低成本提供心理支持起點，市場缺口明顯</li><li>**從個人到組織的雙引擎**：個人測驗＋企業版團隊脈動，一條產品線同時服務 C 端使用者與 B 端企業</li><li>**回應時代的情緒需求**：現代人對「被理解、被陪伴」的渴望持續升溫，這是一個有溫度的長期需求市場</li></ul>
+  </section>
+
+  <section class="section">
+    <div class="cta-box">
+      <h2>讓每一句說不出口的話，<br>都有被好好接住的機會</h2>
+      <p>看懂自己，是改變關係的第一步；而企業願意開始，就是最溫柔的留才。</p>
+      <a href="index.html" class="cta">← 返回作品集總覽</a>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 PORTFOLIO · 讓每個決定，都更有底氣</footer>
+</body>
+</html>

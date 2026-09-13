@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>人資履歷 AI 媒合決策系統｜專案詳細介紹</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:#0c1830;color:#e8edf5;line-height:1.9}
+a{color:inherit}
+.topnav{max-width:1100px;margin:0 auto;padding:24px 6% 0}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:#c9a14b;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid #c9a14b;padding-bottom:2px}
+.hero{position:relative;max-width:1100px;margin:20px auto 0;padding:0 6%}
+.hero-img-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid #2a3d6b;height:340px}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.8)}
+.hero-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,#0c1830 100%)}
+.hero-num{position:absolute;top:18px;left:18px;background:rgba(201,161,75,.95);color:#0c1830;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:22px;z-index:2}
+.hero-cat{position:absolute;top:18px;right:18px;background:rgba(12,24,48,.85);color:#c9a14b;padding:7px 14px;border-radius:4px;font-size:12px;letter-spacing:2px;font-weight:700;z-index:2}
+.hero-title-wrap{position:absolute;bottom:24px;left:28px;right:28px;z-index:2}
+.hero-title-wrap h1{font-size:34px;color:#fff;font-weight:900;line-height:1.3;margin-bottom:8px}
+.hero-title-wrap .value-line{color:#c9a14b;font-size:15px;font-weight:700}
+main{max-width:900px;margin:0 auto;padding:50px 6% 20px}
+.section{margin-bottom:52px}
+.section h2{font-size:22px;color:#c9a14b;font-weight:800;letter-spacing:1px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid #2a3d6b;display:flex;align-items:center;gap:10px}
+.section h2::before{content:"";width:6px;height:22px;background:#c9a14b;border-radius:2px;display:inline-block}
+.section p{color:#dbe3f3;font-size:16px;margin-bottom:14px}
+.persona{background:#142850;border:1px solid #2a3d6b;border-left:4px solid #c9a14b;border-radius:8px;padding:22px 26px;margin-bottom:20px}
+.persona .persona-name{color:#c9a14b;font-weight:800;font-size:16px;margin-bottom:10px}
+.persona p{margin-bottom:0;font-size:15px;color:#dbe3f3}
+ul.plain-list{list-style:none;padding:0}
+ul.plain-list li{position:relative;padding-left:24px;margin-bottom:14px;color:#dbe3f3;font-size:16px}
+ul.plain-list li::before{content:"›";position:absolute;left:0;color:#c9a14b;font-weight:900;font-size:18px}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tags span{font-size:12px;background:#142850;color:#c9a14b;padding:6px 14px;border-radius:4px;border:1px solid #c9a14b}
+.cta-box{background:linear-gradient(135deg,#142850,#0c1830);border:1px solid #c9a14b;border-radius:12px;padding:36px 34px;text-align:center;margin-top:10px}
+.cta-box h2{color:#fff;font-size:24px;font-weight:900;margin-bottom:12px;line-height:1.4}
+.cta-box p{color:#a8b8d4;font-size:15px;margin-bottom:22px}
+.cta-box .cta{display:inline-flex;align-items:center;gap:10px;background:#c9a14b;color:#0c1830;font-weight:800;padding:12px 30px;border-radius:6px;text-decoration:none;font-size:15px;letter-spacing:1px}
+footer{background:#070d1c;padding:50px 6%;text-align:center;border-top:1px solid #2a3d6b;color:#5e7099;font-size:13px;letter-spacing:1px;margin-top:40px}
+@media(max-width:820px){.hero-img-wrap{height:220px}.hero-title-wrap h1{font-size:24px}}
+</style>
+</head>
+<body>
+<div class="topnav">
+  <a href="index.html" class="back-link">← 返回作品集總覽</a>
+</div>
+
+<div class="hero">
+  <div class="hero-img-wrap">
+    <div class="hero-num">03</div>
+    <div class="hero-cat">HR AI</div>
+    <img src="assets/03-hrmatch.png" alt="人資履歷 AI 媒合決策系統">
+    <div class="hero-title-wrap">
+      <h1>人資履歷 AI 媒合決策系統</h1>
+      <div class="value-line">企業價值：公平雇用・符合 ESG</div>
+    </div>
+  </div>
+</div>
+
+<main>
+  <div class="tech-tags"><span>公平雇用</span><span>分層報告</span><span>ESG 加分</span><span>招募效率</span></div>
+
+  <section class="section">
+    <h2>商業價值</h2>
+    <p>每一份被隨手滑過的履歷背後，都是一個真實的人生與職涯期待；而每一次因為疲勞或偏見做出的用人誤判，付出代價的不只是求職者，更是企業自己——重新招募的成本、團隊磨合的時間、錯失真正人才的機會。這套系統的核心價值，不是「幫 HR 少做事」，而是「幫 HR 做出更公平、更一致的判斷」：它在評分邏輯中主動排除年齡、性別、婚姻狀況、宗教信仰、外貌等與職務能力無關的個人資訊，把焦點拉回「這個人能不能勝任這份工作」；同時依閱讀對象自動產出四種分層報告——董事長／總座要的是一頁摘要，部門主管要的是團隊契合度，HR 要的是操作明細，最終錄用決策仍交回人與人的面談判斷，AI 只負責把海量履歷整理成「值得你花時間深談的那幾份」。對企業而言，這代表招募週期縮短、篩選品質提升，更代表一種對每一位應徵者的尊重——他們的履歷真的被認真看過了。</p>
+  </section>
+
+  <section class="section">
+    <h2>人物故事｜這個工具主要幫誰解決問題</h2>
+    <div class="persona"><div class="persona-name">淑芬，同時要處理三個職缺的 HR 招募專員</div><p>淑芬桌上堆著三百多份履歷，眼睛看到花，卻還是不敢隨便刷掉任何一份——萬一漏看了真正合適的人怎麼辦？用這套系統上傳履歷與職缺後，AI 自動排除年齡、性別、婚姻等無關個資，只依硬性條件與軟性配對分數排序，一天之內她就篩出了值得深談的候選人清單，而不是熬夜到眼睛痠痛還在逐份比對。更重要的是，她知道這個篩選過程是公平的，不會因為自己太累而錯放偏見進去——這讓她睡得比較安穩。</p></div><div class="persona"><div class="persona-name">建宏，只想快速決定要不要面談的部門主管</div><p>建宏每天行程排滿會議，HR 傳來的候選人清單他常常來不及細看，只能憑履歷抬頭的公司名稱粗略判斷，錯過不少真正合適的人。拿到系統產出的「部門主管檢視」報告後，他十分鐘內就能看懂每位候選人與團隊的契合重點與推薦理由，不用再讀落落長的完整履歷。對他而言，這個工具幫他把「有限的注意力」精準用在真正該花時間的候選人身上。</p></div>
+  </section>
+
+  <section class="section">
+    <h2>適用範圍</h2>
+    <ul class="plain-list"><li>**企業人資部門**：面對大量履歷、需要快速且公平地完成初步篩選的招募團隊</li><li>**獵頭與人力仲介公司**：需要同時為多個職缺、多位候選人進行交叉媒合分析</li><li>**需對外／對上呈交招募成果的組織**：可自訂公司名稱與 Logo，讓決策報告書具備正式對外呈現的品牌質感</li><li>**重視法遵與 ESG 的企業**：需要證明招募流程排除不當歧視因素、符合公平雇用原則的組織</li></ul>
+  </section>
+
+  <section class="section">
+    <h2>投資亮點｜為什麼值得投入</h2>
+    <ul class="plain-list"><li>**招募成本與流失風險的雙重解方**：每一次用人誤判，背後都是重新招募、團隊磨合與錯失人才的隱形成本——公平篩選直接降低這三項</li><li>**ESG 與雇主品牌的現代化需求**：公平雇用已是投資人與求職者都在看的指標，系統讓企業「可證明」自己的招募是公平的</li><li>**三層決策者一次滿足**：董事長看摘要、主管看契合、HR 看明細——一份系統服務整個決策鏈，採購價值自然放大</li><li>**可延伸的企業服務生態**：從履歷篩選延伸到面試安排、結果通知，是進入企業人力資源流程的入口</li></ul>
+  </section>
+
+  <section class="section">
+    <div class="cta-box">
+      <h2>讓每一份履歷都被認真對待，<br>讓每一次用人都有理有據</h2>
+      <p>公平，不只是口號；它讓人才被看見，也讓企業睡得安穩。</p>
+      <a href="index.html" class="cta">← 返回作品集總覽</a>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 PORTFOLIO · 讓每個決定，都更有底氣</footer>
+</body>
+</html>
