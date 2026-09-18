@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-TW">
+<html lang="zh-Hant" lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -153,7 +153,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
       <a class="back" href="admin.html">← 後台管理</a>
       <a class="back" href="governance.html">專案治理後台 →</a>
       <a class="back" href="index.html">返回作品集首頁</a>
-      <a class="back" href="#" onclick="__adminLogout();return false;">登出</a>
+      <a class="back" href="#" onclick="__admin登出();return false;">登出</a>
     </div>
   </div>
 </header>
@@ -203,7 +203,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
       <div class="actions" style="margin-top:6px;">
         <button class="btn" id="ganttBtn">抓取並產生時間軸</button>
       </div>
-      <div class="status-line" id="ganttStatus"></div>
+      <div class="status-line" id="gantt狀態"></div>
 
       <div id="ganttChartWrap" style="display:none;margin-top:20px;">
         <div id="ganttChart"></div>
@@ -220,7 +220,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
     <div id="reportBody"></div>
     <div class="actions" style="margin-top:24px;">
       <button class="btn" onclick="window.print()">列印／儲存為 PDF</button>
-      <button class="btn ghost" id="backToDashboard">返回後台</button>
+      <button class="btn ghost" id="backTo儀表板">返回後台</button>
     </div>
   </div>
 
@@ -250,7 +250,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
   var reportView = document.getElementById('reportView');
   var reportBody = document.getElementById('reportBody');
   var reportDate = document.getElementById('reportDate');
-  var backToDashboard = document.getElementById('backToDashboard');
+  var backTo儀表板 = document.getElementById('backTo儀表板');
 
   var lastResults = null;
 
@@ -355,7 +355,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
     dashboardView.classList.add('hide');
     reportView.classList.add('show');
   });
-  backToDashboard.addEventListener('click', function(){
+  backTo儀表板.addEventListener('click', function(){
     dashboardView.classList.remove('hide');
     reportView.classList.remove('show');
   });
@@ -385,7 +385,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
   var ganttRemember = document.getElementById('ganttRemember');
   var ganttClear = document.getElementById('ganttClear');
   var ganttBtn = document.getElementById('ganttBtn');
-  var ganttStatus = document.getElementById('ganttStatus');
+  var gantt狀態 = document.getElementById('gantt狀態');
   var ganttChartWrap = document.getElementById('ganttChartWrap');
   var ganttChart = document.getElementById('ganttChart');
   var ganttDetail = document.getElementById('ganttDetail');
@@ -497,18 +497,18 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
     });
 
     if(invalidInputs.length > 0){
-      ganttStatus.textContent = '格式看起來不正確：' + invalidInputs.join('、') + '　（請填 owner/repo，例如 yushihhsien168/project；也可以直接貼完整 GitHub 網址，系統會自動轉換）';
+      gantt狀態.textContent = '格式看起來不正確：' + invalidInputs.join('、') + '　（請填 owner/repo，例如 yushihhsien168/project；也可以直接貼完整 GitHub 網址，系統會自動轉換）';
       return;
     }
 
     var activeJobs = jobs.filter(function(j){ return !j.skip; });
     if(activeJobs.length === 0){
-      ganttStatus.textContent = '請至少填一個專案的 owner/repo（例如 yushihhsien168/project，或直接貼完整 GitHub 網址）';
+      gantt狀態.textContent = '請至少填一個專案的 owner/repo（例如 yushihhsien168/project，或直接貼完整 GitHub 網址）';
       return;
     }
 
     ganttBtn.disabled = true;
-    ganttStatus.textContent = '正在讀取 ' + activeJobs.length + ' 個 repo 的 commit 紀錄...';
+    gantt狀態.textContent = '正在讀取 ' + activeJobs.length + ' 個 repo 的 commit 紀錄...';
 
     Promise.allSettled(activeJobs.map(function(j){
       return fetchCommits(j.owner, j.repo, token).then(function(commits){
@@ -527,7 +527,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
         if(d && d.skip) return;
         if(d && d.ok) okCount++; else errCount++;
       });
-      ganttStatus.textContent = '完成：' + okCount + ' 個專案成功讀取' + (errCount>0 ? '，' + errCount + ' 個失敗或未設定' : '') + '。';
+      gantt狀態.textContent = '完成：' + okCount + ' 個專案成功讀取' + (errCount>0 ? '，' + errCount + ' 個失敗或未設定' : '') + '。';
 
       renderGantt(dataById);
       ganttBtn.disabled = false;
@@ -545,7 +545,7 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
     });
 
     if(allDates.length === 0){
-      ganttStatus.textContent += '　（沒有任何 repo 成功取得 commit 資料，請確認 owner/repo 是否正確、或是否為私有 repo 需要填 Token）';
+      gantt狀態.textContent += '　（沒有任何 repo 成功取得 commit 資料，請確認 owner/repo 是否正確、或是否為私有 repo 需要填 Token）';
       ganttChartWrap.style.display = 'none';
       return;
     }
@@ -643,6 +643,6 @@ footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e70
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="assets/auth.js"></script>
-<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+<script>window.__init管理後台Guard({redirectTo: 'index.html'});</script>
 </body>
 </html>

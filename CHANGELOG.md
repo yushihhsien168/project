@@ -50,7 +50,7 @@
 ### 調整：建議信箱改回純文字，移除登入才能寄信的流程
 - 首頁 footer「✉️ 建議信箱」連結（點擊觸發 Google 登入 → 開啟 Gmail 撰寫視窗）已拿掉，改為純文字顯示：**LUCIDMIND AI STUDIO　建議信箱:felix670131@gmail.com**，前面加上「澄思AI工作室」對應的英文全大寫品牌名稱。
 - 因應此調整，`index.html` 不再載入 Netlify Identity widget 與 `assets/auth.js`（公開首頁已無任何觸發登入的行為），減少一般訪客瀏覽時不必要的第三方腳本載入。`assets/auth.js` 中的 `__openSuggestionMail()` 函式保留供後續若要恢復此功能時使用，但目前未被任何頁面呼叫。
-- `admin.html`、`governance.html`、`analytics.html` 三個後台頁面的 Google 登入與管理者權限守門機制（`__initAdminGuard()`）完全不受影響，維持 v0.0.14 的設定。
+- `admin.html`、`governance.html`、`analytics.html` 三個後台頁面的 Google 登入與管理者權限守門機制（`__init管理後台Guard()`）完全不受影響，維持 v0.0.14 的設定。
 
 ## v0.0.14 — 2026-09-18
 
@@ -58,9 +58,9 @@
 - **新增 `admin.html`**：作為後台唯一入口，集中連結「專案治理後台」與「技術健康監控」兩個儀表板；此頁**未加入任何公開頁面的連結**（首頁、footer 皆無），僅能透過直接輸入網址存取，降低被搜尋引擎索引或一般訪客誤觸的機率（另加上 `<meta name="robots" content="noindex, nofollow">` 避免被收錄）。
 - **首頁 footer 移除後台連結**：原本 `© 2026 PORTFOLIO ｜ 技術健康監控 ｜ 專案治理後台` 的兩個直接連結已拿掉，footer 只保留版權文字，不再公開曝露後台路徑。
 - **新增共用登入守門程式 `assets/auth.js`**：採用 Netlify Identity（Google 第三方登入）：
-  - `__initAdminGuard()`：套用在 `admin.html`、`governance.html`、`analytics.html` 三個後台頁面，進場即以遮罩鎖住畫面內容並自動彈出 Google 登入視窗；登入帳號 email 若非 `felix670131@gmail.com`，會顯示「沒有管理者權限」並在 3 秒後自動登出、導回 `index.html`；只有比對成功才會移除遮罩、放行畫面。
+  - `__init管理後台Guard()`：套用在 `admin.html`、`governance.html`、`analytics.html` 三個後台頁面，進場即以遮罩鎖住畫面內容並自動彈出 Google 登入視窗；登入帳號 email 若非 `felix670131@gmail.com`，會顯示「沒有管理者權限」並在 3 秒後自動登出、導回 `index.html`；只有比對成功才會移除遮罩、放行畫面。
   - 三個後台頁面即使被直接輸入網址存取，也一樣會被攔截驗證，不只是「首頁不連結」這種表面隱藏，是雙重防護。
-  - 後台頁面新增「登出」按鈕（`__adminLogout()`），並在標題列顯示目前登入的管理者信箱。
+  - 後台頁面新增「登出」按鈕（`__admin登出()`），並在標題列顯示目前登入的管理者信箱。
 - **首頁新增「建議信箱」**：footer 新增 ✉️ 建議信箱 連結，點擊後：
   - 若尚未登入：先彈出 Google 登入視窗，登入成功後才自動開啟 Gmail 網頁版撰寫視窗（新分頁）。
   - 若已登入：直接開啟 Gmail 網頁版撰寫視窗。
@@ -299,3 +299,13 @@
 - ~~`assets/small_03-hrmatch.png` ～ `small_06-omniastro.png` 目前跟完整尺寸圖片是同一份檔案，未真正產生縮圖版本~~
 
 
+
+## v0.1.0 — AI 決策作業系統 品牌與商業化文案改版
+
+- 首頁定位由「AI Portfolio」調整為「AI 決策作業系統／AI 決策夥伴生態系」。
+- 重寫 Hero、Problem、企業、平台、信任與治理 與最終 CTA。
+- 8 個產品卡片與詳細頁改為「痛點 → 共情 → 解法 → 商業價值 → 信任與治理」敘事。
+- 移除／弱化未附來源的市場規模與結果保證式表述。
+- 新增企業 SaaS、API、白標授權／企業版 的商業敘事。
+- 強化 AI transparency、human oversight、auditability 與產品邊界。
+- 保留既有單頁 hash routing、圖片資產與後台頁面。

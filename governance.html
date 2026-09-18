@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="zh-Hant">
+<html lang="zh-Hant" lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -98,7 +98,7 @@
       <a href="admin.html">← 後台管理</a>
       <a href="analytics.html">技術健康監控</a>
       <a href="index.html">作品集首頁</a>
-      <a href="#" onclick="__adminLogout();return false;">登出</a>
+      <a href="#" onclick="__admin登出();return false;">登出</a>
     </div>
   </div>
 </header>
@@ -113,7 +113,7 @@
     <h2>① 專案健康儀表板</h2>
     <div class="sub">彙整六個網站的最近一次健康檢查（來自「技術健康監控」頁面）、加上未結案風險與待裁示事項，換算成紅黃綠燈號。此頁不會即時重新連線六個網站，速度較快；要更新網站健康資料，請先到「技術健康監控」按一次「立即分析」。</div>
     <div class="health-grid" id="healthGrid"></div>
-    <div class="status-line" id="healthStatus">載入中...</div>
+    <div class="status-line" id="health狀態">載入中...</div>
   </div>
 
   <div class="panel">
@@ -214,7 +214,7 @@
   // ============ ① 健康儀表板 ============
   function loadHealth(){
     var grid = document.getElementById('healthGrid');
-    var status = document.getElementById('healthStatus');
+    var status = document.getElementById('health狀態');
     fetch('/.netlify/functions/dashboard-summary')
       .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
       .then(function(data){
@@ -866,6 +866,6 @@
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="assets/auth.js"></script>
-<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+<script>window.__init管理後台Guard({redirectTo: 'index.html'});</script>
 </body>
 </html>

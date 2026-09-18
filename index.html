@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+
+<html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>作品集｜企業簡報・活力珊瑚版型</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>澄思 AI Studio｜AI 決策作業系統｜把複雜的事，變成下一步</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
 <style>
 
 :root{
@@ -138,279 +139,189 @@ ul.plain-list li strong{color:var(--cat)}
   .invest-head h2,.vision h2{font-size:22px}
   main.detail-main{padding:36px 6% 10px}
 }
-</style>
-</head>
-<body>
 
-<div id="view-home" class="view active">
+.site-nav{position:relative;z-index:5;max-width:1400px;margin:0 auto 48px;display:flex;align-items:center;gap:26px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.site-nav a{text-decoration:none;transition:color .2s}.site-nav a:hover{color:var(--coral)}
+.site-nav .nav-cta{margin-left:auto;background:var(--ink);color:#fff;padding:9px 18px;border-radius:22px}.site-nav .nav-cta:hover{color:#fff;background:var(--indigo)}
+.home-intro{max-width:900px;margin:0 auto;padding:70px 6% 25px;text-align:center}.home-intro h2{font-size:34px;line-height:1.35;margin-bottom:18px}.home-intro p{color:var(--ink-soft);font-size:17px}
+.audience-grid,.platform-grid,.trust-grid{max-width:1400px;margin:0 auto;padding:30px 6% 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(36,28,53,.05)}
+.info-card h3{font-size:20px;color:var(--indigo);margin-bottom:10px}.info-card p{color:var(--ink-soft);font-size:14px}.info-card .mini{font-size:11px;letter-spacing:2px;color:var(--coral);font-weight:700;margin-bottom:8px}
+.section-kicker{text-align:center;color:var(--coral-deep);font-size:12px;letter-spacing:3px;font-weight:700;margin-bottom:8px}
+.decision-flow{max-width:1200px;margin:0 auto;padding:20px 6% 70px;display:flex;justify-content:center;align-items:stretch;gap:10px;flex-wrap:wrap}.flow-step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 16px;min-width:150px;text-align:center}.flow-step strong{display:block;color:var(--ink);font-size:15px}.flow-step span{display:block;color:var(--ink-soft);font-size:12px;margin-top:5px}.flow-arrow{align-self:center;color:var(--coral);font-weight:900}
+.business-band{background:#F7F3FB;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
+@media(max-width:820px){.site-nav{gap:14px;margin-bottom:34px;flex-wrap:wrap}.site-nav .nav-cta{margin-left:0}.audience-grid,.platform-grid,.trust-grid{grid-template-columns:1fr}.home-intro h2{font-size:26px}.flow-arrow{display:none}}
+
+.hero-empathy{position:relative;z-index:3;max-width:720px;color:var(--ink);font-size:16px;margin:-8px 0 22px}.hero-empathy strong{color:var(--coral-deep)}.hero-actions{position:relative;z-index:3;display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 18px}.hero-primary,.hero-secondary{display:inline-flex;align-items:center;padding:12px 22px;border-radius:26px;text-decoration:none;font-weight:700;font-size:14px}.hero-primary{background:var(--ink);color:#fff}.hero-secondary{background:#fff;border:1px solid var(--border);color:var(--ink)}.hero-proof{position:relative;z-index:3;display:flex;gap:10px;flex-wrap:wrap;color:var(--ink-soft);font-size:12px;font-weight:700}.hero-proof i{font-style:normal;color:var(--coral)}.hl{color:var(--coral)}
+.pain-grid{max-width:1400px;margin:0 auto;padding:10px 6% 70px;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}.pain-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(36,28,53,.05)}.pain-card>span{font-size:11px;color:var(--coral);font-weight:800;letter-spacing:2px}.pain-card h3{font-size:19px;line-height:1.5;margin:12px 0;color:var(--ink)}.pain-card p{font-size:14px;color:var(--ink-soft)}.home-intro strong{color:var(--ink)}
+.decision-promise{max-width:1200px;margin:0 auto 30px;padding:46px 6%;display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center;background:linear-gradient(135deg,#fff,#F4F0FB);border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}.decision-promise h2{font-size:32px;line-height:1.4}.promise-copy p{font-size:16px;color:var(--ink-soft);margin-bottom:12px}.promise-copy strong{color:var(--ink)}
+.business-funnel{max-width:1400px;margin:0 auto;padding:20px 6% 45px;display:grid;grid-template-columns:repeat(4,1fr);gap:14px}.funnel-step{background:#fff;border:1px solid var(--border);border-radius:14px;padding:24px;position:relative}.funnel-step b{font-size:11px;color:var(--coral);letter-spacing:2px}.funnel-step h3{font-size:20px;margin:8px 0}.funnel-step p{font-size:14px;color:var(--ink-soft);min-height:90px}.funnel-step strong{font-size:12px;color:var(--indigo)}.money-callout{max-width:1200px;margin:0 auto 60px;padding:22px 28px;background:var(--ink);color:#fff;border-radius:12px;display:flex;justify-content:space-between;gap:20px;align-items:center}.money-callout span{font-size:13px;opacity:.75}.money-callout strong{font-size:18px}
+.platform-section{padding:70px 0 30px;background:#FFFBF9;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}.moat-section{padding:70px 0 30px}.moat-grid{max-width:1200px;margin:0 auto;padding:20px 6% 60px;display:grid;grid-template-columns:repeat(4,1fr);gap:16px}.moat-grid>div{padding:24px;border-left:3px solid var(--coral);background:#fff;border-top:1px solid var(--border);border-right:1px solid var(--border);border-bottom:1px solid var(--border);border-radius:0 12px 12px 0}.moat-grid span{font-size:12px;color:var(--coral);font-weight:800}.moat-grid h3{margin:8px 0;font-size:18px}.moat-grid p{font-size:13px;color:var(--ink-soft)}.trust-section{padding:70px 0 20px;background:#F7F3FB;border-top:1px solid var(--border-soft)}.cta-section{max-width:1400px;margin:0 auto;padding:50px 6% 80px}.cta-section .cta-box{padding:50px 40px}.cta-section .cta-box h2{font-size:31px}
+@media(max-width:820px){.pain-grid,.business-funnel,.moat-grid,.decision-promise{grid-template-columns:1fr}.money-callout{margin-left:6%;margin-right:6%;display:block}.money-callout strong{display:block;margin-top:8px}.decision-promise{gap:20px}.hero-actions{flex-direction:column;align-items:flex-start}.hero-proof{line-height:1.7}.cta-section .cta-box h2{font-size:24px}}
+@media(max-width:480px){.pain-card h3{font-size:17px}.decision-promise h2{font-size:24px}.money-callout strong{font-size:16px}.funnel-step p{min-height:0}.cta-section{padding-top:30px}.cta-section .cta-box{padding:30px 22px}.hero-empathy{font-size:14px}}
+
+.site-footer{padding:32px 24px 40px;border-top:1px solid rgba(127,127,127,.18);text-align:center;line-height:1.8}
+.site-footer .footer-brand{margin-bottom:10px;opacity:.8}
+.site-footer .footer-contact{display:flex;justify-content:center;align-items:center;gap:18px;flex-wrap:wrap}
+.site-footer .footer-contact span{opacity:.7}
+.site-footer .footer-contact a{color:inherit;text-decoration:none;border-bottom:1px solid rgba(127,127,127,.35);transition:opacity .2s,border-color .2s}
+.site-footer .footer-contact a:hover{opacity:.75;border-color:currentColor}
+@media(max-width:640px){.site-footer{padding:26px 18px 34px}.site-footer .footer-contact{flex-direction:column;gap:4px}}
+</style>
+<meta content="澄思 AI Studio 打造 AI 決策作業系統，將理解、分析、工作流、回饋與治理能力帶進企業與個人的真實決策場景。" name="description"/></head>
+<div class="view active" id="view-home">
 <header>
-  <div class="hero-glow" aria-hidden="true"></div>
-  <svg class="hero-orbit" viewBox="0 0 220 220" aria-hidden="true">
-    <circle cx="110" cy="110" r="86" fill="none" stroke="#4B3F9E" stroke-opacity=".28" stroke-width="1.5"/>
-    <circle cx="110" cy="110" r="52" fill="none" stroke="#FF5B39" stroke-opacity=".22" stroke-width="1.5"/>
-    <circle cx="110" cy="24" r="7" fill="#FF5B39"/>
-    <circle cx="196" cy="110" r="7" fill="#FF5B39"/>
-    <circle cx="110" cy="196" r="7" fill="#FF5B39"/>
-    <circle cx="24" cy="110" r="7" fill="#FF5B39"/>
-    <circle cx="171" cy="49" r="4.5" fill="#4B3F9E"/>
-    <circle cx="171" cy="171" r="4.5" fill="#4B3F9E"/>
-    <circle cx="49" cy="171" r="4.5" fill="#4B3F9E"/>
-    <circle cx="49" cy="49" r="4.5" fill="#4B3F9E"/>
-  </svg>
-  <span class="eyebrow">★ ENTERPRISE AI PORTFOLIO</span>
-  <h1>八個 AI 夥伴，<br>陪你把<span class="hl nowrap">「不確定」</span>變成<span class="nowrap">「下一步」</span></h1>
-  <p class="lead">決策焦慮、招募疲勞、凌晨告警、轉職迷惘、說不出口的話、人生抉擇、一個人忙不過來的瑣事、還有盯盤盯到心累的股市焦慮——這些每天真實上演的時刻，八支 AI 工具用溫暖而專業的方式接住你。不是冷冰冰的系統，而是懂你、陪你的決策副駕駛。</p>
+<nav aria-label="主要導覽" class="site-nav"><a href="#problem">為什麼現在</a><a href="#portfolio">8 個 AI 夥伴</a><a href="#business">怎麼賺錢</a><a href="#platform">平台護城河</a><a href="#trust">信任治理</a><a class="nav-cta" href="#portfolio">從問題開始</a></nav>
+<div aria-hidden="true" class="hero-glow"></div>
+<svg aria-hidden="true" class="hero-orbit" viewbox="0 0 220 220"><circle cx="110" cy="110" fill="none" r="86" stroke="#4B3F9E" stroke-opacity=".28" stroke-width="1.5"></circle><circle cx="110" cy="110" fill="none" r="52" stroke="#FF5B39" stroke-opacity=".22" stroke-width="1.5"></circle><circle cx="110" cy="24" fill="#FF5B39" r="7"></circle><circle cx="196" cy="110" fill="#FF5B39" r="7"></circle><circle cx="110" cy="196" fill="#FF5B39" r="7"></circle><circle cx="24" cy="110" fill="#FF5B39" r="7"></circle></svg>
+<span class="eyebrow">★ 澄思 AI STUDIO · AI 決策作業系統</span>
+<h1>真正昂貴的，<br/><span class="hl nowrap">不是 AI，而是做錯決定。</span></h1>
+<p class="lead">企業每天都在決定：錢該花在哪裡、哪個告警要先處理、哪個人值得留下、哪個流程該自動化。人也一樣：要不要轉職、要不要投資、這段關係該怎麼走。問題從來不是沒有資訊，而是資訊太多，真正能把它想清楚的時間太少。</p>
+<p class="hero-empathy">所以我們做的，不是另一個只會回答問題的 AI。<strong>我們想做的是：當事情真的重要時，陪你把問題接住。</strong></p>
+<div class="hero-actions"><a class="hero-primary" href="#portfolio">看看它能替誰減少負擔 →</a><a class="hero-secondary" href="#business">看看企業為什麼會付費</a></div>
+<div class="hero-proof"><span>8 個真實決策場景</span><i>·</i><span>1 套共同底層能力</span><i>·</i><span>個人、企業、API、白標</span></div>
 </header>
 
-<section class="kpi-bar">
-  <div class="kpi"><div class="num">8</div><div class="label">AI 夥伴</div><div class="desc">行銷、資安、自動化、股市交易、人資、職涯、心理、命理八大生活與商業場景</div></div>
-  <div class="kpi"><div class="num">171.5萬</div><div class="label">中小企業</div><div class="desc">台灣 98% 企業都是中小企業，專業決策力從此不再高不可攀</div></div>
-  <div class="kpi"><div class="num">600億+</div><div class="label">資安市場</div><div class="desc">台灣資安產值持續成長，合規與防護是企業的剛性需求</div></div>
-  <div class="kpi"><div class="num">4.1倍</div><div class="label">命理市場成長</div><div class="desc">2024 年產值 2.9 億元，五年成長 4.1 倍，需求正在爆發</div></div>
+<section class="kpi-bar"><div class="kpi"><div class="num">8</div><div class="label">垂直場景</div><div class="desc">從行銷、資安、流程，到人才、職涯、研究與自我探索。</div></div><div class="kpi"><div class="num">1</div><div class="label">Decision Layer</div><div class="desc">理解 → 分析 → 比較 → 行動 → 回饋 → 治理。</div></div><div class="kpi"><div class="num">4</div><div class="label">收入入口</div><div class="desc">個人訂閱、企業 SaaS、API、白標／企業整合。</div></div><div class="kpi"><div class="num">∞</div><div class="label">可延伸場景</div><div class="desc">新增產品時，共同能力可以重用，而不是每次從零開始。</div></div></section>
+
+<section class="home-intro" id="problem"><div class="section-kicker">THE REAL PROBLEM</div><h2>AI 已經很會「回答」。<br/><span class="hl">企業真正缺的是「把事情往前推」。</span></h2><p>一個老闆知道營收下滑，卻不知道先動價格、渠道還是產品；一個工程師看到告警，卻不知道哪一個值得立刻處理；一個 HR 怕漏掉好人才，也怕自己不小心被第一印象影響；一個求職者被拒絕幾次後，開始懷疑「是不是我不夠好」。這些場景共同缺的，不是聊天，而是<strong>把複雜問題整理成下一步的決策能力。</strong></p></section>
+<section class="pain-grid"><div class="pain-card"><span>給管理者</span><h3>「我不是沒有資料，我是沒有時間把每個資料都想完。」</h3><p>真正稀缺的是注意力。AI 應該先接住整理、比較與風險脈絡，讓人把時間留給關鍵判斷。</p></div><div class="pain-card"><span>給專業團隊</span><h3>「最累的不是做事，是每次都要重新判斷。」</h3><p>把重複分類、摘要、追蹤、交接與準備工作產品化，降低人力摩擦，而不是只增加另一個工具。</p></div><div class="pain-card"><span>給每一個人</span><h3>「我不一定需要你替我決定，我只是希望有人陪我想清楚。」</h3><p>好的 AI 不應讓人失去主導權，而是讓人更理解選項、更看見風險、更有底氣做自己的決定。</p></div></section>
+
+<section class="decision-promise"><div><div class="section-kicker">OUR PROMISE</div><h2>把「我不知道怎麼辦」<br/>變成「我知道下一步要看什麼」。</h2></div><div class="promise-copy"><p>澄思把資訊、脈絡、選項、風險與行動串起來。不是把答案說得更漂亮，而是讓答案<strong>更有來由、更能被討論、更能進入工作。</strong></p><p>這就是我們認為 AI 最有商業價值的地方：<strong>替人減少認知摩擦，替企業減少流程摩擦。</strong></p></div></section>
+
+<section aria-label="8 位 AI 決策夥伴" class="grid" id="portfolio">
+<article class="card" style="--cat:#E8472A"><div class="card-head"><div class="card-num">01</div><div class="card-cat">行銷決策</div><img alt="策引 StratEdge" src="assets/small_01-stratedge.png"/></div><div class="card-body"><h3>策引 StratEdge</h3><div class="value-line">讓每一筆預算，都有一個說得清楚的理由。</div><p><strong>痛點：</strong> 數據很多，真正的下一步卻不清楚。</p><p><strong>價值：</strong> 整理受眾、素材、渠道與成效，協助管理者比較策略選項。</p><a class="card-cta" href="#p1">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#2F6FB0"><div class="card-head"><div class="card-num">02</div><div class="card-cat">資安決策</div><img alt="鎮夜 NightSentry" src="assets/small_02-nightsentry.png"/></div><div class="card-body"><h3>鎮夜 NightSentry</h3><div class="value-line">凌晨的告警，不該只剩一個人扛。</div><p><strong>痛點：</strong> 告警很多，上下文很少，每一次判斷都有壓力。</p><p><strong>價值：</strong> 將事件、資產、弱點與處置紀錄整理成可理解、可交接的脈絡。</p><a class="card-cta" href="#p2">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#4B3F9E"><div class="card-head"><div class="card-num">03</div><div class="card-cat">流程自動化</div><img alt="匯流 Converge" src="assets/small_03-converge.png"/></div><div class="card-body"><h3>匯流 Converge</h3><div class="value-line">不要再靠某個人的記憶，撐住整間公司的流程。</div><p><strong>痛點：</strong> 流程散落在 Email、表單、訊息與人的腦袋裡。</p><p><strong>價值：</strong> 將事件、規則、動作與例外變成可重複執行的工作流。</p><a class="card-cta" href="#p3">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#1F8A4C"><div class="card-head"><div class="card-num">04</div><div class="card-cat">投資研究</div><img alt="脈策 PulseTrade" src="assets/small_04-pulsetrade.png"/></div><div class="card-body"><h3>脈策 PulseTrade</h3><div class="value-line">按下確認前，多看一眼理由、風險與自己。</div><p><strong>痛點：</strong> 資訊太多，真正操作時情緒可能蓋過研究。</p><p><strong>價值：</strong> 把研究框架、訊號與風險紀律放進同一流程；不替你下單。</p><a class="card-cta" href="#p4">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#2E8F79"><div class="card-head"><div class="card-num">05</div><div class="card-cat">人才決策</div><img alt="公鑑 FairView" src="assets/small_05-fairview.png"/></div><div class="card-body"><h3>公鑑 FairView</h3><div class="value-line">每一份履歷後面，都是一個值得被好好看見的人。</div><p><strong>痛點：</strong> 時間有限時，疲勞與無關資訊會干擾初步評估。</p><p><strong>價值：</strong> 聚焦職務相關條件，保留理由與人工覆核，支援人才治理。</p><a class="card-cta" href="#p5">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#C97A2E"><div class="card-head"><div class="card-num">06</div><div class="card-cat">職涯成長</div><img alt="職透 CareerMatch" src="assets/small_06-career.png"/></div><div class="card-body"><h3>職透 CareerMatch</h3><div class="value-line">你不一定是不夠好，你可能只是還沒被正確看見。</div><p><strong>痛點：</strong> 一次次沒有回覆，很容易把方法問題變成自我否定。</p><p><strong>價值：</strong> 把履歷、職缺、ATS 與面試準備變成可持續改善的流程。</p><a class="card-cta" href="#p6">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#6E5AC4"><div class="card-head"><div class="card-num">07</div><div class="card-cat">自我覺察</div><img alt="人生羅盤 LifeCompass" src="assets/small_07-lifecompass.png"/></div><div class="card-body"><h3>人生羅盤 LifeCompass</h3><div class="value-line">我不是想變成另一個人，我只是想更懂自己。</div><p><strong>痛點：</strong> 有些衝突不是不在乎，而是不知道怎麼說。</p><p><strong>價值：</strong> 把自我覺察、溝通與反思變成低門檻、可持續的體驗。</p><a class="card-cta" href="#p7">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#B23A5B"><div class="card-head"><div class="card-num">08</div><div class="card-cat">文化探索</div><img alt="五象 FiveLens" src="assets/small_08-fivelens.png"/></div><div class="card-body"><h3>五象 FiveLens</h3><div class="value-line">不是替你預言未來，而是陪你把功課做完整。</div><p><strong>痛點：</strong> 面對人生大事，人常想找答案，其實更需要整理觀點。</p><p><strong>價值：</strong> 將傳統文化框架轉成可持續探索的數位體驗。</p><a class="card-cta" href="#p8">看完整商業場景 →</a></div></article>
 </section>
 
-<section class="grid" id="portfolio">
+<section class="business-band" id="business"><div class="invest-head"><div class="section-kicker">HOW WE MAKE MONEY</div><h2>真正的商業模式，不是「賣 AI」。<br/><span class="hl">是讓 AI 進入一個人每天都在做的工作。</span></h2><p>當 AI 只回答一次問題，價值很容易一次性；當 AI 進入流程、留下脈絡、產生回饋，就有機會變成持續使用的基礎設施。</p></div><div class="business-funnel">
+<div class="funnel-step"><b>01 · B2C</b><h3>個人訂閱</h3><p>從求職、研究、自我探索等明確痛點切入，先讓使用者感受到「真的省下我的力氣」。</p><strong>月／年訂閱</strong></div>
+<div class="funnel-step"><b>02 · B2B</b><h3>企業 SaaS</h3><p>把能力放進 HR、行銷、資安、營運等日常流程，從單次使用走向席次與持續使用。</p><strong>席次／用量／年度方案</strong></div>
+<div class="funnel-step"><b>03 · API</b><h3>嵌入別人的產品</h3><p>讓平台、人力服務、SaaS 或金融服務直接調用決策能力，擴大分發而不只靠自己的網站。</p><strong>API 用量／授權</strong></div>
+<div class="funnel-step"><b>04 · ENTERPRISE</b><h3>企業整合</h3><p>權限、治理、資料、流程與品牌整合，讓 AI 成為組織的一部分，而不是又一個孤立工具。</p><strong>年度合約／整合服務</strong></div></div>
+<div class="money-callout"><span>投資人應該關注的核心</span><strong>一次能力建設 → 多個場景重用 → 多種收入入口 → 持續累積決策資料與信任。</strong></div></section>
 
-  <article class="card" style="--cat:#E8472A">
-    <div class="card-head">
-      <div class="card-num">01</div>
-      <div class="card-cat">MARKETING AI</div>
-      <img src="assets/small_01-stratedge.png" alt="策引 StratEdge｜行銷決策副駕駛">
-    </div>
-    <div class="card-body">
-      <h3>策引 StratEdge｜行銷決策副駕駛</h3>
-      <div class="value-line">企業價值：把「多花 100 萬多賺多少」變成 3 分鐘有答案</div>
-      <p><strong>解決什麼：</strong>深夜獨自面對數據、卻說不出「為什麼轉換掉了」的決策焦慮——把專業判斷力交到沒有專職策略師的老闆手上。</p><p><strong>核心價值：</strong>五層分析（現況→原因→預測→外部變因→建議）+ CFO 級增量 ROI 引擎，策略擬定從「以週計算」壓縮到「以小時計算」。</p>
-      <a href="#p1" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
+<section class="platform-section" id="platform"><div class="invest-head"><div class="section-kicker">PLATFORM & MOAT</div><h2>8 個產品是前台。<br/><span class="hl">真正要累積的是「決策底座」。</span></h2><p>模型可以被追上，功能可以被複製。但當產品開始累積場景、流程、回饋、治理與使用者脈絡，價值就不只是一個模型包裝。</p></div><div class="platform-grid">
+<div class="info-card"><div class="mini">01 · 理解</div><h3>Context Engine</h3><p>理解角色、目標、限制、資料來源與情境，避免只回答表面問題。</p></div><div class="info-card"><div class="mini">02 · 推理</div><h3>Reasoning Layer</h3><p>把資料整理成原因、選項、比較與風險，讓輸出可以被討論。</p></div><div class="info-card"><div class="mini">03 · 行動</div><h3>Action Layer</h3><p>把建議連到工作流、提醒、紀錄與人工覆核，從「回答」走到「事情往前」。</p></div><div class="info-card"><div class="mini">04 · 回饋</div><h3>Outcome Memory</h3><p>記錄決策與後續結果，在合適的資料治理下，形成長期使用價值。</p></div><div class="info-card"><div class="mini">05 · 治理</div><h3>Trust Layer</h3><p>權限、紀錄、可追溯性、人工介入與風險邊界，讓企業敢用。</p></div><div class="info-card"><div class="mini">06 · 擴張</div><h3>Platform Economics</h3><p>共同底座讓新場景不必從零建設，支援 SaaS、API、白標與企業整合。</p></div></div></section>
 
-  <article class="card" style="--cat:#2F6FB0">
-    <div class="card-head">
-      <div class="card-num">02</div>
-      <div class="card-cat">SECURITY AI</div>
-      <img src="assets/small_02-nightsentry.png" alt="鎮夜 NightSentry｜智慧資安守夜">
-    </div>
-    <div class="card-body">
-      <h3>鎮夜 NightSentry｜智慧資安守夜</h3>
-      <div class="value-line">企業價值：凌晨告警不再孤軍奮戰，稽核季不再全員熬夜</div>
-      <p><strong>解決什麼：</strong>凌晨三點看不懂告警、只能獨自猜測的壓力，資安資產／弱點散落各處看不清全貌，以及上市櫃公司稽核加班的惡夢。</p><p><strong>核心價值：</strong>把冷冰冰的 Log 翻譯成白話，整合 CVE 弱點掃描、區網資產盤點、威脅情資查詢與 IP 封鎖治理於同一平台，一鍵產出 8 份符合《上市上櫃資安管理辦法》第 7 條與 ISO 27001 的角色別報表——且不說謊，AI 分析是真呼叫還是規則引擎，畫面上清楚標示。</p>
-      <a href="#p2" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
+<section class="moat-section"><div class="invest-head"><div class="section-kicker">WHY IT CAN COMPOUND</div><h2>真正的護城河，不是「我們也用了 AI」。</h2><p>護城河來自五件事一起累積：<strong>場景、流程、決策記憶、結果回饋、治理與信任。</strong></p></div><div class="moat-grid"><div><span>01</span><h3>場景資料</h3><p>知道什麼角色，在什麼情境下，真正需要什麼資訊。</p></div><div><span>02</span><h3>流程嵌入</h3><p>從對話工具進入企業流程後，替換成本與使用深度自然不同。</p></div><div><span>03</span><h3>結果回饋</h3><p>不只產生答案，也關心決定之後發生了什麼。</p></div><div><span>04</span><h3>治理能力</h3><p>越重要的場景，越需要可控、可追蹤、可覆核。</p></div></div></section>
 
-  <article class="card" style="--cat:#4B3F9E">
-    <div class="card-head">
-      <div class="card-num">03</div>
-      <div class="card-cat">AUTOMATION AI</div>
-      <img src="assets/small_03-converge.png" alt="匯流 Converge｜自動化工作流平台">
-    </div>
-    <div class="card-body">
-      <h3>匯流 Converge｜自動化工作流平台</h3>
-      <div class="value-line">企業價值：一個人也能撐起一整條自動化管線</div>
-      <p><strong>解決什麼：</strong>中小企業主一人身兼業務、客服、財務、IT 四個角色，靠人腦記住 Email、LINE、審批不能漏接的焦慮。</p><p><strong>核心價值：</strong>事件標準化→規則引擎→動作執行的核心管線，加上 Agent 任務鏈、異常示警、每日晨報等 8 項進階自動化，147 個自動化測試全數通過，並內建多租戶、RBAC、SSO 等 10 項企業就緒模組。</p>
-      <a href="#p3" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
+<section class="trust-section" id="trust"><div class="invest-head"><div class="section-kicker">TRUST BY DESIGN</div><h2>越接近錢、工作與人生，<br/><span class="hl">越不能假裝 AI 什麼都知道。</span></h2><p>信任不是頁尾的一段話，而是產品本身的功能。</p></div><div class="trust-grid"><div class="info-card"><div class="mini">透明</div><h3>AI 就說 AI，規則就說規則</h3><p>讓使用者知道哪些來自模型、資料、規則或人工判斷。</p></div><div class="info-card"><div class="mini">可控</div><h3>重要決策，最後一票留給人</h3><p>投資、人才、健康／心理等高影響場景，不把 AI 輸出包裝成最終答案。</p></div><div class="info-card"><div class="mini">可回看</div><h3>重要事情，要有跡可循</h3><p>透過權限、紀錄與治理機制，讓企業能追蹤關鍵操作與判斷依據。</p></div></div></section>
 
-  <article class="card" style="--cat:#1F8A4C">
-    <div class="card-head">
-      <div class="card-num">04</div>
-      <div class="card-cat">TRADING AI</div>
-      <img src="assets/small_04-pulsetrade.png" alt="脈策 PulseTrade｜六脈診斷選股">
-    </div>
-    <div class="card-body">
-      <h3>脈策 PulseTrade｜六脈診斷選股</h3>
-      <div class="value-line">企業價值：把盯盤的焦慮，交給一套誠實的評分系統</div>
-      <p><strong>解決什麼：</strong>散戶沒有分析師團隊，只能靠感覺追高殺低，還要提心吊膽會不會漏看重要訊號、會不會忘記停損的焦慮。</p><p><strong>核心價值：</strong>技術面＋籌碼面＋估值面六脈共振評分＋觸價停損停利守門員，訊號附白話理由、下單前必須你親自確認，847 個自動化測試全數通過，沒有券商 API 也能先用免費資料看盤。</p>
-      <a href="#p4" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
-<article class="card" style="--cat:#2E8F79">
-    <div class="card-head">
-      <div class="card-num">05</div>
-      <div class="card-cat">HR AI</div>
-      <img src="assets/small_05-fairview.png" alt="公鑑 FairView｜公平履歷篩選">
-    </div>
-    <div class="card-body">
-      <h3>公鑑 FairView｜公平履歷篩選</h3>
-      <div class="value-line">企業價值：每一份履歷都被認真看過，公平雇用・符合 ESG</div>
-      <p><strong>解決什麼：</strong>招募疲勞導致的偏見，與「漏看真正人才」的恐懼——讓 HR 睡得安穩。</p><p><strong>核心價值：</strong>主動排除年齡、性別、婚姻、宗教等無關個資，依董事長／部門主管／HR 三層角色自動產出不同深度的分層報告。</p>
-      <a href="#p5" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
+<section class="invest" id="investor"><div class="invest-head"><div class="section-kicker">THE INVESTMENT STORY</div><h2>如果只看「8 個 AI 產品」，你會錯過真正的故事。</h2><p>真正的故事是：<strong>用 8 個真實場景驗證需求，用共同底座降低重複建設，再把能力透過訂閱、SaaS、API 與白標帶進更多工作流程。</strong></p></div><div class="invest-grid"><div class="invest-item"><div class="icon">01</div><h3>場景驗證</h3><p>每個產品先解一個具體問題：少整理、少遺漏、少猜測、多準備、多可解釋。</p></div><div class="invest-item"><div class="icon">02</div><h3>能力共用</h3><p>理解、推理、工作流、記憶與治理可以跨垂直產品重用，讓產品矩陣具有共同底層。</p></div><div class="invest-item"><div class="icon">03</div><h3>平台擴張</h3><p>當第三方可以透過 API、白標與企業整合使用能力，價值不再只存在於自有前台。</p></div></div></section>
 
-  <article class="card" style="--cat:#C97A2E">
-    <div class="card-head">
-      <div class="card-num">06</div>
-      <div class="card-cat">CAREER AI</div>
-      <img src="assets/small_06-career.png" alt="職透 CareerMatch｜履歷媒合教練">
-    </div>
-    <div class="card-body">
-      <h3>職透 CareerMatch｜履歷媒合教練</h3>
-      <div class="value-line">企業價值：52 萬個職缺背後的求職者，都值得一位職涯教練</div>
-      <p><strong>解決什麼：</strong>求職者「不知道自己哪裡不夠好」的焦慮——把企業端評估邏輯攤開來看。</p><p><strong>核心價值：</strong>媒合分數 + 履歷健診 + ATS 相容度 + 模擬面試出題 + 反問清單 + 客製化履歷改寫，一份履歷串聯六大模組。</p>
-      <a href="#p6" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
-
-  <article class="card" style="--cat:#6E5AC4">
-    <div class="card-head">
-      <div class="card-num">07</div>
-      <div class="card-cat">WELL-BEING AI</div>
-      <img src="assets/small_07-lifecompass.png" alt="人生羅盤 LifeCompass｜自我覺察教練">
-    </div>
-    <div class="card-body">
-      <h3>人生羅盤 LifeCompass｜自我覺察教練</h3>
-      <div class="value-line">企業價值：低成本 EAP，留住人才最溫柔的方式</div>
-      <p><strong>解決什麼：</strong>現代人說不出口的人際焦慮，與企業留才困境。</p><p><strong>核心價值：</strong>人格／依戀／核心價值觀測驗 + 溝通教練 + CBT 自信重建 + ABC 行為紀錄 + 善意練習所 + 團隊脈動。</p>
-      <a href="#p7" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
-
-  <article class="card" style="--cat:#B23A5B">
-    <div class="card-head">
-      <div class="card-num">08</div>
-      <div class="card-cat">ASTROLOGY AI</div>
-      <img src="assets/small_08-fivelens.png" alt="五象 FiveLens｜五術交叉解盤">
-    </div>
-    <div class="card-body">
-      <h3>五象 FiveLens｜五術交叉解盤</h3>
-      <div class="value-line">企業價值：接住 2.9 億市場裡，被時間與金錢擋住的人</div>
-      <p><strong>解決什麼：</strong>想理解自己、卻被命理館高價與預約門檻擋在門外的人。</p><p><strong>核心價值：</strong>八字/紫微/占星/姓名學/易經五套交叉驗證 + 12 種擇日 Copilot + 行銷個人化引擎，不是算命，是陪你做決策。</p>
-      <a href="#p8" class="card-cta">→ 認識這個夥伴</a>
-    </div>
-  </article>
-
-  </section>
-
-<section class="invest">
-  <div class="invest-head">
-    <h2>為什麼現在投資 AI 決策工具？</h2>
-    <p>台灣市場正站在一個關鍵轉折點：中小企業渴望專業決策力、資安與合規成為剛需、心理健康與自我成長需求爆發、超過千萬股民渴望不被割韭菜的投資工具——八支工具正好卡在這些需求的交會點。</p>
+<section class="cta-section"><div class="cta-box"><div class="section-kicker">START WITH A REAL PROBLEM</div><h2>不要先問「AI 還能做什麼」。<br/><span class="hl">先問：你現在最不想一個人扛的是什麼？</span></h2><p>一個行銷決策、一個資安告警、一套混亂流程、一場面試、一個人才判斷，甚至是一個只有你自己知道有多難的選擇。<strong>從真實問題開始，才有真正的產品價值。</strong></p><a class="cta" href="#portfolio">選一個問題，開始探索 →</a></div></section>
+</div>
+<div class="view detail-view" id="view-p1" style="--cat:#E8472A">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">01</div><div class="hero-cat">MARKETING AI</div><img alt="策引 StratEdge｜行銷決策副駕駛" src="assets/01-stratedge.png"/><div class="hero-title-wrap"><h1>策引 StratEdge</h1><div class="value-line">不是多一份報表，而是多一個能陪你想清楚的人。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>現況 → 原因 → 預測 → 外部變因 → 建議</span><span>受眾、預算、素材與成效訊號的整合分析</span><span>增量 ROI 假設與情境比較</span><span>策略報告與可分享摘要</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>你不是不懂行銷。你只是每天都要在有限預算、有限時間裡做太多判斷。廣告該加碼還是停掉？轉換率下降，到底是客群、素材，還是渠道出了問題？你真正需要的不是更多數字，而是把數字整理成可以拿去討論的選項。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>現況 → 原因 → 預測 → 外部變因 → 建議</li><li>受眾、預算、素材與成效訊號的整合分析</li><li>增量 ROI 假設與情境比較</li><li>策略報告與可分享摘要</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">一個人扛著行銷的老闆</div><p>你不是沒有想法，而是沒有時間把每個數字都拆開。你需要一個地方，把資料整理成可以討論的選項。</p></div><div class="persona"><div class="persona-name">同時服務多個客戶的行銷人</div><p>真正消耗你的，往往不是策略，而是一次又一次從零整理資料。把時間還給客戶與創意。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>中小企業主與品牌經營者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>行銷代理商與顧問</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>企業行銷主管</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低策略分析的整理時間</li><li>加速提案與決策週期</li><li>提高預算分配的可解釋性</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>決策的底氣，來自看得懂的數據與說得出的理由。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p2" style="--cat:#2F6FB0">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">02</div><div class="hero-cat">SECURITY AI</div><img alt="鎮夜 NightSentry｜智慧資安守夜" src="assets/02-nightsentry.png"/><div class="hero-title-wrap"><h1>鎮夜 NightSentry</h1><div class="value-line">凌晨三點，不應該只有一個人替整間公司擔心。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>白話告警與事件脈絡</span><span>資產、弱點與威脅情資整理</span><span>IP 封鎖與處置紀錄</span><span>稽核與治理軌跡</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>告警響了。你看著螢幕上的代碼，卻不知道它到底有多嚴重。真正讓資安人員疲憊的，不只是告警數量，而是每一次判斷都像只有自己一個人扛著。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>白話告警與事件脈絡</li><li>資產、弱點與威脅情資整理</li><li>IP 封鎖與處置紀錄</li><li>稽核與治理軌跡</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">凌晨值班的 IT 工程師</div><p>最難的不是看到告警，而是不知道它值不值得立刻處理。先把事件說清楚，再決定下一步。</p></div><div class="persona"><div class="persona-name">需要向主管與稽核交代的管理者</div><p>你需要的不只是儀表板，而是可以回看、可以交接、可以說明的紀錄。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>企業 IT／資安團隊</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>CISO／CIO 與管理者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>NOC／SOC 與受監管組織</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低告警分類與整理負擔</li><li>提升資產與弱點可視性</li><li>支援處置紀錄與稽核追蹤</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>鎮夜不是替你保證「不會出事」，而是讓事情發生時，你不必一個人面對。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p3" style="--cat:#4B3F9E">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">03</div><div class="hero-cat">AUTOMATION AI</div><img alt="匯流 Converge｜自動化工作流平台" src="assets/03-converge.png"/><div class="hero-title-wrap"><h1>匯流 Converge</h1><div class="value-line">你不需要再靠記憶，撐住整間公司的流程。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>事件標準化 → 規則 → 動作</span><span>多步驟任務鏈與失敗處理</span><span>異常示警與每日摘要</span><span>權限、稽核與企業導入能力（依實際完成度標示）</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>Email、訊息、表單、審批與提醒散落各處。真正讓小型團隊累的，是永遠擔心漏掉某件重要的事。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>事件標準化 → 規則 → 動作</li><li>多步驟任務鏈與失敗處理</li><li>異常示警與每日摘要</li><li>權限、稽核與企業導入能力（依實際完成度標示）</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">身兼多職的經營者</div><p>Email、訊息、審批一起來時，你最怕的不是忙，而是漏掉。讓系統接住重複的事情。</p></div><div class="persona"><div class="persona-name">想做自動化但不想養一堆基礎設施的人</div><p>把流程能力集中起來，先解決真正高頻的工作，再逐步擴張。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>中小企業與工作室經營者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>自動化／維運工程師</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>需要串接既有溝通管道的團隊</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低重複人工操作</li><li>減少流程遺漏</li><li>讓小團隊以較低維運負擔導入自動化</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>你不是需要更多工作。你需要的是少一點事情必須一直記在腦子裡。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p4" style="--cat:#1F8A4C">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">04</div><div class="hero-cat">TRADING AI</div><img alt="脈策 PulseTrade｜六脈診斷選股" src="assets/04-pulsetrade.png"/><div class="hero-title-wrap"><h1>脈策 PulseTrade</h1><div class="value-line">不是替你下決定，而是讓你按下確認前，多看一眼。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>技術、籌碼、估值研究框架</span><span>訊號白話說明與研究紀錄</span><span>停損／停利與風險紀律工具</span><span>Kill Switch 與下單前防護</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>你不一定沒有投資知識。有時只是資訊太多、時間太少，真正到了做決定的那一刻，情緒又比分析更大聲。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>技術、籌碼、估值研究框架</li><li>訊號白話說明與研究紀錄</li><li>停損／停利與風險紀律工具</li><li>Kill Switch 與下單前防護</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">白天工作、沒有時間盯盤的人</div><p>不用把注意力一直綁在畫面上；設定研究條件後，在需要你看的時候再回來。</p></div><div class="persona"><div class="persona-name">知道分析卻常被情緒干擾的人</div><p>把風險規則寫進流程，不是為了預測未來，而是幫助自己遵守事先定下的紀律。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>沒有時間整天盯盤的投資人</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>希望建立風險紀律的研究者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>想先用公開資料熟悉工具的人</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>把研究流程結構化</li><li>降低遺漏重要訊號的機會</li><li>把風險紀律放在操作流程裡</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>本產品僅供市場資料整理、研究與風險管理輔助，不構成投資建議、買賣邀約或獲利保證。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p5" style="--cat:#2E8F79">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">05</div><div class="hero-cat">HR AI</div><img alt="公鑑 FairView｜公平履歷篩選" src="assets/05-fairview.png"/><div class="hero-title-wrap"><h1>公鑑 FairView</h1><div class="value-line">每一份履歷後面，都是一個希望被看見的人。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>職務相關條件整理</span><span>無關個資干擾的風險降低設計</span><span>分層報告與可追溯評估理由</span><span>人工覆核與最終決策保留</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>履歷很多、時間很少時，人工初篩容易受到疲勞與無關資訊影響。公鑑把焦點拉回職務相關條件，讓評估更一致，也讓理由更容易被覆核。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>職務相關條件整理</li><li>無關個資干擾的風險降低設計</li><li>分層報告與可追溯評估理由</li><li>人工覆核與最終決策保留</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">同時處理大量履歷的 HR</div><p>你想把每個人都看清楚，但時間有限。讓系統先整理與職缺相關的資訊，再把注意力留給真正需要人的判斷。</p></div><div class="persona"><div class="persona-name">害怕錯過人才的主管</div><p>你需要的是可理解的候選人資訊，而不是一個神秘分數。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>企業人資與招募團隊</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>獵頭與人力仲介</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>重視人才流程治理的企業</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低初篩時間</li><li>提升評估一致性</li><li>讓人才決策更容易被討論與覆核</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>公平不只是口號，而是讓每一次重要判斷都有機會被好好檢視。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p6" style="--cat:#C97A2E">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">06</div><div class="hero-cat">CAREER AI</div><img alt="職透 CareerMatch｜履歷媒合教練" src="assets/06-career.png"/><div class="hero-title-wrap"><h1>職透 CareerMatch</h1><div class="value-line">你不一定是不夠好，也可能只是還沒有被看見。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>履歷健診</span><span>職缺關鍵字與 ATS 檢視</span><span>模擬面試</span><span>反問問題與表達準備</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>履歷投出去沒有回覆，很容易讓人開始懷疑自己。但有時候問題不是能力，而是履歷沒有把能力說到對方聽得懂的地方。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>履歷健診</li><li>職缺關鍵字與 ATS 檢視</li><li>模擬面試</li><li>反問問題與表達準備</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">投了很多履歷卻開始懷疑自己的求職者</div><p>被拒絕很難受，但不知道原因更難受。把可能的問題拆開，你就多了一個可以改善的方向。</p></div><div class="persona"><div class="persona-name">多年資歷、正在準備轉職的人</div><p>經驗很多不代表容易說清楚。透過練習，把你的價值講成對方聽得懂的故事。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>新鮮人與轉職者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>職涯顧問與教育機構</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>人力平台與會員加值服務</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>讓求職者知道下一步怎麼準備</li><li>提升履歷與面試準備程度</li><li>形成平台的長期加值服務</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>把「石沉大海」變成一個可以被分析、被準備、被改善的過程。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p7" style="--cat:#6E5AC4">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">07</div><div class="hero-cat">WELL-BEING AI</div><img alt="人生羅盤 LifeCompass｜自我覺察教練" src="assets/07-lifecompass.png"/><div class="hero-title-wrap"><h1>人生羅盤 LifeCompass</h1><div class="value-line">我不是想變成另一個人，我只是想更懂自己。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>人格／依戀／價值觀等自我覺察工具</span><span>溝通情境與表達練習</span><span>行為紀錄與反思</span><span>企業團隊溝通功能（依實際完成度標示）</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>有些關係裡的衝突，不是不在乎，而是不知道如何把真正的感受說出來。人生羅盤提供自我覺察與溝通練習的空間。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>人格／依戀／價值觀等自我覺察工具</li><li>溝通情境與表達練習</li><li>行為紀錄與反思</li><li>企業團隊溝通功能（依實際完成度標示）</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">在關係裡常常「明明不是這個意思」的人</div><p>先停下來看見自己的感受與反應，再練習用不傷人的方式說出真正想說的話。</p></div><div class="persona"><div class="persona-name">想為團隊提供更多自我覺察資源的 HR</div><p>從自願參與、資料最小化與一般性支持開始，不把 AI 當成心理治療的替代品。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>一般大眾</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>企業 HR 與教育訓練團隊</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>伴侶、好友與團隊溝通情境</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>提供低門檻的自我覺察入口</li><li>把理解自己轉化為可練習的行動</li><li>企業端可延伸團隊溝通與培訓</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>本產品定位於自我覺察、一般性支持與溝通練習，不提供醫療診斷、心理治療或危機處置。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p8" style="--cat:#B23A5B">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">08</div><div class="hero-cat">ASTROLOGY AI</div><img alt="五象 FiveLens｜五術交叉解盤" src="assets/08-fivelens.png"/><div class="hero-title-wrap"><h1>五象 FiveLens</h1><div class="value-line">不是替你預言未來，而是陪你把功課做完整。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>八字／紫微／占星／姓名學／易經等文化框架整理</span><span>擇日情境探索</span><span>個人化報告與比較視角</span><span>以「決策參考」而非結果保證為定位</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>面對求婚、搬家、轉職、重要活動等人生時刻，人有時需要的不是一個保證答案，而是一個可以整理傳統觀點與個人想法的空間。</p><h2>我們怎麼接住</h2><ul class="plain-list"><li>八字／紫微／占星／姓名學／易經等文化框架整理</li><li>擇日情境探索</li><li>個人化報告與比較視角</li><li>以「決策參考」而非結果保證為定位</li></ul></section>
+<section class="section"><h2>你可能就是我們正在陪伴的人</h2><div class="persona"><div class="persona-name">面對人生大事、想多看一個角度的人</div><p>你不一定要相信某一種說法；你可以把它當成文化與自我探索的一種參考。</p></div><div class="persona"><div class="persona-name">想把傳統文化整理得更容易理解的人</div><p>把不同框架放在一起比較，讓你知道自己看到了什麼，也知道哪些只是不同文化脈絡下的解讀。</p></div></section>
+<section class="section"><h2>適合誰</h2><ul class="plain-list"><li><strong>想探索傳統文化的一般使用者</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>人生重大決策前需要多一份參考的人</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li><li><strong>雙人關係與文化體驗情境</strong>｜適合需要這類決策輔助、資訊整理或準備能力的人。</li></ul></section>
+<section class="section"><h2>商業價值</h2><ul class="plain-list"><li>以數位產品降低資訊整理門檻</li><li>從一次性內容延伸到持續探索</li><li>C 端體驗可延伸為合作與授權服務</li></ul></section>
+<section class="section"><h2>信任與邊界</h2><p>內容屬文化、娛樂與自我探索參考，不代表科學預測，也不保證任何事件結果。</p></section>
+<section class="section"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<footer class="site-footer">
+  <div class="footer-brand">© 2026 澄思 AI Studio · LUCIDMIND AI STUDIO · 重要的決定，不必一個人想。</div>
+  <div class="footer-contact">
+    <span>聯絡方式</span>
+    <a href="https://mail.google.com/mail/?view=cm&fs=1&to=project0983487908@gmail.com&su=%E6%83%B3%E9%80%B2%E4%B8%80%E6%AD%A5%E4%BA%86%E8%A7%A3%E5%B0%88%E6%A1%88%E8%88%87%E9%9C%80%E6%B1%82" target="_blank" rel="noopener noreferrer" aria-label="使用 Gmail 聯絡 project0983487908@gmail.com">信箱：project0983487908@gmail.com</a>
+    <a href="https://line.me/R/ti/p/~felix_line" target="_blank" rel="noopener noreferrer" aria-label="透過 LINE 聯絡 felix_line">Line：felix_line</a>
   </div>
-  <div class="invest-grid">
-    <div class="invest-item"><div class="icon">🎯</div><h3>切中真實痛點</h3><p>不是「錦上添花」的工具，而是每天都會被需要的決策夥伴——從老闆的預算分配，到 HR 的招募疲勞，都是高頻、高情緒、高價值的使用場景。</p></div>
-    <div class="invest-item"><div class="icon">📈</div><h3>市場紅利在眼前</h3><p>171.5 萬家中小企業的決策外包需求、600 億+ 的資安剛需、2.9 億且快速成長的命理市場——每個產品都有明確的付費對象與成長空間。</p></div>
-    <div class="invest-item"><div class="icon">🤝</div><h3>低門檻・高信任</h3><p>以「資料主權」與「公平透明」為核心設計，讓使用者安心、讓企業放心——信任，是 AI 產品最難複製的護城河。</p></div>
-  </div>
-</section>
-
-<section class="vision">
-  <div class="box">
-    <h2>我們相信，AI 的價值不是取代人，而是讓每個人都能做出更好的決定</h2>
-    <p>從一間美妝店的預算分配，到一位大夜班工程師的安心，再到一個求職者的自信，再到一位散戶投資人不再徹夜盯盤的安心——八支工具背後是同一個信念：把專業的判斷力，交還給每一個需要它的人。</p>
-    <a href="#portfolio" class="cta">→ 認識八位 AI 夥伴</a>
-  </div>
-</section>
-</div>
-
-<div id="view-p1" class="view detail-view" style="--cat:#E8472A">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">01</div><div class="hero-cat">MARKETING AI</div><img src="assets/01-stratedge.png" alt="策引 StratEdge｜行銷決策副駕駛"><div class="hero-title-wrap"><h1>策引 StratEdge｜行銷決策副駕駛</h1><div class="value-line">企業價值：策略擬定從週壓到小時</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>決策副駕駛</span><span>五層分析</span><span>ROI 引擎</span><span>11 種產業</span></div>
-  <section class="section"><h2>商業價值</h2><p>深夜十一點，數據攤在螢幕上，你卻說不出「為什麼轉換掉了」；月底要交策略簡報，卻還在土法煉鋼拼湊 Excel。這種「決策焦慮」，是每一位沒有專職策略師的老闆每天都在經歷的孤獨時刻。策引 AI 不是「多一個報表工具」，而是那個隨時在線、懂你生意的策略夥伴——它把受眾、預算、創意訊號即時匯流，用五層分析（現況→原因→預測→外部變因→建議）取代過去需要顧問公司數週才能交付的策略推演，並內建 CFO 級增量 ROI 引擎，直接回答老闆最在意的那句話：「多花 100 萬，到底多賺多少毛利？」對企業而言，這代表策略擬定週期從「以週計算」壓縮到「以小時計算」，讓團隊把時間花在執行與創意，而不是在數據泥沼裡打轉；對決策者而言，一份可下載、可交付、甚至可用 3–5 分鐘語音摘要在通勤時聽完的策略報告，讓「看懂自己的生意」這件事，第一次變得從容不迫。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">阿明，美妝保養品牌創辦人</div><p>阿明一個人身兼創辦人、行銷、客服三個角色，每個月三萬元的廣告預算，他只能憑感覺分配在 Facebook 跟 Google 之間，投完才發現轉換率慘不忍睹，卻說不出問題出在客群、創意還是渠道。用策引 AI 輸入品牌與產品資料後，五層分析清楚告訴他「你的客單價與目標客群不匹配，建議調整渠道配比」，並附上預估轉換漏斗。他第一次不是憑感覺，而是有數據依據地重新配置預算，兩週後 ROAS 明顯回升——那種「終於看懂自己生意」的踏實感，是他過去付錢請顧問都換不到的。</p></div><div class="persona"><div class="persona-name">佩君，行銷代理商的資深窗口</div><p>佩君同時服務六個客戶，每個月最痛苦的不是提案本身，而是「重新從零開始分析」的時間黑洞——每個客戶的產業、客群、痛點都不同，她卻只有自己一個人。用策引 AI，她把客戶資料輸入後，半天內就能產出原本要花三天才能完成的五層策略分析與素材草稿，剩下的時間她可以真正花在跟客戶討論策略細節，而不是埋首整理 Excel。對她而言，這個工具解決的不是「不會做策略」，而是「時間永遠不夠用」的焦慮。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>中小企業主與品牌經營者</strong>：沒有專職行銷分析師，卻仍要在有限預算裡做出正確判斷的人</li><li><strong>行銷代理商與顧問</strong>：需要在短時間內為多個客戶產出專業級策略提案，取代部分人力分析作業</li><li><strong>企業行銷主管</strong>：需要用數據說服老闆與跨部門，而不是憑經驗喊價</li><li><strong>產業別涵蓋</strong>：美妝保養、服飾配件、食品飲料、零售電商、B2B／SaaS、醫療健康、金融保險、教育培訓、旅遊住宿、房地產、娛樂媒體等，系統會依產業別自動切換分析框架與基準數據</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>171.5 萬家中小企業的決策外包需求</strong>：多數老闆沒有專職策略師，卻每天都要做高風險的預算與渠道決策——這是一個被長期忽略的巨大市場</li><li><strong>可量化的 ROI 主張</strong>：把「多花 100 萬多賺多少毛利」變成 3 分鐘內有答案的問題，讓付費決策從「感覺」變成「數據」</li><li><strong>高黏著度使用節奏</strong>：每月預算週期、每季策略檢討，都是自然回訪的場景，用戶會主動回來</li><li><strong>可擴充的商業模式</strong>：從單店品牌到代理商、顧問公司，再到跨境電商與多語言市場，客單價與服務深度都能逐級放大</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一位老闆，都擁有一位懂生意的策略夥伴</h2><p>決策的底氣，來自看得懂的數據與說得出的理由。策引 AI 把這份底氣，交還給每一個正在為生意打拚的人。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p2" class="view detail-view" style="--cat:#2F6FB0">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">02</div><div class="hero-cat">SECURITY AI</div><img src="assets/02-nightsentry.png" alt="鎮夜 NightSentry｜智慧資安守夜"><div class="hero-title-wrap"><h1>鎮夜 NightSentry｜智慧資安守夜</h1><div class="value-line">企業價值：從告警到弱點，資安維運不再單打獨鬥</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>白話告警</span><span>CVE 弱點掃描</span><span>威脅情資整合</span><span>IP 封鎖治理</span><span>8 份稽核報表</span></div>
-  <section class="section"><h2>商業價值</h2><p>凌晨三點，整棟大樓只剩你一個人醒著。告警跳出看不懂的規則代碼，你必須在不確定「這是不是真的緊急」的狀態下，決定要不要叫醒主管——這是每一位值班 IT 人員都懂的孤獨與壓力。資安事件從來不是「會不會發生」的問題，而是「多快發現、多快反應」的問題。鎮夜平台把冷冰冰的 Log 數據，翻譯成任何人都看得懂的語言：點一下告警，AI 抽屜立刻告訴你「發生了什麼事」與「該怎麼處理」，信心度、處置步驟、相關文章一應俱全，讓非技術背景的主管也能第一時間掌握狀況、做出決策，不必等技術人員睡醒。平台的守備範圍也不再只是「看日誌」：CVE 弱點掃描主動揪出 Zerologon、PrintNightmare 這類高風險漏洞，區網資產盤點掌握每一台設備開了哪些連接埠，串接 AbuseIPDB 威脅情資即時查出可疑 IP 的信譽分數，IP 封鎖治理讓每一次自動封鎖都留下稽核軌跡、可設定時數自動解封，病毒防護巡檢與封包連線分析則補上端點與網路層的最後一塊拼圖——八個模組收斂在同一片儀表板上，值班的人不用再開十個視窗東拼西湊。更關鍵的是，它自動產出 8 份符合《上市上櫃公司資訊安全管理辦法》第 7 條與 ISO 27001 稽核要求的角色別報表——每一次外部稽核，不再是全員加班趕資料的惡夢，而是點幾個按鈕就能交件的日常。而且這個平台對自己誠實：介面上會明確標示這次的 AI 分析是「真的呼叫了 AI」還是「離線規則引擎」，不用猜、不用賭。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">志豪，獨自值大夜班的 IT 工程師</div><p>凌晨三點，志豪是整棟大樓唯一還醒著監控系統的人。告警跳出一堆看不懂的規則代碼與英文縮寫，他必須在不確定「這是不是真的緊急」的狀態下決定要不要叫醒主管。用鎮夜平台，他點下告警的瞬間，右側 AI 抽屜立刻用白話告訴他「phpMyAdmin 管理介面頻繁存取，疑似 SQL Injection 攻擊特徵」，並列出建議處置步驟與信心度；旁邊的威脅情資區塊還會秀出這個來源 IP 過去的信譽分數與被回報次數。他不再需要獨自猜測、獨自承擔判斷錯誤的壓力——那種「有人在背後幫我確認、而且確認的內容不是編出來的」的安心感，讓大夜班不再是一個人的戰鬥。</p></div><div class="persona"><div class="persona-name">建宏，身兼資安與網管的維運工程師</div><p>建宏一個人要顧內網幾十台設備，過去他只能靠手動 ping、靠記憶判斷「哪台機器什麼時候多開了一個連接埠」。用鎮夜的區網設備資產掃描，他排程掃一次就能看到誰新開了 3389、誰的服務版本落在已知風險清單裡；弱點掃描模組主動比對 Zerologon、PrintNightmare 等高風險 CVE 的完整埠清單，不會因為只檢查單一連接埠而漏判。發現可疑對外連線時，他點一下就能封鎖來源 IP，系統自動記下封鎖原因與時數、到期還會自動解封，不用再靠一張隨手寫的便條紙提醒自己「這個 IP 是三天前封的」。</p></div><div class="persona"><div class="persona-name">雅雯，剛升任資安長的管理者</div><p>雅雯的公司是上市公司，每季都要面對法規稽核，過去她的團隊要花一整週手動整理 MIS、資安、網管等八個面向的報表，稽核前總是全員加班到深夜。用鎮夜平台的稽核報表下載中心，她點幾下滑鼠，8 份符合《上市上櫃公司資訊安全管理辦法》與 ISO 27001 要求的角色別報表就自動產出，可直接用 Excel 開啟提交；每一次自動封鎖 IP、每一次弱點掃描，也都留在稽核日誌軌跡裡，禁得起主管機關與董事會追問。她第一次能準時下班回家陪孩子，而不是在稽核季徹夜加班——這個工具還給她的，是原本屬於她自己的時間。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>企業 IT／資安部門</strong>：需要即時掌握系統健康與資安威脅，卻苦於告警數量龐大、難以優先排序的技術團隊</li><li><strong>CISO／CIO 等管理層</strong>：不需要親自看 Log，但必須為整體資安風險負責、需要一目瞭然儀表板的決策者</li><li><strong>上市櫃公司與受監管產業</strong>：金融、醫療等需要定期提交稽核報表、面對主管機關或董事會問責的企業</li><li><strong>中大型企業 NOC／網管團隊</strong>：需要跨系統（Apache、MariaDB、WordPress、FTP、SSH）統一監控，並掌握區網資產、弱點與病毒防護狀態的維運人員</li><li><strong>資安維運中心（SOC）／一人多工的資安兼職者</strong>：需要在同一平台完成弱點掃描、威脅情資查詢、IP 封鎖治理與稽核軌跡留存，沒有多餘人力分頭維護不同工具</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>600 億+ 且持續成長的資安剛需市場</strong>：台灣資安產業產值逐年攀升，合規與防護是企業躲不掉的剛性支出</li><li><strong>把「人」從值班地獄解放出來</strong>：告警翻譯與自動化報表，直接降低企業的人力成本與判斷失誤風險</li><li><strong>合規即賣點</strong>：上市櫃資安法規與 ISO 27001 稽核是強制需求，每一家受監管企業都是潛在客戶</li><li><strong>從單一監控擴展為整合式資安維運平台</strong>：CVE 弱點掃描、區網資產盤點、威脅情資查詢、IP 封鎖治理、病毒防護巡檢收斂在同一片儀表板，並透過唯讀 MCP 網路服務讓內網其他系統也能讀取資料，讓平台不只是工具，而是企業資安決策的入口</li><li><strong>誠實透明，建立資安產品最稀缺的信任資產</strong>：平台移除全部模擬假資料，AI 分析明確標示「真的呼叫 AI」或「離線規則引擎」，每一次自動封鎖與掃描都留下可稽核的軌跡——對資安工具而言，可被信任比功能多寡更關鍵</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一位值班的人，都不再獨自面對凌晨的告警</h2><p>看得懂的告警、按得出來的報表、睡得著的夜晚——這就是鎮夜想還給企業的安心。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p3" class="view detail-view" style="--cat:#4B3F9E">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">03</div><div class="hero-cat">AUTOMATION AI</div><img src="assets/03-converge.png" alt="匯流 Converge｜自動化工作流平台"><div class="hero-title-wrap"><h1>匯流 Converge｜自動化工作流平台</h1><div class="value-line">企業價值：一個人也能撐起一整條自動化管線</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>事件→規則→動作</span><span>8 項進階自動化</span><span>10 項企業模組</span><span>147 個自動化測試</span></div>
-  <section class="section"><h2>商業價值</h2><p>多數中小企業主，其實同時在扮演業務、客服、財務、IT 四個角色——LINE 跳出客戶訊息、Email 收到一份逾期發票、又一筆需要核准的付款，全部靠人腦記住、靠意志力不漏接，一旦哪天忙昏了頭漏看一則訊息，付出的代價常常是一位客戶或一筆生意。匯流把這些散落在 Gmail、LINE、各種通知裡的事件，收斂進同一條「事件標準化→規則引擎→動作執行」的管線：符合條件的事情自動用 LINE 通知，高風險的動作攔下來等你核准，其餘的默默記錄、不打擾你。在核心管線之上，再疊上 8 項進階自動化——多步驟 Agent 任務鏈會失敗自動重試、統計異常示警在事件量暴增時主動示警、每日晨報把一整天的事情摘要成幾行字、聲量監控與成本重複偵測則替你多盯著幾個容易被忽略的角落——把「一個人打十份工」的中小企業主，變成背後有一整條自動化管線撐著的團隊。更重要的是，當企業真的要導入新工具時，多租戶架構、角色權限（RBAC）、SSO 單一登入、稽核日誌、密鑰加密、GDPR 資料清除、每日自動備份——這些採購與資安審查會直接卡關的項目，匯流從架構層就準備好了，不是等出事才臨時補；而且每一項功能都誠實寫出「做了什麼」與「還沒做到什麼」，147 個自動化測試與 10 位人物角色、50 個檢查點的端對端模擬全數通過，不是一份只能看不能用的展示稿。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">阿凱，五人顧問工作室的創辦人</div><p>阿凱每天在 LINE、Email、幾個客戶群組間來回切換，深怕漏掉一則重要訊息或一張逾期發票，晚上躺平了還在想「今天是不是漏看了什麼」。用匯流設定好規則後，含有「合約」關鍵字的信件會自動用 LINE 立即通知他，一般的客服詢問先被記錄下來不用逐字盯著，每天早上還會收到一份晨報，把昨天發生的事情摘要成幾行字。他不用再自己手動巡一輪五、六個帳號才敢放心去忙別的事——那種「有東西在背後幫我盯著」的安心感，是他過去花錢請兼職助理都不見得換得到的。</p></div><div class="persona"><div class="persona-name">品瑄，十人新創裡唯一的維運工程師</div><p>品瑄被交辦「把手動巡檢自動化」，但公司規模小，沒有預算讓她另外養一整套訊息佇列與資料庫。用匯流的 Agent 任務鏈，她能建立多步驟自動化流程，某一步失敗會自動重試三次才標記失敗，不用自己寫重試邏輯；異常示警模組會自己算出「今天的事件量是不是超過過去 7 天平均的兩倍」，不用她手刻閾值判斷。因為整個系統就是一個 Python 程序加一個 SQLite 檔案，她不用另外維護 Redis 或訊息佇列，多出來的時間可以拿去做真正該她做的開發工作。</p></div><div class="persona"><div class="persona-name">曉薇，正在評估要不要導入的企業資安主管</div><p>曉薇每次審查新工具，第一個問題永遠是「有沒有角色權限？有沒有稽核日誌？資料外洩了怎麼辦？」過去不少好用的小工具，都是卡在這一關被她打回票。看匯流的文件時，她發現多租戶隔離、RBAC 角色權限、SSO 單一登入、append-only 稽核日誌、Fernet 加密的密鑰保存、資料保存政策與 GDPR 被遺忘權清除、每天凌晨自動備份、Prometheus 格式的系統監控，全部都已經內建，而且文件誠實列出目前哪些模組的多租戶隔離還沒做完——她第一次不用因為「這只是個小工具」就把資安檢核表整張跳過，反而能安心地把它排進正式導入評估清單。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>中小企業主／工作室經營者</strong>：沒有專職 IT 與行政人力，卻要同時盯著 Email、LINE、審批不能漏接的人</li><li><strong>自動化／維運工程師</strong>：需要在有限資源下把重複性巡檢與通知自動化，卻不想額外維護一整套中介軟體的人</li><li><strong>中大型企業 IT／資安採購評估者</strong>：導入新工具前，第一關永遠是多租戶、RBAC、SSO、稽核日誌、GDPR 這些企業就緒基礎設施是否到位</li><li><strong>需要串接 LINE／Gmail 等既有溝通管道的團隊</strong>：不需要自行從零開發 webhook 或輪詢邏輯，直接用現成連接器</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>單機部署、零額外基礎設施</strong>：一個 Python 程序＋一個 SQLite 檔案就能跑起 8 項進階自動化功能，大幅降低中小企業的導入門檻與維運成本</li><li><strong>147 個自動化測試＋10 人物角色 50 檢查點端對端模擬</strong>：不是「看起來能動」，而是連角色權限、跨租戶隔離、失敗重試這些邊界情況都真的驗證過</li><li><strong>企業就緒基礎設施從架構層內建</strong>：多租戶、RBAC、SSO、稽核日誌、密鑰管理、備份、GDPR——這些正是多數自動化小工具進不了大型企業採購清單的關卡，匯流第一天就準備好了</li><li><strong>誠實的範圍界定本身就是信任資產</strong>：每項功能都明確寫出做了什麼、還沒做到什麼，甚至主動揭露尚未完成的多租戶隔離範圍——對企業採購而言，這種透明度比誇大的功能清單更值得信賴</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓一個人的團隊，也擁有一整條自動化管線</h2><p>不用漏接、不用死記、不用另外養一套基礎設施——這就是匯流想還給每一位身兼多職的經營者的餘裕。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p4" class="view detail-view" style="--cat:#1F8A4C">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">04</div><div class="hero-cat">TRADING AI</div><img src="assets/04-pulsetrade.png" alt="脈策 PulseTrade｜六脈診斷選股"><div class="hero-title-wrap"><h1>脈策 PulseTrade｜六脈診斷選股</h1><div class="value-line">企業價值：把盯盤的焦慮，交給一套誠實的評分系統</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>六脈診斷框架</span><span>觸價停損守門員</span><span>847 個自動化測試</span><span>零門檻免費看盤</span></div>
-  <section class="section"><h2>商業價值</h2><p>多數散戶投資人沒有分析師團隊、沒有即時籌碼系統，只能憑感覺追高殺低，晚上還要擔心「今天是不是有什麼訊號我漏看了」「停損點到了我卻沒發現」。脈策把技術面、籌碼面、估值面三大面向收斂成一套「六脈診斷框架」（趨勢／動能／量能／型態／籌碼／位階），每次掃描都附上白話理由與風險報酬比，而不是丟一個燈號叫你自己猜。系統最核心的設計原則是「有訊號、你確認、才下單」——不管評分多高，系統都不會自己送出委託，這是為了不讓自動化交易變成失控的黑箱。在核心評分邏輯之上，再疊上觸價停損停利守門員（移動停損只升不降、停損優先於停利）、Kill Switch 緊急停止鈕、下單前錯價與頻率防護、條件警報中心等資金保護機制，加上大盤指數看板、昨夜國際行情、K線圖視覺化等決策背景資訊。更重要的是，還沒申請券商 API 也能先用證交所公開資料把整套技術面／籌碼面分析用起來，不用先繳錢、先開戶才能感受這套系統對不對你的胃口；而且每一項功能都誠實寫出「做到什麼」與「還沒做到什麼」——例如目前仍需手動維護自選股清單、尚未支援全市場自動選股——847 個自動化測試全數通過，不是一份只能看不能真的上場的展示稿。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">家瑋，白天上班、沒空盯盤的存股族</div><p>家瑋手上有幾檔長期定期定額的 ETF 跟權值股，但白天開會、根本沒空看盤，最怕的就是盤中出現重大訊號卻完全不知道，等晚上打開手機才發現已經錯過。設定好自選股跟 LINE 通知後，符合條件的訊號會直接推播到手機，附上白話理由跟六脈共振燈號；他不用整天緊盯 App，收到通知才點進去看，確認要不要下單——那種「系統在幫我盯著、不用整天心神不寧」的安心感，是他過去自己土法煉鋼設價格提醒完全比不上的。</p></div><div class="persona"><div class="persona-name">承翰，會寫程式、卻不想被情緒左右進出場的技術派投資人</div><p>承翰懂技術分析，但每次真的到了要按下買賣的那一刻，情緒還是會蓋過理性——賺了捨不得停利、虧了不甘心停損。他最在意的是移動停損守門員：設定好百分比或點數後，停損價只會往有利方向調整、不會因為一時心軟改回去，而且停損永遠優先於停利，不會出現自相矛盾的委託邏輯。系統的回測績效指標（Sharpe、Sortino、最大回撤）也讓他能誠實檢視自己的策略到底有沒有用，而不是憑印象覺得「我最近手感不錯」。</p></div><div class="persona"><div class="persona-name">育萱，剛開始想學投資、卻怕被割韭菜的新手</div><p>育萱對投資有興趣，但完全沒有券商 API、也還沒準備好開戶下單，最怕的是一堆工具都要先繳費或先綁券商才能用，等於還沒學會走路就被推著跑。她打開系統後，不需要任何券商帳號就能加自選股、看到完整的技術面／籌碼面分析，也能直接在「即時查詢」頁面打股票代號或中文名稱看六脈全貌。系統老實告訴她哪些是「證交所公開資料能做到的」、哪些是「外資等級才有的即時報價、目前還做不到」，這種不誇大的誠實，反而讓她第一次覺得投資工具沒有在唬弄新手。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>沒有時間整天盯盤的上班族投資人</strong>：需要系統代為掃描、只在符合條件時才推播通知的人</li><li><strong>有技術分析基礎、但想要紀律化停損停利的投資人</strong>：需要移動停損守門員與 Kill Switch 這類資金保護機制，避免情緒化操作的人</li><li><strong>還沒開通券商 API、想先熟悉系統再決定要不要投入</strong>的潛在使用者：不需要先開戶、先付費就能用免費公開資料完整體驗核心分析功能</li><li><strong>重視「系統誠實揭露限制」而非「誇大功能清單」</strong>的謹慎型投資人：每項功能都明確寫出做了什麼、還沒做到什麼</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>六脈診斷框架收斂複雜指標</strong>：把技術面、籌碼面、估值面十幾項分散指標整合成一張總結論卡片，共振度達門檻才標記「⚡強力訊號」，量化訊號可信度而非單純羅列數字</li><li><strong>資金保護機制從架構層內建</strong>：觸價停損停利＋移動停損守門員、Kill Switch 緊急停止鈕、下單前錯價與頻率防護、防重複下單原子狀態轉移，四層防護不是事後補丁，是設計之初就規劃好的</li><li><strong>零門檻免費看盤模式</strong>：沒有券商 API 也能用證交所公開資料完整體驗技術面／籌碼面分析，大幅降低新手的試用門檻與心理負擔</li><li><strong>847 個自動化測試＋誠實的範圍界定</strong>：每一輪功能迭代都有對應回歸測試，且文件主動揭露「還沒做到什麼」（例如全市場自動選股、觸價自動出場仍需手動確認），這種透明度對投資工具而言，比誇大的勝率宣傳更值得信賴</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>把盯盤的焦慮，交給一套講理由、也講誠實的系統</h2><p>不用整天盯盤、不用靠感覺追高殺低、不用擔心漏接停損——這就是脈策想還給每一位散戶投資人的從容。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p5" class="view detail-view" style="--cat:#2E8F79">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">05</div><div class="hero-cat">HR AI</div><img src="assets/05-fairview.png" alt="公鑑 FairView｜公平履歷篩選"><div class="hero-title-wrap"><h1>公鑑 FairView｜公平履歷篩選</h1><div class="value-line">企業價值：公平雇用・符合 ESG</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>公平雇用</span><span>分層報告</span><span>ESG 加分</span><span>招募效率</span></div>
-  <section class="section"><h2>商業價值</h2><p>每一份被隨手滑過的履歷背後，都是一個真實的人生與職涯期待；而每一次因為疲勞或偏見做出的用人誤判，付出代價的不只是求職者，更是企業自己——重新招募的成本、團隊磨合的時間、錯失真正人才的機會。這套系統的核心價值，不是「幫 HR 少做事」，而是「幫 HR 做出更公平、更一致的判斷」：它在評分邏輯中主動排除年齡、性別、婚姻狀況、宗教信仰、外貌等與職務能力無關的個人資訊，把焦點拉回「這個人能不能勝任這份工作」；同時依閱讀對象自動產出四種分層報告——董事長／總座要的是一頁摘要，部門主管要的是團隊契合度，HR 要的是操作明細，最終錄用決策仍交回人與人的面談判斷，AI 只負責把海量履歷整理成「值得你花時間深談的那幾份」。對企業而言，這代表招募週期縮短、篩選品質提升，更代表一種對每一位應徵者的尊重——他們的履歷真的被認真看過了。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">淑芬，同時要處理三個職缺的 HR 招募專員</div><p>淑芬桌上堆著三百多份履歷，眼睛看到花，卻還是不敢隨便刷掉任何一份——萬一漏看了真正合適的人怎麼辦？用這套系統上傳履歷與職缺後，AI 自動排除年齡、性別、婚姻等無關個資，只依硬性條件與軟性配對分數排序，一天之內她就篩出了值得深談的候選人清單，而不是熬夜到眼睛痠痛還在逐份比對。更重要的是，她知道這個篩選過程是公平的，不會因為自己太累而錯放偏見進去——這讓她睡得比較安穩。</p></div><div class="persona"><div class="persona-name">建宏，只想快速決定要不要面談的部門主管</div><p>建宏每天行程排滿會議，HR 傳來的候選人清單他常常來不及細看，只能憑履歷抬頭的公司名稱粗略判斷，錯過不少真正合適的人。拿到系統產出的「部門主管檢視」報告後，他十分鐘內就能看懂每位候選人與團隊的契合重點與推薦理由，不用再讀落落長的完整履歷。對他而言，這個工具幫他把「有限的注意力」精準用在真正該花時間的候選人身上。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>企業人資部門</strong>：面對大量履歷、需要快速且公平地完成初步篩選的招募團隊</li><li><strong>獵頭與人力仲介公司</strong>：需要同時為多個職缺、多位候選人進行交叉媒合分析</li><li><strong>需對外／對上呈交招募成果的組織</strong>：可自訂公司名稱與 Logo，讓決策報告書具備正式對外呈現的品牌質感</li><li><strong>重視法遵與 ESG 的企業</strong>：需要證明招募流程排除不當歧視因素、符合公平雇用原則的組織</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>招募成本與流失風險的雙重解方</strong>：每一次用人誤判，背後都是重新招募、團隊磨合與錯失人才的隱形成本——公平篩選直接降低這三項</li><li><strong>ESG 與雇主品牌的現代化需求</strong>：公平雇用已是投資人與求職者都在看的指標，系統讓企業「可證明」自己的招募是公平的</li><li><strong>三層決策者一次滿足</strong>：董事長看摘要、主管看契合、HR 看明細——一份系統服務整個決策鏈，採購價值自然放大</li><li><strong>可延伸的企業服務生態</strong>：從履歷篩選延伸到面試安排、結果通知，是進入企業人力資源流程的入口</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一份履歷都被認真對待，讓每一次用人都有理有據</h2><p>公平，不只是口號；它讓人才被看見，也讓企業睡得安穩。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p6" class="view detail-view" style="--cat:#C97A2E">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">06</div><div class="hero-cat">CAREER AI</div><img src="assets/06-career.png" alt="職透 CareerMatch｜履歷媒合教練"><div class="hero-title-wrap"><h1>職透 CareerMatch｜履歷媒合教練</h1><div class="value-line">企業價值：人力銀行加值服務入口</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>職涯教練</span><span>履歷健診</span><span>模擬面試</span><span>誠實原則</span></div>
-  <section class="section"><h2>商業價值</h2><p>求職路上最讓人焦慮的，往往不是「我不夠好」，而是「我不知道自己哪裡不夠好」——投了履歷卻石沉大海，連被拒絕的原因都不清楚。職透要做的，是把企業端的評估邏輯攤開在求職者面前：不只是給一個媒合分數，而是告訴你「面試官可能會怎麼看你」、「你的履歷中哪些成就被你自己低估了」、「哪些反問問題能幫你看穿這份工作真正的樣貌」。它甚至會示範一個「建議回答」給你，讓你在真正上戰場之前，先在安全的地方練習把經驗說得具體、有說服力。對求職者而言，這是一位隨時待命、不會不耐煩、不收費的職涯教練；對人力銀行或教育機構而言，這是一個能大幅提升用戶黏著度與轉換率的加值服務入口——因為它解決的不是「找到職缺」，而是「贏得那份職缺」。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">小雨，投了二十份履歷卻石沉大海的應屆畢業生</div><p>小雨不知道問題出在哪——履歷寫得認真，卻連一封回覆都沒收到，越投越懷疑是不是自己不夠好。用職透的履歷健診功能，她才發現原來自己的履歷關鍵字跟職缺說明完全對不上，ATS 系統可能連看都沒看到她的履歷就篩掉了。健診報告具體指出缺口與修改建議後，她調整了幾個段落重新投遞，很快就收到了第一封面試邀約——那一刻，她終於不再懷疑自己的能力，而是明白了「方法」的重要。</p></div><div class="persona"><div class="persona-name">志明，四十五歲準備轉職的中年上班族</div><p>志明在同一個產業做了二十年，卻在準備轉職面試時緊張到手心冒汗——他不知道該怎麼把過去的經驗，講得讓一個比他年輕十歲的面試官聽得懂、覺得有說服力。用職透的模擬面試功能，系統挑出他履歷中「保守帶過」的部分出題，並直接示範一個具體的建議回答，讓他反覆練習怎麼把資歷說得有分量。面試當天，他不再結結巴巴，而是有條理地講出自己的價值——那份重新找回的自信，比任何一份錄取通知都先到來。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>求職者本人</strong>：尤其是新鮮人／轉職者，面對不熟悉的產業或職務時，需要建立信心與具體論述的人</li><li><strong>技術／業務／管理／新鮮人等不同職務類型</strong>：系統會依職務類型自動調整語氣與強調重點——技術職強調解決問題與成果指標，業務職強調數字與客戶影響，管理職強調團隊與決策成果</li><li><strong>職涯顧問與教育機構</strong>：可作為求職輔導工具，協助學員系統性準備履歷與面試</li><li><strong>人力銀行平台</strong>：可作為會員加值服務，提升平台差異化競爭力</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>52 萬個新鮮人職缺背後的巨大需求</strong>：每年畢業季都有大量求職者需要「被看懂」與「被肯定」——這是一個高頻、高情緒的使用場景</li><li><strong>人力銀行的差異化武器</strong>：把「找到職缺」升級為「贏得職缺」，直接提升會員黏著度與付費轉換率</li><li><strong>誠實原則建立信任</strong>：AI 只調整表達、不捏造經歷，讓使用者放心把履歷交給它——信任是求職工具最稀缺的資產</li><li><strong>六大模組一次串聯</strong>：一份履歷打通健診、媒合、面試、改寫全流程，用戶體驗完整，商業變現空間大</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一位求職者，都有一位隨時待命的職涯教練</h2><p>被看見、被肯定、被準備好——職透陪你把「石沉大海」變成「收到邀約」。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p7" class="view detail-view" style="--cat:#6E5AC4">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">07</div><div class="hero-cat">WELL-BEING AI</div><img src="assets/07-lifecompass.png" alt="人生羅盤 LifeCompass｜自我覺察教練"><div class="hero-title-wrap"><h1>人生羅盤 LifeCompass｜自我覺察教練</h1><div class="value-line">企業價值：低成本 EAP 員工協助方案</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>自我覺察</span><span>溝通教練</span><span>團隊脈動</span><span>留才溫度</span></div>
-  <section class="section"><h2>商業價值</h2><p>我們常常對外人客氣，卻對最親近的人說出最傷人的話；我們渴望被理解，卻不知道如何開口說出真正的感受。人生羅盤想陪伴的，正是這些說不出口的時刻——透過人格傾向測驗、依戀類型測驗、核心價值觀盤點，幫助使用者先看懂自己；再透過溝通教練、情境範例產生器、CBT 自信重建、ABC 行為紀錄，把「看懂自己」轉化為「更好地與人相處」的具體練習。特別是「善意練習所」與「一致性檢查」這類功能，回應的是現代人越來越普遍的內在渴望：不是要變成另一個人，而是活得更誠實、更靠近自己真正相信的價值。對企業而言，內建的「團隊脈動（企業版）」與好友配對分析，讓這套工具能延伸成為員工協助方案（EAP）或團隊建立活動的載體——當一個組織願意投資員工的自我覺察，往往也是留住人才最溫柔卻最有效的方式。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">思穎，總是在關係中說出傷人話語卻不明白為什麼的人</div><p>思穎每次吵架後都很後悔——明明不是真心那樣想，話一出口卻總是最傷人的那句。她不知道自己為什麼會這樣，只覺得越親近的人，越容易成為她情緒的出口。做完依戀類型測驗後，她第一次看懂自己在關係中「害怕被拋棄所以先攻擊」的模式，再透過溝通教練練習如何把真實感受說出口而不是用刺人的話包裝。她沒有變成另一個人，只是終於能誠實地說：「我剛剛其實是在害怕」——這句話，改變了她跟伴侶之間很多次差點爆炸的對話。</p></div><div class="persona"><div class="persona-name">怡君，想低成本照顧員工心理健康的 HR 主管</div><p>怡君所在的公司規模不大，沒有預算聘請專職心理諮商師，但她親眼看著幾位優秀同仁因為壓力與人際摩擦陸續離職，心裡很不是滋味。用人生羅盤的企業版「團隊脈動」功能，她讓團隊成員自願參與測驗與溝通練習，用不高的成本為團隊提供了一個自我覺察與溝通改善的起點。半年後，她發現團隊內部的摩擦少了，同仁也更願意主動表達需求——這讓她相信，關心員工的心理狀態，不一定需要龐大的預算，而是願不願意開始。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>一般大眾</strong>：在感情、職涯、人際關係中感到困惑，渴望自我理解與成長的每一個人</li><li><strong>企業 HR 與教育訓練部門</strong>：想為員工提供心理健康與溝通能力提升資源、打造更有溫度組織文化的團隊</li><li><strong>伴侶與好友</strong>：透過合盤配對分析，理解彼此差異、減少不必要的衝突與誤解</li><li><strong>心理諮商輔助情境</strong>：作為諮商前的自我覺察暖身工具（非醫療診斷，仍需專業心理師介入判斷）</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>留才議題的溫柔解方</strong>：員工因壓力與摩擦離職的成本遠高於任何工具——投資自我覺察，是最划算的留才方式</li><li><strong>EAP 的普惠化機會</strong>：多數中小企業負擔不起專職諮商師，人生羅盤以極低成本提供心理支持起點，市場缺口明顯</li><li><strong>從個人到組織的雙引擎</strong>：個人測驗＋企業版團隊脈動，一條產品線同時服務 C 端使用者與 B 端企業</li><li><strong>回應時代的情緒需求</strong>：現代人對「被理解、被陪伴」的渴望持續升溫，這是一個有溫度的長期需求市場</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一句說不出口的話，都有被好好接住的機會</h2><p>看懂自己，是改變關係的第一步；而企業願意開始，就是最溫柔的留才。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<div id="view-p8" class="view detail-view" style="--cat:#B23A5B">
-<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
-<div class="hero"><div class="hero-img-wrap"><div class="hero-num">08</div><div class="hero-cat">ASTROLOGY AI</div><img src="assets/08-fivelens.png" alt="五象 FiveLens｜五術交叉解盤"><div class="hero-title-wrap"><h1>五象 FiveLens｜五術交叉解盤</h1><div class="value-line">企業價值：瞄準 2.9 億元台灣命理市場</div></div></div></div>
-<main class="detail-main">
-  <div class="tech-tags"><span>五套交叉驗證</span><span>擇日 Copilot</span><span>決策陪伴</span><span>透明信任</span></div>
-  <section class="section"><h2>商業價值</h2><p>凌晨十二點半，一位行銷專員又滑起了手機——工作卡關快三個月、感情也不上不下，她很想找人聊聊，命理館最快的預約卻要等兩週，開口就是三千元起跳。五象存在的意義，正是要接住這群「想理解自己、卻被時間與金錢門檻擋在外面」的人。它用真實天文演算（真太陽時、24節氣、朔望月、行星軌道根數）取代市售 App 常見的固定對照表估算，把八字、紫微斗數、西洋占星、姓名學、易經五套系統同時排出，讓使用者能自己交叉驗證，而不是只聽單一說法各自表述、越看越迷惘。更進一步，它不只是「算命」，而是陪你「做決策」——擇日 Copilot 涵蓋面試、簽約、求婚等 12 種真實人生場景，直接給出可執行建議；目標導向行動看板把命盤洞察轉化為每月待辦事項，讓使用者不是看完就忘，而是真正被陪伴著往前走。這正對應著台灣命理服務近 5 年成長 4.1 倍、2024 年產值達 2.9 億元的市場趨勢，而五象選擇用「精度公開透明」與「基礎功能免費」的姿態切入，賺得的不只是使用者的付費意願，更是信任。</p></section>
-  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">心怡，工作卡關又約不到命理館的行銷專員</div><p>心怡的工作卡關快三個月，感情也不上不下，她很想找人聊聊，翻開行事曆卻發現命理館最快的預約要等兩週，開口就是三千元起跳。打開手機 App 商店，跳出來的不是介面停留在十年前的產品，就是每套系統講的完全兜不攏——八字說她今年適合轉職，星座 App 卻說水逆諸事不宜，反而讓她更迷惘。用五象同時排出五套系統交叉比對後，她第一次不是被單一片面的說法牽著走，而是自己看懂了哪些訊號是多系統一致指向的重點，那種「終於有人把話講清楚」的安心感，是她過去滑手機滑再久都找不到的。</p></div><div class="persona"><div class="persona-name">家豪，即將求婚卻不知道該挑哪一天的準新郎</div><p>家豪想給女友一個難忘的求婚驚喜，卻在挑日子這件事上卡關——長輩說要看農民曆，朋友說隨便哪天都行，他自己毫無頭緒，又不想花大錢跑一趟命理館只為問一個日子。用五象的擇日 Copilot，他選擇「求婚」這個決策場景，系統依他的命盤給出具體的推薦日期與時辰、附上可執行建議，甚至交叉核對了傳統日禁忌口訣。求婚當天一切順利，他事後笑說，真正讓他安心的不是「這天真的比較好」，而是「我做了功課、盡了心」——那份準備周全的踏實感，才是他真正想要的。</p></div></section>
-  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>25–40 歲都會區使用者，尤其女性</strong>：重視隱私、追求自我成長與心理療癒，願意為精準且個人化的內容付費，卻對實體命理館的高價與預約門檻卻步</li><li><strong>人生重大決策前的一般大眾</strong>：面試、簽約、開店、求婚等關鍵時刻，需要多一份參考與安心感的人</li><li><strong>雙人與團隊關係經營者</strong>：情侶、夫妻、創業夥伴或主管與下屬，希望透過合盤理解彼此差異、找到更順暢的相處與分工方式</li><li><strong>企業延伸應用</strong>：品牌行銷團隊（行銷個人化引擎，將命盤五行分析轉換為 EDM／推播文案模板）、企業擇日（團隊或品牌適用的批次擇日服務）</li></ul></section>
-  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>2.9 億且五年成長 4.1 倍的爆發市場</strong>：台灣命理服務業正經歷爆炸式成長，年輕世代對自我理解的需求持續升溫</li><li><strong>「決策陪伴」的差異化定位</strong>：不是算命，而是陪你做人生決策——從擇日到行動看板，把一次性瀏覽變成持續使用</li><li><strong>透明與免費建立信任護城河</strong>：精度公開、基礎免費，讓使用者自己驗證，信任一旦建立就很難被取代</li><li><strong>B 端變現空間明確</strong>：行銷個人化引擎與企業擇日服務，把 C 端熱度轉化為企業端的商用授權收入</li></ul></section>
-  <section class="section"><div class="cta-box"><h2>讓每一個重要決定，都有人陪你好好想過</h2><p>不是替你決定，而是陪你做功課、盡了心——那份踏實感，就是五象想給你的安心。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
-</main>
-</div>
-
-<footer>© 2026 PORTFOLIO · 讓每個決定，都更有底氣　｜　澄思AI工作室 LUCIDMIND AI STUDIO　建議信箱:project0983487908@gmail.com</footer>
-
+</footer>
 <script>
 (function(){
   function navigate(){
@@ -426,10 +337,8 @@ ul.plain-list li strong{color:var(--cat)}
       window.scrollTo(0,0);
     } else {
       document.getElementById('view-home').classList.add('active');
-      if(hash === 'portfolio'){
-        // 這是頁內錨點（如「認識八位AI夥伴」按鈕），讓它自然捲動到對應區塊，
-        // 不要被下面的「回到頂部」邏輯搶走
-        var target = document.getElementById('portfolio');
+      if(['portfolio','business','platform','trust'].indexOf(hash) > -1){
+        var target = document.getElementById(hash);
         if(target) target.scrollIntoView({behavior:'smooth'});
       } else {
         window.scrollTo(0,0);
@@ -440,6 +349,5 @@ ul.plain-list li strong{color:var(--cat)}
   navigate();
 })();
 </script>
-
 </body>
 </html>

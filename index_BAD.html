@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<title>澄思 AI Studio｜AI 決策作業系統｜把複雜的事，變成下一步</title>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;display=swap" rel="stylesheet"/>
+<style>
+
+:root{
+  --coral:#FF5B39;
+  --coral-deep:#E8472A;
+  --indigo:#4B3F9E;
+  --indigo-soft:#6E5AC4;
+  --bg:#FFF6F1;
+  --bg-card:#FFFFFF;
+  --ink:#241C35;
+  --ink-soft:#6B6480;
+  --border:#F2DED4;
+  --border-soft:#EAE3F5;
+}
+
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.9}
+a{color:inherit}
+.view{display:none}
+.view.active{display:block}
+h1,h2,h3,.eyebrow,.kpi .num,.card-num,.card-cat,.hero-num,.hero-cat{font-family:"Space Grotesk","PingFang TC","Microsoft JhengHei",sans-serif}
+
+header{position:relative;background:linear-gradient(180deg,#FFF9F6,#FFF1EA);padding:70px 6% 60px;border-bottom:1px solid var(--border);overflow:hidden}
+header::after{content:"PORTFOLIO 2026";position:absolute;bottom:20px;right:6%;font-size:80px;font-weight:700;color:rgba(75,63,158,.05);letter-spacing:-2px;pointer-events:none}
+.hero-glow{position:absolute;top:-100px;right:-40px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,91,57,.20) 0%,rgba(75,63,158,.10) 55%,transparent 72%);filter:blur(6px);border-radius:50%;pointer-events:none;z-index:1}
+.hero-orbit{position:absolute;top:36px;right:7%;width:220px;height:220px;pointer-events:none;z-index:2}
+.eyebrow{position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px;background:rgba(255,91,57,.12);border:1px solid rgba(255,91,57,.35);color:var(--coral-deep);padding:6px 16px;border-radius:20px;font-size:12px;letter-spacing:3px;font-weight:700;margin-bottom:20px;white-space:nowrap}
+header h1{position:relative;z-index:3;font-size:58px;color:var(--ink);font-weight:700;line-height:1.15;max-width:760px;margin-bottom:20px;text-wrap:balance}
+header h1 .hl{color:var(--coral)}
+header h1 .nowrap,.hero-cat,.card-cat{white-space:nowrap}
+header h1,.hero-title-wrap h1,.card-body h3,.invest-head h2,.vision h2,.cta-box h2,.section h2{text-wrap:balance}
+header .lead{position:relative;z-index:3;font-size:18px;color:var(--ink-soft);max-width:640px;margin-bottom:30px}
+.kpi-bar{max-width:1400px;margin:-40px auto 40px;padding:0 6%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:3}
+.kpi{background:var(--bg-card);border:1px solid var(--border);padding:24px;border-radius:12px;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(75,63,158,.07)}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--coral),var(--indigo))}
+.kpi .num{font-size:36px;font-weight:700;color:var(--coral);line-height:1}
+.kpi .label{font-size:12px;letter-spacing:2px;color:var(--indigo);margin-top:8px;font-weight:700}
+.kpi .desc{font-size:13px;color:var(--ink-soft);margin-top:6px}
+.grid{max-width:1400px;margin:0 auto;padding:60px 6% 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
+.card{background:var(--bg-card);border-radius:14px;overflow:hidden;border:1px solid var(--border);position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;--cat:#E8472A;box-shadow:0 2px 12px rgba(36,28,53,.05)}
+.card:hover{transform:translateY(-4px);border-color:var(--cat);box-shadow:0 16px 32px rgba(36,28,53,.12)}
+.card-head{position:relative;height:220px;overflow:hidden}
+.card-head img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.98)}
+.card-head::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#fff 100%)}
+.card-num{position:absolute;top:14px;left:14px;background:var(--cat);color:#fff;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;z-index:2}
+.card-cat{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.92);color:var(--cat);padding:6px 12px;border-radius:20px;font-size:11px;letter-spacing:2px;font-weight:700;z-index:2;border:1px solid var(--cat)}
+.card-body{padding:28px}
+.card-body h3{font-size:24px;color:var(--ink);margin-bottom:8px;font-weight:700;line-height:1.3}
+.card-body .value-line{color:var(--cat);font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.card-body p{color:var(--ink-soft);font-size:14px;margin-bottom:10px}
+.card-body p strong{color:var(--cat)}
+.card-cta{display:inline-flex;align-items:center;gap:8px;color:var(--cat);text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid var(--cat);padding-bottom:4px;background:none;cursor:pointer;font-family:inherit}
+.invest{max-width:1400px;margin:0 auto;padding:50px 6% 20px}
+.invest-head{text-align:center;margin-bottom:40px}
+.invest-head h2{font-size:32px;color:var(--ink);font-weight:700;margin-bottom:12px}
+.invest-head p{color:var(--ink-soft);font-size:16px;max-width:780px;margin:0 auto}
+.invest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+.invest-item{background:var(--bg-card);border:1px solid var(--border);border-top:4px solid var(--coral);border-radius:12px;padding:26px;box-shadow:0 2px 12px rgba(36,28,53,.05)}
+.invest-item .icon{font-size:30px;margin-bottom:12px}
+.invest-item h3{color:var(--indigo);font-size:17px;font-weight:700;margin-bottom:10px}
+.invest-item p{color:var(--ink-soft);font-size:14px}
+.vision{max-width:1400px;margin:0 auto;padding:60px 6% 80px;text-align:center}
+.vision .box{background:linear-gradient(135deg,#FFF1EA,#F1EDFB);border:1px solid var(--border-soft);border-radius:16px;padding:50px 40px}
+.vision h2{font-size:30px;color:var(--ink);font-weight:700;margin-bottom:16px;line-height:1.4}
+.vision p{color:var(--ink-soft);font-size:16px;max-width:760px;margin:0 auto 26px}
+.vision .cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--coral),var(--indigo));color:#fff;font-weight:700;padding:14px 34px;border-radius:30px;text-decoration:none;font-size:16px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
+footer{background:#FBF2EE;padding:50px 6%;text-align:center;border-top:1px solid var(--border);color:var(--ink-soft);font-size:13px;letter-spacing:1px}
+
+/* ---- 詳細頁（合併後共用一份樣式，套用各專案自己的 --cat 色） ---- */
+.detail-view{--cat:#E8472A}
+.topnav{max-width:1100px;margin:0 auto;padding:24px 6% 0}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--cat);text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid var(--cat);padding-bottom:2px;background:none;cursor:pointer;font-family:inherit}
+.hero{position:relative;max-width:1100px;margin:20px auto 0;padding:0 6%}
+.hero-img-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);height:340px;background:var(--bg-card)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85)}
+.hero-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(28,18,46,.86) 100%)}
+.hero-num{position:absolute;top:18px;left:18px;background:var(--cat);color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;z-index:2}
+.hero-cat{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.92);color:var(--cat);padding:7px 14px;border-radius:20px;font-size:12px;letter-spacing:2px;font-weight:700;z-index:2;border:1px solid var(--cat)}
+.hero-title-wrap{position:absolute;bottom:24px;left:28px;right:28px;z-index:2}
+.hero-title-wrap h1{font-size:34px;color:#fff;font-weight:700;line-height:1.3;margin-bottom:8px}
+.hero-title-wrap .value-line{color:#fff;opacity:.92;font-size:15px;font-weight:700}
+main.detail-main{max-width:900px;margin:0 auto;padding:50px 6% 20px}
+.section{margin-bottom:52px}
+.section h2{font-size:22px;color:var(--cat);font-weight:700;letter-spacing:1px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.section h2::before{content:"";width:6px;height:22px;background:var(--cat);border-radius:2px;display:inline-block}
+.section p{color:var(--ink-soft);font-size:16px;margin-bottom:14px}
+.persona{background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--cat);border-radius:8px;padding:22px 26px;margin-bottom:20px;box-shadow:0 2px 10px rgba(36,28,53,.04)}
+.persona .persona-name{color:var(--cat);font-weight:700;font-size:16px;margin-bottom:10px}
+.persona p{margin-bottom:0;font-size:15px;color:var(--ink-soft)}
+ul.plain-list{list-style:none;padding:0}
+ul.plain-list li{position:relative;padding-left:24px;margin-bottom:14px;color:var(--ink-soft);font-size:16px}
+ul.plain-list li::before{content:"›";position:absolute;left:0;color:var(--cat);font-weight:900;font-size:18px}
+ul.plain-list li strong{color:var(--cat)}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tags span{font-size:12px;background:#fff;color:var(--cat);padding:6px 14px;border-radius:20px;border:1px solid var(--cat)}
+.cta-box{background:linear-gradient(135deg,#fff,var(--bg));border:1px solid var(--cat);border-radius:12px;padding:36px 34px;text-align:center;margin-top:10px}
+.cta-box h2{color:var(--ink);font-size:24px;font-weight:700;margin-bottom:12px;line-height:1.4;border:none;padding:0}
+.cta-box h2::before{display:none}
+.cta-box p{color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+.cta-box .cta{display:inline-flex;align-items:center;gap:10px;background:var(--cat);color:#fff;font-weight:700;padding:12px 30px;border-radius:24px;text-decoration:none;font-size:15px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
+
+/* ---- RWD：多段斷點，涵蓋平板與常見手機尺寸 ---- */
+@media(max-width:1100px){
+  .hero-orbit{display:none}
+}
+@media(max-width:820px){
+  .kpi-bar,.grid,.invest-grid{grid-template-columns:1fr}
+  header h1{font-size:36px}
+  .hero-glow{width:360px;height:360px;top:-70px;right:-90px}
+  .hero-img-wrap{height:220px}
+  .hero-title-wrap h1{font-size:24px}
+}
+@media(max-width:480px){
+  header{padding:50px 6% 44px}
+  header h1{font-size:28px}
+  header .lead{font-size:15px}
+  .eyebrow{font-size:10px;letter-spacing:2px;padding:5px 12px}
+  .kpi .num{font-size:26px}
+  .kpi{padding:18px}
+  .card-body{padding:20px}
+  .card-body h3{font-size:20px}
+  .hero-img-wrap{height:170px}
+  .hero-title-wrap h1{font-size:19px}
+  .hero-title-wrap{left:18px;right:18px;bottom:16px}
+  .section h2{font-size:18px}
+  .section p,.persona p{font-size:14px}
+  .cta-box{padding:26px 20px}
+  .cta-box h2{font-size:19px}
+  .invest-head h2,.vision h2{font-size:22px}
+  main.detail-main{padding:36px 6% 10px}
+}
+
+.site-nav{position:relative;z-index:5;max-width:1400px;margin:0 auto 48px;display:flex;align-items:center;gap:26px;font-size:13px;font-weight:700;color:var(--ink-soft)}
+.site-nav a{text-decoration:none;transition:color .2s}.site-nav a:hover{color:var(--coral)}
+.site-nav .nav-cta{margin-left:auto;background:var(--ink);color:#fff;padding:9px 18px;border-radius:22px}.site-nav .nav-cta:hover{color:#fff;background:var(--indigo)}
+.home-intro{max-width:900px;margin:0 auto;padding:70px 6% 25px;text-align:center}.home-intro h2{font-size:34px;line-height:1.35;margin-bottom:18px}.home-intro p{color:var(--ink-soft);font-size:17px}
+.audience-grid,.platform-grid,.trust-grid{max-width:1400px;margin:0 auto;padding:30px 6% 60px;display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.info-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:28px;box-shadow:0 2px 12px rgba(36,28,53,.05)}
+.info-card h3{font-size:20px;color:var(--indigo);margin-bottom:10px}.info-card p{color:var(--ink-soft);font-size:14px}.info-card .mini{font-size:11px;letter-spacing:2px;color:var(--coral);font-weight:700;margin-bottom:8px}
+.section-kicker{text-align:center;color:var(--coral-deep);font-size:12px;letter-spacing:3px;font-weight:700;margin-bottom:8px}
+.decision-flow{max-width:1200px;margin:0 auto;padding:20px 6% 70px;display:flex;justify-content:center;align-items:stretch;gap:10px;flex-wrap:wrap}.flow-step{background:#fff;border:1px solid var(--border);border-radius:12px;padding:20px 16px;min-width:150px;text-align:center}.flow-step strong{display:block;color:var(--ink);font-size:15px}.flow-step span{display:block;color:var(--ink-soft);font-size:12px;margin-top:5px}.flow-arrow{align-self:center;color:var(--coral);font-weight:900}
+.business-band{background:#F7F3FB;border-top:1px solid var(--border-soft);border-bottom:1px solid var(--border-soft)}
+@media(max-width:820px){.site-nav{gap:14px;margin-bottom:34px;flex-wrap:wrap}.site-nav .nav-cta{margin-left:0}.audience-grid,.platform-grid,.trust-grid{grid-template-columns:1fr}.home-intro h2{font-size:26px}.flow-arrow{display:none}}
+
+.hero-actions{position:relative;z-index:3;display:flex;gap:12px;flex-wrap:wrap;margin:4px 0 18px}.hero-primary,.hero-secon<body>
+<div class="view active" id="view-home">
+<header>
+<nav aria-label="主要導覽" class="site-nav">
+<a href="#problem">為什麼現在</a><a href="#portfolio">AI 夥伴</a><a href="#business">商業模式</a><a href="#platform">平台護城河</a><a href="#trust">信任治理</a><a class="nav-cta" href="#portfolio">看看能解決什麼</a>
+</nav>
+<div aria-hidden="true" class="hero-glow"></div>
+<svg aria-hidden="true" class="hero-orbit" viewbox="0 0 220 220"><circle cx="110" cy="110" fill="none" r="86" stroke="#4B3F9E" stroke-opacity=".28" stroke-width="1.5"></circle><circle cx="110" cy="110" fill="none" r="52" stroke="#FF5B39" stroke-opacity=".22" stroke-width="1.5"></circle><circle cx="110" cy="24" fill="#FF5B39" r="7"></circle><circle cx="196" cy="110" fill="#FF5B39" r="7"></circle><circle cx="110" cy="196" fill="#FF5B39" r="7"></circle><circle cx="24" cy="110" fill="#FF5B39" r="7"></circle><circle cx="171" cy="49" fill="#4B3F9E" r="4.5"></circle><circle cx="171" cy="171" fill="#4B3F9E" r="4.5"></circle><circle cx="49" cy="171" fill="#4B3F9E" r="4.5"></circle><circle cx="49" cy="49" fill="#4B3F9E" r="4.5"></circle></svg>
+<span class="eyebrow">★ 澄思 AI STUDIO · AI 決策作業系統</span>
+<h1>真正昂貴的，<br/><span class="hl nowrap">不是 AI，而是做錯決定。</span></h1>
+<p class="lead">每天，企業花時間整理資料、追進度、判斷風險、篩選人才；每個人也在面對轉職、投資、關係與人生選擇。資訊越來越多，真正能替你承擔「理解、比較、判斷」的時間卻越來越少。澄思做的，不是再多一個聊天機器人，而是一層能進入真實工作與真實人生的決策能力。</p>
+<div class="hero-actions"><a class="hero-primary" href="#portfolio">從一個真實問題開始 →</a><a class="hero-secondary" href="#business">看企業為什麼願意付費</a></div>
+<div class="hero-proof"><span>8 個垂直決策場景</span><i>·</i><span>同一套決策底層能力</span><i>·</i><span>B2C / B2B / API / 白標</span></div>
+</header>
+
+<section class="kpi-bar">
+<div class="kpi"><div class="num">8</div><div class="label">真實決策場景</div><div class="desc">不是展示 AI 有多會回答，而是直接對應企業與個人的高頻痛點。</div></div>
+<div class="kpi"><div class="num">1</div><div class="label">共同決策底座</div><div class="desc">理解、分析、比較、行動、回饋與治理，可以跨產品累積。</div></div>
+<div class="kpi"><div class="num">4</div><div class="label">收入入口</div><div class="desc">個人訂閱、企業 SaaS、API、白標與企業客製整合。</div></div>
+<div class="kpi"><div class="num">∞</div><div class="label">可延伸的決策場景</div><div class="desc">場景越多，共同能力越能被重用；新產品不必從零開始。</div></div>
+</section>
+
+<section class="home-intro" id="problem">
+<div class="section-kicker">WHY NOW</div>
+<h2>AI 已經很會回答問題。<br/>企業真正缺的是：<span class="hl">有人把問題接住。</span></h2>
+<p>一個老闆知道營收下滑，卻不知道下一步該先動價格、渠道還是產品；一個資安工程師看到告警，卻必須自己判斷哪一個值得立刻處理；一個 HR 面對數百份履歷，怕漏掉好人才，也怕錯過公平；一個求職者被拒絕幾次後，開始懷疑是不是自己不夠好。這些都不是「缺答案」的問題，而是<strong>缺少一套能把複雜事情變成下一步的能力。</strong></p>
+</section>
+
+<section class="pain-grid">
+<div class="pain-card"><span>01 · 老闆</span><h3>「我知道很多事情重要，但我沒有時間每一件都想清楚。」</h3><p>資料散落、選項很多、每個決定都牽動成本。真正稀缺的是管理者的注意力。</p></div>
+<div class="pain-card"><span>02 · 專業團隊</span><h3>「最累的不是做事，是每次都要重新判斷。」</h3><p>重複整理、分類、追蹤與交接，把高價值的人力耗在低價值摩擦上。</p></div>
+<div class="pain-card"><span>03 · 個人</span><h3>「我不是沒有能力，我只是現在很需要有人陪我把事情拆開。」</h3><p>很多人生選擇沒有標準答案，但可以有更好的準備、更清楚的選項與更有底氣的下一步。</p></div>
+</section>
+
+<section class="decision-promise">
+<div><div class="section-kicker">OUR PROMISE</div><h2>把「我不知道怎麼辦」<br/>變成「我知道下一步要看什麼」。</h2></div>
+<div class="promise-copy"><p>澄思的核心不是預測未來，也不是把人的判斷拿走。核心是把原本需要大量人工整理的資訊、脈絡、選項、風險與準備工作接住。</p><p><strong>讓人少一點混亂，多一點理解；少一點重工，多一點真正需要人的時間。</strong></p></div>
+</section>
+
+<section aria-label="8 位 AI 決策夥伴" class="grid" id="portfolio">
+<article class="card" style="--cat:#E8472A"><div class="card-head"><div class="card-num">01</div><div class="card-cat">行銷決策</div><img alt="策引 StratEdge｜行銷決策副駕駛" src="assets/small_01-stratedge.png"/></div><div class="card-body"><h3>策引 StratEdge</h3><div class="value-line">讓每一筆行銷預算，都有一個說得清楚的理由。</div><p><strong>你正在承擔：</strong> 數據很多、預算有限，卻每天都要回答「下一步投哪裡？」</p><p><strong>商業價值：</strong> 把受眾、素材、渠道與成效訊號整理成可討論的策略脈絡，縮短從資料到行動的距離。</p><a class="card-cta" href="#p1">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#2F6FB0"><div class="card-head"><div class="card-num">02</div><div class="card-cat">資安決策</div><img alt="鎮夜 NightSentry｜智慧資安守夜" src="assets/small_02-nightsentry.png"/></div><div class="card-body"><h3>鎮夜 NightSentry</h3><div class="value-line">凌晨的告警，不該只剩一個人扛。</div><p><strong>你正在承擔：</strong> 告警很多、上下文很少，每一次誤判都可能有成本。</p><p><strong>商業價值：</strong> 把告警、資產、弱點與處置紀錄整理成可理解、可交接、可追溯的事件脈絡。</p><a class="card-cta" href="#p2">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#4B3F9E"><div class="card-head"><div class="card-num">03</div><div class="card-cat">流程自動化</div><img alt="匯流 Converge｜AI 工作流平台" src="assets/small_03-converge.png"/></div><div class="card-body"><h3>匯流 Converge</h3><div class="value-line">不要再靠某個人的記憶，撐住整間公司的流程。</div><p><strong>你正在承擔：</strong> Email、表單、訊息與審批散落各處，漏一步就可能多花一整天。</p><p><strong>商業價值：</strong> 將事件、規則、動作與例外串成可重複執行的工作流，降低人工摩擦。</p><a class="card-cta" href="#p3">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#1F8A4C"><div class="card-head"><div class="card-num">04</div><div class="card-cat">投資研究</div><img alt="脈策 PulseTrade｜投資研究與風險紀律工具" src="assets/small_04-pulsetrade.png"/></div><div class="card-body"><h3>脈策 PulseTrade</h3><div class="value-line">按下確認前，多看一眼理由、風險與自己。</div><p><strong>你正在承擔：</strong> 資訊太多、時間太少，真正操作時情緒可能蓋過原本的研究。</p><p><strong>商業價值：</strong> 將研究框架、訊號說明與風險紀律放進同一個決策流程；不替你下單、不保證結果。</p><a class="card-cta" href="#p4">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#2E8F79"><div class="card-head"><div class="card-num">05</div><div class="card-cat">人才決策</div><img alt="公鑑 FairView｜可解釋的人才評估工具" src="assets/small_05-fairview.png"/></div><div class="card-body"><h3>公鑑 FairView</h3><div class="value-line">每一份履歷後面，都是一個值得被好好看見的人。</div><p><strong>你正在承擔：</strong> 時間有限時，疲勞、第一印象與無關資訊都可能干擾判斷。</p><p><strong>商業價值：</strong> 聚焦職務相關條件，保留評估理由與人工覆核，讓人才流程更一致、更可檢視。</p><a class="card-cta" href="#p5">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#C97A2E"><div class="card-head"><div class="card-num">06</div><div class="card-cat">職涯成長</div><img alt="職透 CareerMatch｜AI 職涯準備教練" src="assets/small_06-career.png"/></div><div class="card-body"><h3>職透 CareerMatch</h3><div class="value-line">你不一定是不夠好，你可能只是還沒被正確看見。</div><p><strong>你正在承擔：</strong> 投出去沒有回覆，很容易把方法問題誤認成能力問題。</p><p><strong>商業價值：</strong> 從履歷、職缺、ATS 到模擬面試，形成可持續的求職準備服務。</p><a class="card-cta" href="#p6">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#6E5AC4"><div class="card-head"><div class="card-num">07</div><div class="card-cat">自我覺察</div><img alt="人生羅盤 LifeCompass｜自我覺察與溝通教練" src="assets/small_07-lifecompass.png"/></div><div class="card-body"><h3>人生羅盤 LifeCompass</h3><div class="value-line">我不是想變成另一個人，我只是想更懂自己。</div><p><strong>你正在承擔：</strong> 很多關係不是不在乎，而是不知道怎麼把真正想說的話說出來。</p><p><strong>商業價值：</strong> 將自我覺察與溝通練習產品化，延伸個人訂閱與企業培訓場景。</p><a class="card-cta" href="#p7">看完整商業場景 →</a></div></article>
+<article class="card" style="--cat:#B23A5B"><div class="card-head"><div class="card-num">08</div><div class="card-cat">文化探索</div><img alt="五象 FiveLens｜傳統文化與自我探索工具" src="assets/small_08-fivelens.png"/></div><div class="card-body"><h3>五象 FiveLens</h3><div class="value-line">不是替你預言未來，而是陪你把功課做完整。</div><p><strong>你正在承擔：</strong> 面對人生大事，人有時需要的不是真正答案，而是一個整理觀點的空間。</p><p><strong>商業價值：</strong> 將傳統文化框架轉成可持續探索的數位體驗，形成內容、會員與合作授權可能。</p><a class="card-cta" href="#p8">看完整商業場景 →</a></div></article>
+</section>
+
+<section class="business-band" id="business">
+<div class="invest-head"><div class="section-kicker">HOW THE BUSINESS WORKS</div><h2>我們不是靠「賣一個 AI 功能」賺錢。</h2><p>真正的商業價值，是把一個人每天反覆做的判斷工作，變成願意持續付費的產品；再把同一套能力嵌入企業流程，從單點工具走向平台收入。</p></div>
+<div class="business-funnel">
+<div class="funnel-step"><b>第一層</b><h3>個人訂閱</h3><p>履歷、研究、自我探索等高頻需求，讓使用者先體驗「被接住」的價值。</p><strong>收入邏輯｜月／年訂閱</strong></div>
+<div class="funnel-step"><b>第二層</b><h3>企業 SaaS</h3><p>把決策能力放進 HR、行銷、資安、營運等日常工作，形成持續使用與席次收入。</p><strong>收入邏輯｜席次／用量／方案</strong></div>
+<div class="funnel-step"><b>第三層</b><h3>API 與白標</h3><p>讓第三方產品直接調用能力，從「我們的網站」走進「別人的產品」。</p><strong>收入邏輯｜API 用量／授權</strong></div>
+<div class="funnel-step"><b>第四層</b><h3>企業整合</h3><p>依組織流程、權限、治理與資料需求做深度整合，提升客戶黏著與導入深度。</p><strong>收入邏輯｜專案／年度合約</strong></div>
+</div>
+<div class="money-callout"><span>投資人真正該看的，不只是功能數量</span><strong>而是「一次開發 → 多場景重用 → 多種收入入口」的能力。</strong></div>
+</section>
+
+<section class="platform-section" id="platform">
+<div class="invest-head"><div class="section-kicker">THE PLATFORM</div><h2>8 個產品只是前台。<br/><span class="hl">真正要累積的是後面的 Decision Layer。</span></h2><p>今天使用者在意的是「這個工具有沒有幫我解決問題」；長期企業價值則來自一套可以跨場景複製、治理與持續學習的底層能力。</p></div>
+<div class="platform-grid">
+<div class="info-card"><div class="mini">01 · 理解</div><h3>Context Engine</h3><p>理解角色、目標、限制、資料來源與情境，避免 AI 只看到一句問題，卻看不到真正的問題。</p></div>
+<div class="info-card"><div class="mini">02 · 分析</div><h3>Reasoning Layer</h3><p>把資料轉成原因、選項、比較與風險，而不是只產生一段看起來很完整的文字。</p></div>
+<div class="info-card"><div class="mini">03 · 行動</div><h3>Action Layer</h3><p>將建議連到工作流、提醒、紀錄與人工覆核，讓 AI 的價值從「回答」走到「工作真的往前走」。</p></div>
+<div class="info-card"><div class="mini">04 · 回饋</div><h3>Outcome Memory</h3><p>記錄決策與後續結果，在合適的資料治理前提下，讓產品逐步從一次性工具走向長期使用。</p></div>
+<div class="info-card"><div class="mini">05 · 治理</div><h3>Trust Layer</h3><p>權限、紀錄、可追溯性、人工介入與風險邊界，讓企業敢把 AI 放進真正重要的流程。</p></div>
+<div class="info-card"><div class="mini">06 · 擴張</div><h3>Platform Economics</h3><p>共同底座降低新場景開發的重複成本，讓產品矩陣可以透過 SaaS、API 與白標持續擴張。</p></div>
+</div>
+</section>
+
+<section class="moat-section">
+<div class="invest-head"><div class="section-kicker">WHY IT CAN COMPOUND</div><h2>真正的護城河，不是「我們也用了 AI」。</h2><p>模型會進步、功能會被複製；真正值得累積的是<strong>決策場景、工作流程、回饋資料、治理能力與使用者信任</strong>。</p></div>
+<div class="moat-grid">
+<div><span>01</span><h3>場景資料</h3><p>知道不同角色在什麼情境下提出什麼問題，以及哪些資訊真正有用。</p></div>
+<div><span>02</span><h3>決策記憶</h3><p>從單次對話走向持續脈絡，讓使用者不用每次從頭解釋。</p></div>
+<div><span>03</span><h3>結果回饋</h3><p>把「最後發生了什麼」帶回產品，而不是永遠停在產生答案的那一刻。</p></div>
+<div><span>04</span><h3>企業治理</h3><p>越重要的流程，越需要權限、稽核、人工覆核與責任邊界。</p></div>
+</div>
+</section>
+
+<section class="trust-section" id="trust">
+<div class="invest-head"><div class="section-kicker">TRUST IS A PRODUCT FEATURE</div><h2>越接近錢、工作與人生，<br/>越不能假裝 AI 什麼都知道。</h2><p>信任不是頁尾的一段免責聲明，而是產品本身的一部分。</p></div>
+<div class="trust-grid"><div class="info-card"><div class="mini">透明</div><h3>AI 就說 AI，規則就說規則</h3><p>清楚區分 AI 推論、資料、規則引擎與人工判斷，讓使用者知道「這個結論從哪裡來」。</p></div><div class="info-card"><div class="mini">可控</div><h3>重要決策，最後一票留給人</h3><p>投資、人才、健康／心理與其他高影響場景，不把 AI 輸出包裝成不可質疑的最終答案。</p></div><div class="info-card"><div class="mini">可回看</div><h3>每一次重要操作，都應該有跡可循</h3><p>透過權限、紀錄與治理機制，讓企業能追蹤關鍵操作、輸入與判斷依據。</p></div></div>
+</section>
+
+<section class="invest" id="investor">
+<div class="invest-head"><div class="section-kicker">THE INVESTMENT STORY</div><h2>如果把今天的 8 個產品放在一起看，真正的故事是什麼？</h2><p>不是「我們做了很多 AI 小工具」。而是：<strong>我們正在用多個真實場景，驗證同一套決策基礎設施能不能被個人使用、被企業付費、被第三方整合，最後形成平台。</strong></p></div>
+<div class="invest-grid"><div class="invest-item"><div class="icon">01</div><h3>先用場景證明價值</h3><p>每個產品都從一個明確痛點切入：少整理、少遺漏、少猜測、多準備、多可解釋性。</p></div><div class="invest-item"><div class="icon">02</div><h3>再用共用底座放大</h3><p>同一套理解、分析、工作流與治理能力，可以被不同垂直產品重複使用，形成產品矩陣。</p></div><div class="invest-item"><div class="icon">03</div><h3>最後把能力變成平台</h3><p>當能力可以被 API、白標與企業系統調用，價值就不只存在於自己的網站，而能進入更多工作流程。</p></div></div>
+</section>
+
+<section class="cta-section">
+<div class="cta-box"><div class="section-kicker">START WITH A REAL PROBLEM</div><h2>不要先問「AI 還能做什麼」。<br/><span class="hl">先問：你現在最不想一個人扛的是什麼？</span></h2><p>一個行銷決策、一個資安告警、一套混亂流程、一場面試、一個人才判斷，甚至是一個只有你自己知道有多難的選擇。從真實問題開始，才有真正的產品價值。</p><a class="cta" href="#portfolio">選一個問題，開始探索 →</a></div>
+</section>
+</div>
+
+<div class="view detail-view" id="view-p1" style="--cat:#E8472A"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">01</div><div class="hero-cat">行銷決策</div><img alt="策引 StratEdge｜行銷決策副駕駛" src="assets/01-stratedge.png"/><div class="hero-title-wrap"><h1>策引 StratEdge</h1><div class="value-line">讓每一筆行銷預算，都有一個說得清楚的理由。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>受眾與渠道分析</span><span>素材與成效訊號整理</span><span>情境比較</span><span>策略報告</span></div><section class="section"><h2>真正昂貴的問題</h2><p>行銷不是沒有資料，而是資料太多。你看到點擊率、轉換率、成本與營收，卻還是要在會議裡回答：「所以我們下一步到底要做什麼？」</p><p>策引的價值，是把數字整理成可以討論的假設與選項，讓管理者少花時間找答案，多花時間做判斷。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>縮短從資料整理到策略討論的時間</li><li>提高預算與資源分配的可解釋性</li><li>把個人經驗沉澱成團隊可複用的決策流程</li></ul></section><section class="section"><h2>誰會付費</h2><ul class="plain-list"><li><strong>品牌與中小企業</strong>｜需要更快做出行銷資源配置。</li><li><strong>代理商與顧問</strong>｜需要把研究與提案流程標準化。</li><li><strong>企業行銷團隊</strong>｜需要讓決策脈絡可以交接與回看。</li></ul></section><section class="section"><div class="cta-box"><h2>不是多一份報表，而是少一次猜測。</h2><p>回到總覽，看看其他決策場景如何被產品化。</p><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p2" style="--cat:#2F6FB0"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">02</div><div class="hero-cat">資安決策</div><img alt="鎮夜 NightSentry｜智慧資安守夜" src="assets/02-nightsentry.png"/><div class="hero-title-wrap"><h1>鎮夜 NightSentry</h1><div class="value-line">凌晨的告警，不該只剩一個人替整間公司擔心。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>告警白話化</span><span>資產與威脅脈絡</span><span>處置紀錄</span><span>稽核軌跡</span></div><section class="section"><h2>真正昂貴的問題</h2><p>告警本身不一定可怕。可怕的是沒有人知道它的上下文、嚴重度與下一步，最後所有壓力都落在值班工程師身上。</p><p>鎮夜把分散訊號整理成可以理解、交接與追蹤的事件脈絡，讓專業人員把注意力放在真正需要判斷的地方。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低告警分類與整理負擔</li><li>提升事件脈絡與資產可視性</li><li>讓處置與稽核紀錄更容易沉澱</li></ul></section><section class="section"><h2>誰會付費</h2><ul class="plain-list"><li><strong>企業 IT／資安團隊</strong>｜需要降低日常告警摩擦。</li><li><strong>SOC／NOC</strong>｜需要更一致的事件處理流程。</li><li><strong>受監管組織</strong>｜需要可追溯的治理與紀錄。</li></ul></section><section class="section"><div class="cta-box"><h2>真正的價值，不是承諾永遠不出事。</h2><p>而是事情發生時，團隊知道該看什麼、做什麼、留下什麼。</p><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p3" style="--cat:#4B3F9E"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">03</div><div class="hero-cat">流程自動化</div><img alt="匯流 Converge｜AI 工作流平台" src="assets/03-converge.png"/><div class="hero-title-wrap"><h1>匯流 Converge</h1><div class="value-line">不要再靠某個人的記憶，撐住整間公司的流程。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>事件 → 規則 → 動作</span><span>多步驟工作流</span><span>例外處理</span><span>權限與稽核</span></div><section class="section"><h2>真正昂貴的問題</h2><p>很多公司的流程不是沒有寫，而是寫在某個人的腦袋裡。人一忙、請假、離職，流程就開始失速。</p><p>匯流把重複工作變成可執行、可監控、可交接的流程，讓企業把人的時間留給例外與真正重要的事。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低重複人工操作與流程摩擦</li><li>減少遺漏與跨工具切換成本</li><li>形成可持續擴張的自動化基礎</li></ul></section><section class="section"><h2>誰會付費</h2><ul class="plain-list"><li><strong>中小企業</strong>｜需要用更少人力承擔更多流程。</li><li><strong>營運與自動化團隊</strong>｜需要集中管理工作流。</li><li><strong>SaaS／平台業者</strong>｜需要 API 與流程能力。</li></ul></section><section class="section"><div class="cta-box"><h2>把公司從「靠人記得」帶到「系統接得住」。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p4" style="--cat:#1F8A4C"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">04</div><div class="hero-cat">投資研究</div><img alt="脈策 PulseTrade｜投資研究與風險紀律工具" src="assets/04-pulsetrade.png"/><div class="hero-title-wrap"><h1>脈策 PulseTrade</h1><div class="value-line">按下確認前，多看一眼理由、風險與自己。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>研究框架</span><span>訊號說明</span><span>風險紀律</span><span>操作前防護</span></div><section class="section"><h2>真正昂貴的問題</h2><p>很多人不是沒有研究，而是在真正要做決定時，資訊太多、時間太少，情緒卻突然變得很大聲。</p><p>脈策把研究、理由與風險紀律放到同一條流程裡，讓使用者在確認之前，多一個檢查自己假設的機會。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>把零散研究變成結構化流程</li><li>提高風險規則被遵守的可見性</li><li>形成個人訂閱與金融服務合作的產品入口</li></ul></section><section class="section"><h2>信任與邊界</h2><p>本產品供市場資料整理、研究與風險管理輔助，不構成投資建議、買賣邀約或獲利保證。</p></section><section class="section"><div class="cta-box"><h2>不是替你下注，是陪你把下注前的功課做完整。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p5" style="--cat:#2E8F79"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">05</div><div class="hero-cat">人才決策</div><img alt="公鑑 FairView｜可解釋的人才評估工具" src="assets/05-fairview.png"/><div class="hero-title-wrap"><h1>公鑑 FairView</h1><div class="value-line">每一份履歷後面，都是一個值得被好好看見的人。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>職務相關條件</span><span>可解釋評估</span><span>人工覆核</span><span>治理紀錄</span></div><section class="section"><h2>真正昂貴的問題</h2><p>HR 不缺履歷，缺的是時間。當一天要看大量候選人，疲勞與無關資訊很容易影響初步判斷；但真正的風險，是企業錯過適合的人，也無法說明自己為什麼做出某個判斷。</p><p>公鑑讓系統先整理與職務相關的資訊，再把最後的判斷交回人。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>降低履歷初篩與資訊整理負擔</li><li>提升人才評估流程的一致性與可解釋性</li><li>支援企業人才治理、覆核與紀錄需求</li></ul></section><section class="section"><h2>誰會付費</h2><ul class="plain-list"><li><strong>企業 HR</strong>｜需要處理大量招募流程。</li><li><strong>獵頭與人力服務商</strong>｜需要提升候選人整理效率。</li><li><strong>重視治理的企業</strong>｜需要可回看的決策紀錄。</li></ul></section><section class="section"><div class="cta-box"><h2>效率可以交給 AI，但人的價值不能被一個分數取代。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p6" style="--cat:#C97A2E"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">06</div><div class="hero-cat">職涯成長</div><img alt="職透 CareerMatch｜AI 職涯準備教練" src="assets/06-career.png"/><div class="hero-title-wrap"><h1>職透 CareerMatch</h1><div class="value-line">你不一定是不夠好，你可能只是還沒被正確看見。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>履歷健診</span><span>ATS 檢視</span><span>模擬面試</span><span>表達準備</span></div><section class="section"><h2>真正昂貴的問題</h2><p>被拒絕很難受，但「不知道為什麼被拒絕」更難受。求職者往往只能一次又一次投遞，卻沒有一個地方告訴他：哪裡可以改善、怎麼練、下一次怎麼做。</p><p>職透把求職從「等待結果」變成「持續準備」：履歷、職缺理解、面試表達，都能被拆開練習。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>提高求職者使用頻率與長期留存的理由</li><li>形成會員加值、職涯服務與教育合作入口</li><li>可被人力平台、學校與職涯機構以 API／白標整合</li></ul></section><section class="section"><div class="cta-box"><h2>不要讓一次沉默的拒絕，變成對自己的否定。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p7" style="--cat:#6E5AC4"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">07</div><div class="hero-cat">自我覺察</div><img alt="人生羅盤 LifeCompass｜自我覺察與溝通教練" src="assets/07-lifecompass.png"/><div class="hero-title-wrap"><h1>人生羅盤 LifeCompass</h1><div class="value-line">我不是想變成另一個人，我只是想更懂自己。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>自我覺察</span><span>溝通練習</span><span>情境反思</span><span>企業培訓延伸</span></div><section class="section"><h2>真正昂貴的問題</h2><p>有些人不是沒有感受，而是不知道怎麼說；有些團隊不是沒有能力，而是彼此沒有真正理解。</p><p>人生羅盤把自我覺察與溝通練習做成低門檻、可持續的體驗，讓使用者先理解自己，再練習怎麼走向別人。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>建立個人訂閱與持續使用的內容型產品</li><li>延伸企業團隊溝通與培訓服務</li><li>以一般性支持切入，不取代醫療或心理專業</li></ul></section><section class="section"><div class="cta-box"><h2>有時候，人真正想要的不是答案，只是終於有人幫他把心裡那團線理清楚。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<div class="view detail-view" id="view-p8" style="--cat:#B23A5B"><div class="topnav"><a class="back-link" href="#">← 返回 AI 決策夥伴</a></div><div class="hero"><div class="hero-img-wrap"><div class="hero-num">08</div><div class="hero-cat">文化探索</div><img alt="五象 FiveLens｜傳統文化與自我探索工具" src="assets/08-fivelens.png"/><div class="hero-title-wrap"><h1>五象 FiveLens</h1><div class="value-line">不是替你預言未來，而是陪你把功課做完整。</div></div></div></div><main class="detail-main"><div class="tech-tags"><span>傳統文化框架</span><span>觀點整理</span><span>情境探索</span><span>內容與會員</span></div><section class="section"><h2>真正昂貴的問題</h2><p>求婚、搬家、轉職、人生大事到來時，人很自然會想找一個答案。但很多時候，真正需要的是一個空間，把自己的期待、擔心與不同文化觀點整理在一起。</p><p>五象以現代介面承載傳統文化框架，把「探索」做成可以反覆使用的體驗，而不是一次性的神諭。</p></section><section class="section"><h2>商業價值</h2><ul class="plain-list"><li>從一次性內容走向持續探索與會員服務</li><li>可延伸內容、品牌合作與數位授權</li><li>以文化與自我探索定位，不宣稱科學預測</li></ul></section><section class="section"><div class="cta-box"><h2>有些問題沒有標準答案，但可以有更完整的思考過程。</h2><a class="cta" href="#">← 返回 AI 決策夥伴</a></div></section></main></div>
+<footer>© 2026 澄思 AI Studio · AI 決策作業系統 · 重要的決定，不必一個人想。</footer>
+ion"><div class="cta-box"><h2>重要的決定，不必一個人想。</h2><p>看看這位 AI 夥伴如何陪你把問題整理清楚，再由你決定下一步。</p><a class="cta" href="#">← 返回 AI 決策夥伴總覽</a></div></section></main>
+</div>
+<div class="view detail-view" id="view-p7" style="--cat:#6E5AC4">
+<div class="topnav"><a class="back-link" href="#">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">07</div><div class="hero-cat">WELL-BEING AI</div><img alt="人生羅盤 LifeCompass｜自我覺察教練" src="assets/07-lifecompass.png"/><div class="hero-title-wrap"><h1>人生羅盤 LifeCompass</h1><div class="value-line">我不是想變成另一個人，我只是想更懂自己。</div></div></div></div>
+<main class="detail-main">
+<div class="tech-tags"><span>人格／依戀／價值觀等自我覺察工具</span><span>溝通情境與表達練習</span><span>行為紀錄與反思</span><span>企業團隊溝通功能（依實際完成度標示）</span></div>
+<section class="section"><h2>你正在面對的問題</h2><p>有些關係裡的衝突，不是不在乎，而是不知道如何把真正的感受說出來。人生羅盤提供自我覺察與溝通練習的空間。</p><h2>我
+</body>
+</html>
