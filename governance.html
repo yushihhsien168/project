@@ -1,0 +1,871 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>專案治理後台｜健康儀表板・風險登記冊・決策日誌</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0F14; --panel:#12161D; --panel2:#171C25; --line:#232A36;
+    --text:#E7ECF2; --muted:#8B96A8; --faint:#5B6576;
+    --accent:#5B9BD5; --green:#5FBF8F; --red:#E0664A; --amber:#D9A441;
+    --sans:'Noto Sans TC',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;}
+  a{color:var(--accent);}
+  .wrap{max-width:1000px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);padding:22px 0;}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  header h1{font-size:1.1rem;font-weight:500;margin:0;}
+  .navlinks{display:flex;gap:16px;font-size:.82rem;color:var(--muted);}
+  .navlinks a{color:var(--muted);}
+  .navlinks a:hover{color:var(--accent);}
+
+  main{padding:32px 0 80px;}
+  .panel{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:24px 26px;margin-bottom:24px;}
+  .panel h2{font-size:1rem;font-weight:500;margin:0 0 6px;display:flex;align-items:center;gap:8px;}
+  .panel .sub{font-size:.82rem;color:var(--muted);margin-bottom:18px;}
+
+  /* ---- 健康儀表板 ---- */
+  .health-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;}
+  @media(max-width:760px){.health-grid{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:480px){.health-grid{grid-template-columns:1fr;}}
+  .health-card{background:var(--panel2);border-radius:8px;padding:16px;border-left:4px solid var(--faint);}
+  .health-card.light-green{border-left-color:var(--green);}
+  .health-card.light-yellow{border-left-color:var(--amber);}
+  .health-card.light-red{border-left-color:var(--red);}
+  .health-card .dot{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:8px;}
+  .light-green .dot{background:var(--green);}
+  .light-yellow .dot{background:var(--amber);}
+  .light-red .dot{background:var(--red);}
+  .health-card .pname{font-size:.86rem;font-weight:700;}
+  .health-card .meta{font-size:.74rem;color:var(--muted);margin-top:8px;line-height:1.8;}
+
+  .btn{background:var(--accent);color:#08111C;border:none;border-radius:6px;padding:9px 18px;font-size:.86rem;font-weight:700;cursor:pointer;}
+  .btn:hover{filter:brightness(1.1);}
+  .btn.ghost{background:transparent;border:1px solid var(--line);color:var(--text);}
+  .btn.ghost:hover{border-color:var(--accent);color:var(--accent);}
+  .btn.small{padding:5px 12px;font-size:.76rem;}
+  .btn.danger{background:var(--red);color:#fff;}
+
+  .status-line{font-size:.78rem;color:var(--muted);margin-top:10px;}
+
+  /* ---- 表單 ---- */
+  .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:14px;}
+  @media(max-width:640px){.form-grid{grid-template-columns:1fr;}}
+  .form-grid.full{grid-template-columns:1fr;}
+  label{display:block;font-size:.76rem;color:var(--muted);margin-bottom:5px;}
+  input[type=text],input[type=number],input[type=date],select,textarea{
+    width:100%;background:var(--bg);border:1px solid var(--line);border-radius:6px;
+    padding:9px 11px;color:var(--text);font-family:var(--sans);font-size:.86rem;
+  }
+  textarea{resize:vertical;min-height:56px;font-family:var(--sans);}
+  input:focus,select:focus,textarea:focus{outline:1px solid var(--accent);border-color:var(--accent);}
+
+  /* ---- 清單卡片（風險/決策共用） ---- */
+  .item-card{background:var(--panel2);border-radius:8px;padding:16px 18px;margin-bottom:10px;border-left:4px solid var(--line);}
+  .item-card.risk-high{border-left-color:var(--red);}
+  .item-card.risk-mid{border-left-color:var(--amber);}
+  .item-card.risk-low{border-left-color:var(--green);}
+  .item-card.decision-open{border-left-color:var(--amber);}
+  .item-card.decision-closed{border-left-color:var(--faint);}
+  .item-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;flex-wrap:wrap;}
+  .item-title{font-size:.9rem;font-weight:700;}
+  .item-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:6px;}
+  .tag{font-size:.7rem;background:var(--bg);border:1px solid var(--line);border-radius:999px;padding:2px 10px;color:var(--muted);}
+  .item-body{font-size:.82rem;color:var(--muted);margin-top:8px;white-space:pre-wrap;}
+  .item-meta{font-size:.72rem;color:var(--faint);margin-top:8px;font-family:var(--mono);}
+  .item-actions{display:flex;gap:8px;margin-top:10px;}
+  .empty{color:var(--faint);font-size:.84rem;padding:16px 0;text-align:center;}
+
+  .notice-banner{
+    background:rgba(224,102,74,.1);border:1px solid rgba(224,102,74,.4);color:#f0a89a;
+    border-radius:8px;padding:14px 18px;font-size:.82rem;margin-bottom:24px;line-height:1.7;
+  }
+
+  footer{border-top:1px solid var(--line);padding:26px 0 50px;color:var(--faint);font-size:.78rem;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>專案治理後台</h1>
+    <div class="navlinks">
+      <a href="admin.html">← 後台管理</a>
+      <a href="analytics.html">技術健康監控</a>
+      <a href="index.html">作品集首頁</a>
+      <a href="#" onclick="__adminLogout();return false;">登出</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div class="notice-banner">
+    ⚠️ 這個頁面目前沒有登入或權限保護——任何知道網址的人都能檢視並修改這裡的資料（含即將加入的預算、法遵、人事資訊）。這是已知且暫時接受的風險（詳見 CHANGELOG），建議近期評估是否補上權限機制（第⑩項）。
+  </div>
+
+  <div class="panel">
+    <h2>① 專案健康儀表板</h2>
+    <div class="sub">彙整六個網站的最近一次健康檢查（來自「技術健康監控」頁面）、加上未結案風險與待裁示事項，換算成紅黃綠燈號。此頁不會即時重新連線六個網站，速度較快；要更新網站健康資料，請先到「技術健康監控」按一次「立即分析」。</div>
+    <div class="health-grid" id="healthGrid"></div>
+    <div class="status-line" id="healthStatus">載入中...</div>
+  </div>
+
+  <div class="panel">
+    <h2>④ 風險登記冊</h2>
+    <div class="sub">紅色＝高風險（可能性×影響 ≥15）、黃色＝中低風險、綠色／灰色＝已結案。健康儀表板的紅燈會直接反映這裡的高風險項目。</div>
+
+    <div id="riskFormArea"></div>
+    <button class="btn" id="riskAddBtn">＋ 新增風險項目</button>
+
+    <div style="margin-top:20px;" id="riskList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>⑤ 決策日誌與待裁示事項</h2>
+    <div class="sub">記錄重大決策的來龍去脈，以及還在等董事會／管理層裁示的事項，避免事情卡住卻沒人知道。</div>
+
+    <div id="decisionFormArea"></div>
+    <button class="btn" id="decisionAddBtn">＋ 新增決策紀錄</button>
+
+    <div style="margin-top:20px;" id="decisionList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>③ 里程碑與時程管理</h2>
+    <div class="sub">登記每個專案的關鍵里程碑與預計完成日。超過預計完成日還沒標記完成的項目，會自動列為「逾期」，並讓健康儀表板亮紅燈。</div>
+
+    <div id="milestoneFormArea"></div>
+    <button class="btn" id="milestoneAddBtn">＋ 新增里程碑</button>
+
+    <div style="margin-top:20px;" id="milestoneList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>⑨ 市場與競爭情報追蹤</h2>
+    <div class="sub">首頁展示的市場數據（例如「171.5萬家中小企業」）目前是寫死在頁面上的文字，時間久了會過時。這裡用來登記這些數字的來源與更新時間，方便定期回頭檢視「這個市場假設還成立嗎」——目前是獨立的追蹤紀錄，尚未接回首頁自動更新，需要時可再串接。</div>
+
+    <div id="marketFormArea"></div>
+    <button class="btn" id="marketAddBtn">＋ 新增市場情報</button>
+
+    <div style="margin-top:20px;" id="marketList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>⑧ 技術債與維運健康度</h2>
+    <div class="sub">把「已知但還沒處理」的技術問題正式列管，而不是散落在 CHANGELOG 的備註裡。標記「高」嚴重度且未解決的項目，會讓健康儀表板亮紅燈。</div>
+
+    <div id="techdebtFormArea"></div>
+    <button class="btn" id="techdebtAddBtn">＋ 新增技術債項目</button>
+
+    <div style="margin-top:20px;" id="techdebtList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>② 預算與成本追蹤</h2>
+    <div class="sub">登記各專案的預算與實際支出。實際支出超過預算的項目，會讓健康儀表板亮紅燈。</div>
+
+    <div id="budgetFormArea"></div>
+    <button class="btn" id="budgetAddBtn">＋ 新增預算項目</button>
+
+    <div style="margin-top:20px;" id="budgetList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>⑥ 合規與法遵追蹤</h2>
+    <div class="sub">登記各專案適用的法規或證書（例如 ISO 27001、個資法）。狀態為「不符合」、或證書效期在 30 天內到期的項目，會讓健康儀表板亮紅燈。</div>
+
+    <div id="complianceFormArea"></div>
+    <button class="btn" id="complianceAddBtn">＋ 新增合規項目</button>
+
+    <div style="margin-top:20px;" id="complianceList"></div>
+  </div>
+
+  <div class="panel">
+    <h2>⑦ 人力與資源分工</h2>
+    <div class="sub">登記各專案的負責人、團隊成員與外部顧問，方便掌握誰在忙什麼、有沒有人力衝突。此模組不影響健康儀表板燈號，純粹作為名冊使用。</div>
+
+    <div id="teamFormArea"></div>
+    <button class="btn" id="teamAddBtn">＋ 新增人員</button>
+
+    <div style="margin-top:20px;" id="teamList"></div>
+  </div>
+
+</main>
+
+<footer class="wrap">此頁面資料儲存於 Netlify Blobs（pm-governance）｜系統開發者：游士賢</footer>
+
+<script>
+(function(){
+  var PROJECT_ORDER = ['stratedge','aiops','hrmatch','career','lifecompass','omniastro'];
+  var PROJECT_NAMES = {
+    stratedge:'策引 AI｜Strat Edge', aiops:'AIOps 智慧巡檢平台', hrmatch:'人資媒合決策系統',
+    career:'職透', lifecompass:'人生羅盤 LifeCompass', omniastro:'真命盤'
+  };
+
+  function esc(s){ return (s||'').toString().replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+  function fmtTime(iso){ if(!iso) return '—'; return new Date(iso).toLocaleString('zh-TW',{hour12:false}); }
+
+  // ============ ① 健康儀表板 ============
+  function loadHealth(){
+    var grid = document.getElementById('healthGrid');
+    var status = document.getElementById('healthStatus');
+    fetch('/.netlify/functions/dashboard-summary')
+      .then(function(r){ if(!r.ok) throw new Error('HTTP '+r.status); return r.json(); })
+      .then(function(data){
+        if(data.error) throw new Error(data.error);
+        grid.innerHTML = '';
+        data.projects.forEach(function(p){
+          var card = document.createElement('div');
+          card.className = 'health-card light-' + p.light;
+          card.innerHTML =
+            '<div class="pname"><span class="dot"></span>'+esc(p.name)+'</div>' +
+            '<div class="meta">' +
+              '網站版本：'+esc(p.siteVersion || '尚未檢查')+'<br>' +
+              '網站狀態：'+(p.siteOk===null?'尚未檢查':(p.siteOk?'正常':'異常'))+'<br>' +
+              '未結案風險：'+p.openRiskCount+'（高風險 '+p.highRiskCount+'）<br>' +
+              '待裁示事項：'+p.openDecisionCount+'<br>' +
+              '逾期里程碑：'+p.overdueMilestoneCount+'　高嚴重度技術債：'+p.highTechDebtCount+'<br>' +
+              '預算超支：'+p.overBudgetCount+'　法遵警示：'+p.complianceAlertCount +
+            '</div>';
+          grid.appendChild(card);
+        });
+        status.textContent = '資料時間：' + fmtTime(data.generatedAt);
+      })
+      .catch(function(err){
+        status.textContent = '載入失敗：' + err.message + '（若剛部署，Netlify Functions 可能需要 1-2 分鐘生效）';
+      });
+  }
+
+  // ============ 通用：讀取/新增/更新/刪除 ============
+  function apiList(collection){
+    return fetch('/.netlify/functions/pm-data?collection='+collection).then(function(r){ return r.json(); });
+  }
+  function apiCreate(collection, body){
+    return fetch('/.netlify/functions/pm-data?collection='+collection, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); });
+  }
+  function apiUpdate(collection, body){
+    return fetch('/.netlify/functions/pm-data?collection='+collection, {
+      method:'PUT', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)
+    }).then(function(r){ return r.json(); });
+  }
+  function apiDelete(collection, id){
+    return fetch('/.netlify/functions/pm-data?collection='+collection+'&id='+encodeURIComponent(id), { method:'DELETE' })
+      .then(function(r){ return r.json(); });
+  }
+  function projectOptions(selected){
+    return PROJECT_ORDER.map(function(id){
+      return '<option value="'+id+'"'+(id===selected?' selected':'')+'>'+PROJECT_NAMES[id]+'</option>';
+    }).join('');
+  }
+
+  // ============ ④ 風險登記冊 ============
+  var riskFormArea = document.getElementById('riskFormArea');
+  var riskAddBtn = document.getElementById('riskAddBtn');
+  var riskListEl = document.getElementById('riskList');
+
+  function riskLevel(likelihood, impact){ return (Number(likelihood)||0) * (Number(impact)||0); }
+  function riskLevelClass(score){ if(score>=15) return 'risk-high'; if(score>=7) return 'risk-mid'; return 'risk-low'; }
+  function riskLevelLabel(score){ if(score>=15) return '高風險'; if(score>=7) return '中風險'; return '低風險'; }
+
+  function showRiskForm(){
+    riskFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="rf-project">'+projectOptions()+'</select></div>' +
+        '<div><label>風險類別</label><select id="rf-category">'+
+          ['技術','市場','法遵','人員','財務'].map(function(c){return '<option>'+c+'</option>';}).join('')+
+        '</select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>風險描述</label><textarea id="rf-desc" placeholder="具體描述這個風險是什麼"></textarea></div></div>' +
+      '<div class="form-grid">' +
+        '<div><label>發生可能性（1～5）</label><input type="number" id="rf-likelihood" min="1" max="5" value="3"></div>' +
+        '<div><label>影響程度（1～5）</label><input type="number" id="rf-impact" min="1" max="5" value="3"></div>' +
+      '</div>' +
+      '<div class="form-grid">' +
+        '<div><label>負責人</label><input type="text" id="rf-owner" placeholder="例如：游士賢"></div>' +
+        '<div><label>狀態</label><select id="rf-status"><option>待處理</option><option>已列管</option><option>已結案</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>緩解措施</label><textarea id="rf-mitigation" placeholder="打算怎麼降低這個風險"></textarea></div></div>' +
+      '<div class="item-actions"><button class="btn" id="rf-save">儲存</button><button class="btn ghost" id="rf-cancel">取消</button></div>';
+
+    document.getElementById('rf-cancel').addEventListener('click', function(){ riskFormArea.innerHTML=''; });
+    document.getElementById('rf-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('rf-project').value,
+        category: document.getElementById('rf-category').value,
+        description: document.getElementById('rf-desc').value.trim(),
+        likelihood: document.getElementById('rf-likelihood').value,
+        impact: document.getElementById('rf-impact').value,
+        owner: document.getElementById('rf-owner').value.trim(),
+        status: document.getElementById('rf-status').value,
+        mitigation: document.getElementById('rf-mitigation').value.trim()
+      };
+      if(!body.description){ alert('請填寫風險描述'); return; }
+      apiCreate('risks', body).then(function(){
+        riskFormArea.innerHTML = '';
+        loadRisks();
+        loadHealth();
+      });
+    });
+  }
+  riskAddBtn.addEventListener('click', showRiskForm);
+
+  function loadRisks(){
+    apiList('risks').then(function(data){
+      if(data.error){ riskListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ riskListEl.innerHTML = '<div class="empty">目前沒有登記任何風險項目</div>'; return; }
+      items.sort(function(a,b){ return riskLevel(b.likelihood,b.impact) - riskLevel(a.likelihood,a.impact); });
+      riskListEl.innerHTML = '';
+      items.forEach(function(it){
+        var score = riskLevel(it.likelihood, it.impact);
+        var cls = it.status==='已結案' ? 'risk-low' : riskLevelClass(score);
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.description)+'</div>' +
+          '<div class="tag">'+riskLevelLabel(score)+'（'+score+'分）</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            '<span class="tag">'+esc(it.category)+'</span>' +
+            '<span class="tag">'+esc(it.status)+'</span>' +
+            (it.owner?'<span class="tag">負責人：'+esc(it.owner)+'</span>':'') +
+          '</div>' +
+          (it.mitigation? '<div class="item-body">緩解措施：'+esc(it.mitigation)+'</div>' : '') +
+          '<div class="item-meta">建立於 '+fmtTime(it.createdAt)+'</div>' +
+          '<div class="item-actions">' +
+            (it.status!=='已結案' ? '<button class="btn small" data-close="'+it.id+'">標記已結案</button>' : '') +
+            '<button class="btn small danger" data-del="'+it.id+'">刪除</button>' +
+          '</div>';
+        riskListEl.appendChild(card);
+      });
+      riskListEl.querySelectorAll('[data-close]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          apiUpdate('risks', { id: btn.getAttribute('data-close'), status:'已結案' }).then(function(){ loadRisks(); loadHealth(); });
+        });
+      });
+      riskListEl.querySelectorAll('[data-del]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆風險紀錄嗎？')) return;
+          apiDelete('risks', btn.getAttribute('data-del')).then(function(){ loadRisks(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ⑤ 決策日誌 ============
+  var decisionFormArea = document.getElementById('decisionFormArea');
+  var decisionAddBtn = document.getElementById('decisionAddBtn');
+  var decisionListEl = document.getElementById('decisionList');
+
+  function showDecisionForm(){
+    decisionFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="df-project">'+projectOptions()+'</select></div>' +
+        '<div><label>狀態</label><select id="df-status"><option>待裁示</option><option>已決定</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>決策標題</label><input type="text" id="df-title" placeholder="例如：是否投資開發企業擇日商用授權功能"></div></div>' +
+      '<div class="form-grid full"><div><label>說明／背景</label><textarea id="df-desc" placeholder="這個決策的來龍去脈、需要裁示的原因"></textarea></div></div>' +
+      '<div class="form-grid">' +
+        '<div><label>決策者（若已決定）</label><input type="text" id="df-decidedby" placeholder="例如：董事會"></div>' +
+        '<div><label>日期</label><input type="date" id="df-date"></div>' +
+      '</div>' +
+      '<div class="item-actions"><button class="btn" id="df-save">儲存</button><button class="btn ghost" id="df-cancel">取消</button></div>';
+
+    document.getElementById('df-cancel').addEventListener('click', function(){ decisionFormArea.innerHTML=''; });
+    document.getElementById('df-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('df-project').value,
+        status: document.getElementById('df-status').value,
+        title: document.getElementById('df-title').value.trim(),
+        description: document.getElementById('df-desc').value.trim(),
+        decidedBy: document.getElementById('df-decidedby').value.trim(),
+        date: document.getElementById('df-date').value
+      };
+      if(!body.title){ alert('請填寫決策標題'); return; }
+      apiCreate('decisions', body).then(function(){
+        decisionFormArea.innerHTML = '';
+        loadDecisions();
+        loadHealth();
+      });
+    });
+  }
+  decisionAddBtn.addEventListener('click', showDecisionForm);
+
+  function loadDecisions(){
+    apiList('decisions').then(function(data){
+      if(data.error){ decisionListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ decisionListEl.innerHTML = '<div class="empty">目前沒有任何決策紀錄</div>'; return; }
+      decisionListEl.innerHTML = '';
+      items.forEach(function(it){
+        var cls = it.status==='待裁示' ? 'decision-open' : 'decision-closed';
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.title)+'</div>' +
+          '<div class="tag">'+esc(it.status)+'</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            (it.decidedBy?'<span class="tag">決策者：'+esc(it.decidedBy)+'</span>':'') +
+            (it.date?'<span class="tag">'+esc(it.date)+'</span>':'') +
+          '</div>' +
+          (it.description? '<div class="item-body">'+esc(it.description)+'</div>' : '') +
+          '<div class="item-meta">建立於 '+fmtTime(it.createdAt)+'</div>' +
+          '<div class="item-actions">' +
+            (it.status==='待裁示' ? '<button class="btn small" data-decide="'+it.id+'">標記已決定</button>' : '') +
+            '<button class="btn small danger" data-deldec="'+it.id+'">刪除</button>' +
+          '</div>';
+        decisionListEl.appendChild(card);
+      });
+      decisionListEl.querySelectorAll('[data-decide]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          apiUpdate('decisions', { id: btn.getAttribute('data-decide'), status:'已決定' }).then(function(){ loadDecisions(); loadHealth(); });
+        });
+      });
+      decisionListEl.querySelectorAll('[data-deldec]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆決策紀錄嗎？')) return;
+          apiDelete('decisions', btn.getAttribute('data-deldec')).then(function(){ loadDecisions(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ③ 里程碑與時程管理 ============
+  var milestoneFormArea = document.getElementById('milestoneFormArea');
+  var milestoneAddBtn = document.getElementById('milestoneAddBtn');
+  var milestoneListEl = document.getElementById('milestoneList');
+  var todayStr = new Date().toISOString().slice(0,10);
+
+  function showMilestoneForm(){
+    milestoneFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="mf-project">'+projectOptions()+'</select></div>' +
+        '<div><label>狀態</label><select id="mf-status"><option>規劃中</option><option>進行中</option><option>已完成</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>里程碑名稱</label><input type="text" id="mf-title" placeholder="例如：企業擇日商用授權功能上線"></div></div>' +
+      '<div class="form-grid full"><div><label>說明</label><textarea id="mf-desc" placeholder="這個里程碑具體要完成什麼"></textarea></div></div>' +
+      '<div class="form-grid">' +
+        '<div><label>預計完成日</label><input type="date" id="mf-planned"></div>' +
+        '<div><label>實際完成日（若已完成）</label><input type="date" id="mf-actual"></div>' +
+      '</div>' +
+      '<div class="item-actions"><button class="btn" id="mf-save">儲存</button><button class="btn ghost" id="mf-cancel">取消</button></div>';
+
+    document.getElementById('mf-cancel').addEventListener('click', function(){ milestoneFormArea.innerHTML=''; });
+    document.getElementById('mf-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('mf-project').value,
+        status: document.getElementById('mf-status').value,
+        title: document.getElementById('mf-title').value.trim(),
+        description: document.getElementById('mf-desc').value.trim(),
+        plannedDate: document.getElementById('mf-planned').value,
+        actualDate: document.getElementById('mf-actual').value
+      };
+      if(!body.title){ alert('請填寫里程碑名稱'); return; }
+      apiCreate('milestones', body).then(function(){ milestoneFormArea.innerHTML=''; loadMilestones(); loadHealth(); });
+    });
+  }
+  milestoneAddBtn.addEventListener('click', showMilestoneForm);
+
+  function loadMilestones(){
+    apiList('milestones').then(function(data){
+      if(data.error){ milestoneListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ milestoneListEl.innerHTML = '<div class="empty">目前沒有登記任何里程碑</div>'; return; }
+      items.sort(function(a,b){ return (a.plannedDate||'9999').localeCompare(b.plannedDate||'9999'); });
+      milestoneListEl.innerHTML = '';
+      items.forEach(function(it){
+        var overdue = it.status!=='已完成' && it.plannedDate && it.plannedDate < todayStr;
+        var cls = it.status==='已完成' ? 'decision-closed' : (overdue ? 'risk-high' : 'decision-open');
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.title)+'</div>' +
+          '<div class="tag">'+(overdue?'逾期':esc(it.status))+'</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            (it.plannedDate?'<span class="tag">預計：'+esc(it.plannedDate)+'</span>':'') +
+            (it.actualDate?'<span class="tag">實際：'+esc(it.actualDate)+'</span>':'') +
+          '</div>' +
+          (it.description? '<div class="item-body">'+esc(it.description)+'</div>' : '') +
+          '<div class="item-meta">建立於 '+fmtTime(it.createdAt)+'</div>' +
+          '<div class="item-actions">' +
+            (it.status!=='已完成' ? '<button class="btn small" data-donems="'+it.id+'">標記已完成</button>' : '') +
+            '<button class="btn small danger" data-delms="'+it.id+'">刪除</button>' +
+          '</div>';
+        milestoneListEl.appendChild(card);
+      });
+      milestoneListEl.querySelectorAll('[data-donems]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          apiUpdate('milestones', { id: btn.getAttribute('data-donems'), status:'已完成', actualDate: todayStr }).then(function(){ loadMilestones(); loadHealth(); });
+        });
+      });
+      milestoneListEl.querySelectorAll('[data-delms]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆里程碑嗎？')) return;
+          apiDelete('milestones', btn.getAttribute('data-delms')).then(function(){ loadMilestones(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ⑨ 市場與競爭情報追蹤 ============
+  var marketFormArea = document.getElementById('marketFormArea');
+  var marketAddBtn = document.getElementById('marketAddBtn');
+  var marketListEl = document.getElementById('marketList');
+
+  function showMarketForm(){
+    marketFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案（或選一個最相關的）</label><select id="mk-project">'+projectOptions()+'</select></div>' +
+        '<div><label>資料日期</label><input type="date" id="mk-date" value="'+todayStr+'"></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>指標名稱</label><input type="text" id="mk-metric" placeholder="例如：台灣命理服務市場產值"></div></div>' +
+      '<div class="form-grid">' +
+        '<div><label>數值</label><input type="text" id="mk-value" placeholder="例如：2.9億元"></div>' +
+        '<div><label>資料來源</label><input type="text" id="mk-source" placeholder="例如：財政部統計處"></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>備註</label><textarea id="mk-notes" placeholder="這個數字為什麼重要、有什麼限制"></textarea></div></div>' +
+      '<div class="item-actions"><button class="btn" id="mk-save">儲存</button><button class="btn ghost" id="mk-cancel">取消</button></div>';
+
+    document.getElementById('mk-cancel').addEventListener('click', function(){ marketFormArea.innerHTML=''; });
+    document.getElementById('mk-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('mk-project').value,
+        date: document.getElementById('mk-date').value,
+        metric: document.getElementById('mk-metric').value.trim(),
+        value: document.getElementById('mk-value').value.trim(),
+        source: document.getElementById('mk-source').value.trim(),
+        notes: document.getElementById('mk-notes').value.trim()
+      };
+      if(!body.metric || !body.value){ alert('請至少填寫指標名稱與數值'); return; }
+      apiCreate('market-intel', body).then(function(){ marketFormArea.innerHTML=''; loadMarket(); });
+    });
+  }
+  marketAddBtn.addEventListener('click', showMarketForm);
+
+  function loadMarket(){
+    apiList('market-intel').then(function(data){
+      if(data.error){ marketListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ marketListEl.innerHTML = '<div class="empty">目前沒有登記任何市場情報</div>'; return; }
+      items.sort(function(a,b){ return (b.date||'').localeCompare(a.date||''); });
+      marketListEl.innerHTML = '';
+      items.forEach(function(it){
+        var card = document.createElement('div');
+        card.className = 'item-card decision-open';
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.metric)+'：'+esc(it.value)+'</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            (it.source?'<span class="tag">來源：'+esc(it.source)+'</span>':'') +
+            (it.date?'<span class="tag">'+esc(it.date)+'</span>':'') +
+          '</div>' +
+          (it.notes? '<div class="item-body">'+esc(it.notes)+'</div>' : '') +
+          '<div class="item-actions"><button class="btn small danger" data-delmk="'+it.id+'">刪除</button></div>';
+        marketListEl.appendChild(card);
+      });
+      marketListEl.querySelectorAll('[data-delmk]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆市場情報嗎？')) return;
+          apiDelete('market-intel', btn.getAttribute('data-delmk')).then(function(){ loadMarket(); });
+        });
+      });
+    });
+  }
+
+  // ============ ⑧ 技術債與維運健康度 ============
+  var techdebtFormArea = document.getElementById('techdebtFormArea');
+  var techdebtAddBtn = document.getElementById('techdebtAddBtn');
+  var techdebtListEl = document.getElementById('techdebtList');
+
+  function showTechdebtForm(){
+    techdebtFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="td-project">'+projectOptions()+'</select></div>' +
+        '<div><label>嚴重度</label><select id="td-severity"><option>低</option><option selected>中</option><option>高</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>項目名稱</label><input type="text" id="td-title" placeholder="例如：假縮圖問題（已於v0.0.3修復，此為範例）"></div></div>' +
+      '<div class="form-grid full"><div><label>說明</label><textarea id="td-desc" placeholder="具體是什麼問題、可能的影響"></textarea></div></div>' +
+      '<div class="form-grid full"><div><label>狀態</label><select id="td-status"><option>待處理</option><option>處理中</option><option>已解決</option></select></div></div>' +
+      '<div class="item-actions"><button class="btn" id="td-save">儲存</button><button class="btn ghost" id="td-cancel">取消</button></div>';
+
+    document.getElementById('td-cancel').addEventListener('click', function(){ techdebtFormArea.innerHTML=''; });
+    document.getElementById('td-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('td-project').value,
+        severity: document.getElementById('td-severity').value,
+        title: document.getElementById('td-title').value.trim(),
+        description: document.getElementById('td-desc').value.trim(),
+        status: document.getElementById('td-status').value
+      };
+      if(!body.title){ alert('請填寫項目名稱'); return; }
+      apiCreate('techdebt', body).then(function(){ techdebtFormArea.innerHTML=''; loadTechdebt(); loadHealth(); });
+    });
+  }
+  techdebtAddBtn.addEventListener('click', showTechdebtForm);
+
+  function loadTechdebt(){
+    apiList('techdebt').then(function(data){
+      if(data.error){ techdebtListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ techdebtListEl.innerHTML = '<div class="empty">目前沒有登記任何技術債項目</div>'; return; }
+      var sevScore = { '高':3, '中':2, '低':1 };
+      items.sort(function(a,b){ return (sevScore[b.severity]||0) - (sevScore[a.severity]||0); });
+      techdebtListEl.innerHTML = '';
+      items.forEach(function(it){
+        var cls = it.status==='已解決' ? 'decision-closed' : (it.severity==='高' ? 'risk-high' : (it.severity==='中' ? 'risk-mid' : 'risk-low'));
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.title)+'</div>' +
+          '<div class="tag">'+esc(it.severity)+'嚴重度</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            '<span class="tag">'+esc(it.status)+'</span>' +
+          '</div>' +
+          (it.description? '<div class="item-body">'+esc(it.description)+'</div>' : '') +
+          '<div class="item-meta">建立於 '+fmtTime(it.createdAt)+'</div>' +
+          '<div class="item-actions">' +
+            (it.status!=='已解決' ? '<button class="btn small" data-donetd="'+it.id+'">標記已解決</button>' : '') +
+            '<button class="btn small danger" data-deltd="'+it.id+'">刪除</button>' +
+          '</div>';
+        techdebtListEl.appendChild(card);
+      });
+      techdebtListEl.querySelectorAll('[data-donetd]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          apiUpdate('techdebt', { id: btn.getAttribute('data-donetd'), status:'已解決' }).then(function(){ loadTechdebt(); loadHealth(); });
+        });
+      });
+      techdebtListEl.querySelectorAll('[data-deltd]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆技術債紀錄嗎？')) return;
+          apiDelete('techdebt', btn.getAttribute('data-deltd')).then(function(){ loadTechdebt(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ② 預算與成本追蹤 ============
+  var budgetFormArea = document.getElementById('budgetFormArea');
+  var budgetAddBtn = document.getElementById('budgetAddBtn');
+  var budgetListEl = document.getElementById('budgetList');
+
+  function showBudgetForm(){
+    budgetFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="bg-project">'+projectOptions()+'</select></div>' +
+        '<div><label>類別</label><select id="bg-category">'+
+          ['人力','雲端費用','第三方服務','行銷','其他'].map(function(c){return '<option>'+c+'</option>';}).join('')+
+        '</select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>項目說明</label><input type="text" id="bg-desc" placeholder="例如：Netlify Pro方案、Claude API用量"></div></div>' +
+      '<div class="form-grid">' +
+        '<div><label>預算金額（新台幣）</label><input type="number" id="bg-budget" placeholder="例如：50000"></div>' +
+        '<div><label>實際支出（新台幣）</label><input type="number" id="bg-actual" placeholder="例如：42000"></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>週期</label><input type="text" id="bg-period" placeholder="例如：2026-Q3"></div></div>' +
+      '<div class="form-grid full"><div><label>備註</label><textarea id="bg-notes"></textarea></div></div>' +
+      '<div class="item-actions"><button class="btn" id="bg-save">儲存</button><button class="btn ghost" id="bg-cancel">取消</button></div>';
+
+    document.getElementById('bg-cancel').addEventListener('click', function(){ budgetFormArea.innerHTML=''; });
+    document.getElementById('bg-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('bg-project').value,
+        category: document.getElementById('bg-category').value,
+        description: document.getElementById('bg-desc').value.trim(),
+        budgetAmount: document.getElementById('bg-budget').value,
+        actualAmount: document.getElementById('bg-actual').value,
+        period: document.getElementById('bg-period').value.trim(),
+        notes: document.getElementById('bg-notes').value.trim()
+      };
+      if(!body.description){ alert('請填寫項目說明'); return; }
+      apiCreate('budget', body).then(function(){ budgetFormArea.innerHTML=''; loadBudget(); loadHealth(); });
+    });
+  }
+  budgetAddBtn.addEventListener('click', showBudgetForm);
+
+  function loadBudget(){
+    apiList('budget').then(function(data){
+      if(data.error){ budgetListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ budgetListEl.innerHTML = '<div class="empty">目前沒有登記任何預算項目</div>'; return; }
+      items.sort(function(a,b){ return (b.period||'').localeCompare(a.period||''); });
+      budgetListEl.innerHTML = '';
+      items.forEach(function(it){
+        var over = Number(it.actualAmount) > Number(it.budgetAmount) && Number(it.budgetAmount) > 0;
+        var cls = over ? 'risk-high' : 'decision-closed';
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.description)+'</div>' +
+          '<div class="tag">'+(over?'超支':'正常')+'</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            '<span class="tag">'+esc(it.category)+'</span>' +
+            (it.period?'<span class="tag">'+esc(it.period)+'</span>':'') +
+            '<span class="tag">預算 NT$'+esc(it.budgetAmount||'0')+'　實際 NT$'+esc(it.actualAmount||'0')+'</span>' +
+          '</div>' +
+          (it.notes? '<div class="item-body">'+esc(it.notes)+'</div>' : '') +
+          '<div class="item-actions"><button class="btn small danger" data-delbg="'+it.id+'">刪除</button></div>';
+        budgetListEl.appendChild(card);
+      });
+      budgetListEl.querySelectorAll('[data-delbg]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆預算紀錄嗎？')) return;
+          apiDelete('budget', btn.getAttribute('data-delbg')).then(function(){ loadBudget(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ⑥ 合規與法遵追蹤 ============
+  var complianceFormArea = document.getElementById('complianceFormArea');
+  var complianceAddBtn = document.getElementById('complianceAddBtn');
+  var complianceListEl = document.getElementById('complianceList');
+  var in30DaysStr = new Date(Date.now() + 30*24*3600*1000).toISOString().slice(0,10);
+
+  function showComplianceForm(){
+    complianceFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="cp-project">'+projectOptions()+'</select></div>' +
+        '<div><label>狀態</label><select id="cp-status"><option>符合</option><option>待處理</option><option>不符合</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>法規／證書名稱</label><input type="text" id="cp-name" placeholder="例如：ISO 27001、個人資料保護法"></div></div>' +
+      '<div class="form-grid full"><div><label>證書效期（若適用）</label><input type="date" id="cp-expiry"></div></div>' +
+      '<div class="form-grid full"><div><label>備註</label><textarea id="cp-notes"></textarea></div></div>' +
+      '<div class="item-actions"><button class="btn" id="cp-save">儲存</button><button class="btn ghost" id="cp-cancel">取消</button></div>';
+
+    document.getElementById('cp-cancel').addEventListener('click', function(){ complianceFormArea.innerHTML=''; });
+    document.getElementById('cp-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('cp-project').value,
+        status: document.getElementById('cp-status').value,
+        regulationName: document.getElementById('cp-name').value.trim(),
+        certExpiryDate: document.getElementById('cp-expiry').value,
+        notes: document.getElementById('cp-notes').value.trim()
+      };
+      if(!body.regulationName){ alert('請填寫法規／證書名稱'); return; }
+      apiCreate('compliance', body).then(function(){ complianceFormArea.innerHTML=''; loadCompliance(); loadHealth(); });
+    });
+  }
+  complianceAddBtn.addEventListener('click', showComplianceForm);
+
+  function loadCompliance(){
+    apiList('compliance').then(function(data){
+      if(data.error){ complianceListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ complianceListEl.innerHTML = '<div class="empty">目前沒有登記任何合規項目</div>'; return; }
+      complianceListEl.innerHTML = '';
+      items.forEach(function(it){
+        var expiringSoon = it.certExpiryDate && it.certExpiryDate <= in30DaysStr;
+        var alert_ = it.status==='不符合' || expiringSoon;
+        var cls = alert_ ? 'risk-high' : (it.status==='待處理' ? 'risk-mid' : 'decision-closed');
+        var card = document.createElement('div');
+        card.className = 'item-card ' + cls;
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.regulationName)+'</div>' +
+          '<div class="tag">'+esc(it.status)+(expiringSoon?'・即將到期':'')+'</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            (it.certExpiryDate?'<span class="tag">效期：'+esc(it.certExpiryDate)+'</span>':'') +
+          '</div>' +
+          (it.notes? '<div class="item-body">'+esc(it.notes)+'</div>' : '') +
+          '<div class="item-actions"><button class="btn small danger" data-delcp="'+it.id+'">刪除</button></div>';
+        complianceListEl.appendChild(card);
+      });
+      complianceListEl.querySelectorAll('[data-delcp]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆合規紀錄嗎？')) return;
+          apiDelete('compliance', btn.getAttribute('data-delcp')).then(function(){ loadCompliance(); loadHealth(); });
+        });
+      });
+    });
+  }
+
+  // ============ ⑦ 人力與資源分工 ============
+  var teamFormArea = document.getElementById('teamFormArea');
+  var teamAddBtn = document.getElementById('teamAddBtn');
+  var teamListEl = document.getElementById('teamList');
+
+  function showTeamForm(){
+    teamFormArea.innerHTML =
+      '<div class="form-grid">' +
+        '<div><label>所屬專案</label><select id="tm-project">'+projectOptions()+'</select></div>' +
+        '<div><label>類型</label><select id="tm-type"><option>內部</option><option>外部顧問</option></select></div>' +
+      '</div>' +
+      '<div class="form-grid">' +
+        '<div><label>姓名</label><input type="text" id="tm-name" placeholder="例如：游士賢"></div>' +
+        '<div><label>角色</label><input type="text" id="tm-role" placeholder="例如：系統開發者"></div>' +
+      '</div>' +
+      '<div class="form-grid full"><div><label>投入程度</label><input type="text" id="tm-alloc" placeholder="例如：全職／兼職 50%"></div></div>' +
+      '<div class="item-actions"><button class="btn" id="tm-save">儲存</button><button class="btn ghost" id="tm-cancel">取消</button></div>';
+
+    document.getElementById('tm-cancel').addEventListener('click', function(){ teamFormArea.innerHTML=''; });
+    document.getElementById('tm-save').addEventListener('click', function(){
+      var body = {
+        projectId: document.getElementById('tm-project').value,
+        type: document.getElementById('tm-type').value,
+        name: document.getElementById('tm-name').value.trim(),
+        role: document.getElementById('tm-role').value.trim(),
+        allocation: document.getElementById('tm-alloc').value.trim()
+      };
+      if(!body.name){ alert('請填寫姓名'); return; }
+      apiCreate('team', body).then(function(){ teamFormArea.innerHTML=''; loadTeam(); });
+    });
+  }
+  teamAddBtn.addEventListener('click', showTeamForm);
+
+  function loadTeam(){
+    apiList('team').then(function(data){
+      if(data.error){ teamListEl.innerHTML = '<div class="empty">載入失敗：'+esc(data.error)+'</div>'; return; }
+      var items = data.items || [];
+      if(items.length===0){ teamListEl.innerHTML = '<div class="empty">目前沒有登記任何人員</div>'; return; }
+      teamListEl.innerHTML = '';
+      items.forEach(function(it){
+        var card = document.createElement('div');
+        card.className = 'item-card decision-closed';
+        card.innerHTML =
+          '<div class="item-head"><div class="item-title">'+esc(it.name)+'（'+esc(it.role||'—')+'）</div></div>' +
+          '<div class="item-tags">' +
+            '<span class="tag">'+esc(PROJECT_NAMES[it.projectId]||it.projectId)+'</span>' +
+            '<span class="tag">'+esc(it.type)+'</span>' +
+            (it.allocation?'<span class="tag">'+esc(it.allocation)+'</span>':'') +
+          '</div>' +
+          '<div class="item-actions"><button class="btn small danger" data-deltm="'+it.id+'">刪除</button></div>';
+        teamListEl.appendChild(card);
+      });
+      teamListEl.querySelectorAll('[data-deltm]').forEach(function(btn){
+        btn.addEventListener('click', function(){
+          if(!confirm('確定要刪除這筆人員紀錄嗎？')) return;
+          apiDelete('team', btn.getAttribute('data-deltm')).then(function(){ loadTeam(); });
+        });
+      });
+    });
+  }
+
+  loadHealth();
+  loadRisks();
+  loadDecisions();
+  loadMilestones();
+  loadMarket();
+  loadTechdebt();
+  loadBudget();
+  loadCompliance();
+  loadTeam();
+})();
+</script>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="assets/auth.js"></script>
+<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+</body>
+</html>

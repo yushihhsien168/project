@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>後台管理｜僅限管理者存取</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#0C0F14; --panel:#12161D; --panel2:#171C25; --line:#232A36;
+    --text:#E7ECF2; --muted:#8B96A8; --faint:#5B6576;
+    --accent:#5B9BD5; --gold:#c9a14b;
+    --sans:'Noto Sans TC',sans-serif; --mono:'JetBrains Mono',monospace;
+  }
+  *{box-sizing:border-box;}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:var(--sans);font-weight:300;line-height:1.7;}
+  a{color:var(--accent);text-decoration:none;}
+  .wrap{max-width:840px;margin:0 auto;padding:0 24px;}
+  header{border-bottom:1px solid var(--line);padding:22px 0;}
+  header .wrap{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;}
+  header h1{font-size:1.1rem;font-weight:500;margin:0;}
+  .who{font-size:.78rem;color:var(--muted);}
+  .who span{color:var(--gold);}
+  .logout-btn{background:transparent;border:1px solid var(--line);color:var(--muted);border-radius:6px;padding:6px 14px;font-size:.78rem;cursor:pointer;font-family:var(--sans);}
+  .logout-btn:hover{border-color:var(--accent);color:var(--accent);}
+
+  main{padding:48px 0 80px;}
+  .intro{color:var(--muted);font-size:.9rem;margin-bottom:32px;}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+  @media(max-width:640px){.grid{grid-template-columns:1fr;}}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:26px;transition:.15s;}
+  .card:hover{border-color:var(--accent);transform:translateY(-2px);}
+  .card .icon{font-size:1.6rem;margin-bottom:10px;}
+  .card h2{font-size:1rem;font-weight:500;margin:0 0 8px;color:var(--text);}
+  .card p{font-size:.82rem;color:var(--muted);margin:0 0 16px;}
+  .card .go{font-size:.8rem;color:var(--accent);}
+
+  .note{margin-top:40px;font-size:.76rem;color:var(--faint);border-top:1px solid var(--line);padding-top:18px;}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>🔧 後台管理</h1>
+    <div style="display:flex;align-items:center;gap:14px;">
+      <div class="who">登入身分：<span data-admin-email>—</span></div>
+      <button class="logout-btn" onclick="__adminLogout()">登出</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="intro">此頁面未公開連結於作品集首頁，僅供管理者透過 Google 帳號登入後存取。</div>
+  <div class="grid">
+    <a class="card" href="governance.html">
+      <div class="icon">🗂️</div>
+      <h2>專案治理後台</h2>
+      <p>健康儀表板・風險登記冊・決策日誌，管理八個作品專案的治理資料。</p>
+      <div class="go">進入 →</div>
+    </a>
+    <a class="card" href="analytics.html">
+      <div class="icon">📊</div>
+      <h2>技術健康監控</h2>
+      <p>六個 AI 夥伴的進度追蹤與網站健康狀態監控儀表板。</p>
+      <div class="go">進入 →</div>
+    </a>
+  </div>
+
+  <div class="note">
+    存取權限僅開放單一管理者信箱。其他 Google 帳號登入後將自動登出並導回作品集首頁。
+  </div>
+</main>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="assets/auth.js"></script>
+<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+</body>
+</html>

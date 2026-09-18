@@ -1,0 +1,648 @@
+<!doctype html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>專案分析後台｜六個 AI 夥伴進度追蹤</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:#0c1830;color:#e8edf5;line-height:1.8}
+a{color:#c9a14b;text-decoration:none}
+.wrap{max-width:1100px;margin:0 auto;padding:0 6%}
+
+header{background:linear-gradient(180deg,#0c1830,#142850);padding:40px 0 32px;border-bottom:4px solid #c9a14b;}
+header .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:12px;}
+header h1{font-size:26px;font-weight:900;color:#fff;}
+header .back{font-size:13px;color:#a8b8d4;}
+header .back:hover{color:#c9a14b;}
+
+main{padding:40px 0 80px;}
+
+.panel{background:#142850;border:1px solid #2a3d6b;border-radius:12px;padding:26px 28px;margin-bottom:24px;}
+.panel h2{font-size:16px;color:#fff;font-weight:800;margin-bottom:6px;display:flex;align-items:center;gap:10px;}
+.panel .sub{color:#a8b8d4;font-size:13px;margin-bottom:18px;}
+
+.actions{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px;}
+.btn{
+  background:#c9a14b;color:#0c1830;font-weight:800;border:none;border-radius:6px;
+  padding:12px 24px;font-size:14px;cursor:pointer;transition:filter .2s;
+}
+.btn:hover{filter:brightness(1.1);}
+.btn:disabled{opacity:.4;cursor:not-allowed;}
+.btn.ghost{background:transparent;border:1px solid #2a3d6b;color:#dbe3f3;}
+.btn.ghost:hover{border-color:#c9a14b;color:#c9a14b;}
+
+.status-line{font-size:13px;color:#a8b8d4;margin-top:12px;min-height:18px;}
+
+table{width:100%;border-collapse:collapse;margin-top:18px;font-size:13px;}
+th{text-align:left;color:#a8b8d4;font-weight:600;padding:10px 12px;border-bottom:1px solid #2a3d6b;font-size:12px;letter-spacing:.5px;}
+td{padding:12px;border-bottom:1px solid #1c2d54;vertical-align:middle;}
+tr:last-child td{border-bottom:none;}
+.pname{color:#fff;font-weight:700;}
+.pline{color:#a8b8d4;font-size:12px;margin-top:2px;}
+.ver{font-family:monospace;font-size:13px;color:#dbe3f3;}
+.badge{display:inline-block;font-size:11px;font-weight:700;padding:3px 10px;border-radius:999px;}
+.badge.ok{background:rgba(95,191,143,.15);color:#5fbf8f;}
+.badge.err{background:rgba(224,102,74,.15);color:#e0664a;}
+.badge.changed{background:rgba(201,161,75,.2);color:#c9a14b;}
+.badge.same{background:rgba(168,184,212,.12);color:#a8b8d4;}
+
+.history{margin-top:10px;}
+.hist-item{padding:12px 0;border-bottom:1px solid #1c2d54;font-size:13px;color:#a8b8d4;}
+.hist-item:last-child{border-bottom:none;}
+.hist-item b{color:#dbe3f3;}
+.hist-item .changed-tag{color:#c9a14b;font-weight:700;}
+.empty{color:#5e7099;font-size:13px;padding:20px 0;text-align:center;}
+
+/* ---- Gantt 時間軸設定與圖表 ---- */
+.gh-config{display:grid;gap:10px;margin-bottom:16px;}
+.gh-row{display:grid;grid-template-columns:170px 1fr;gap:10px;align-items:center;}
+@media(max-width:640px){.gh-row{grid-template-columns:1fr;}}
+.gh-row .pname-label{font-size:13px;color:#dbe3f3;}
+.gh-row input{
+  width:100%;background:#0c1830;border:1px solid #2a3d6b;border-radius:6px;
+  padding:9px 12px;color:#e8edf5;font-family:monospace;font-size:13px;
+}
+.gh-row input:focus{outline:1px solid #c9a14b;border-color:#c9a14b;}
+label{display:block;font-size:12px;color:#a8b8d4;margin-bottom:6px;}
+#ghToken{
+  width:100%;background:#0c1830;border:1px solid #2a3d6b;border-radius:6px;
+  padding:10px 12px;color:#e8edf5;font-family:monospace;font-size:13px;margin-bottom:4px;
+}
+#ghToken:focus{outline:1px solid #c9a14b;border-color:#c9a14b;}
+.remember-row{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  background:#0c1830;border-radius:6px;padding:10px 12px;flex-wrap:wrap;
+}
+.remember-label{display:flex;align-items:center;gap:8px;font-size:12px;color:#a8b8d4;cursor:pointer;}
+.remember-label input{width:auto;}
+
+#ganttChart{overflow-x:auto;}
+.gantt-row{display:grid;grid-template-columns:150px 1fr;gap:14px;align-items:center;padding:10px 0;border-bottom:1px solid #1c2d54;}
+.gantt-row:last-child{border-bottom:none;}
+.gantt-label{font-size:12px;color:#dbe3f3;font-weight:700;}
+.gantt-label small{display:block;color:#5e7099;font-weight:400;font-size:11px;margin-top:2px;}
+.gantt-track{position:relative;height:26px;background:#0c1830;border-radius:4px;min-width:600px;}
+.gantt-bar{position:absolute;top:8px;height:10px;background:rgba(201,161,75,.35);border-radius:4px;}
+.gantt-dot{
+  position:absolute;top:5px;width:16px;height:16px;border-radius:50%;
+  background:#c9a14b;border:2px solid #0c1830;cursor:pointer;transform:translateX(-50%);
+  transition:transform .15s;
+}
+.gantt-dot:hover{transform:translateX(-50%) scale(1.3);}
+.gantt-axis{display:grid;grid-template-columns:150px 1fr;gap:14px;margin-top:6px;}
+.gantt-axis-track{position:relative;height:16px;font-size:10px;color:#5e7099;min-width:600px;}
+.gantt-axis-tick{position:absolute;transform:translateX(-50%);}
+#ganttDetail{background:#0c1830;border-radius:6px;padding:14px 16px;font-size:13px;color:#dbe3f3;text-align:left;}
+#ganttDetail b{color:#c9a14b;}
+#ganttDetail .commit-msg{color:#fff;margin-top:6px;white-space:pre-wrap;}
+
+/* ---- 報告視圖 ---- */
+#reportView{display:none;}
+#reportView.show{display:block;}
+#dashboardView.hide{display:none;}
+.report-header{text-align:center;padding:20px 0 30px;border-bottom:2px solid #c9a14b;margin-bottom:24px;}
+.report-header h2{font-size:22px;color:#fff;font-weight:900;}
+.report-header .date{color:#a8b8d4;font-size:13px;margin-top:8px;}
+.report-row{
+  display:grid;grid-template-columns:32px 1fr 120px 90px;gap:16px;align-items:center;
+  padding:16px 0;border-bottom:1px solid #1c2d54;
+}
+.report-row .idx{color:#c9a14b;font-weight:900;font-size:16px;}
+.report-name{color:#fff;font-weight:700;font-size:14px;}
+.report-tag{color:#a8b8d4;font-size:12px;margin-top:3px;}
+
+footer{border-top:1px solid #2a3d6b;padding:30px 0;text-align:center;color:#5e7099;font-size:12px;}
+
+@media print{
+  header, .panel.controls, #dashboardView, footer{display:none !important;}
+  #reportView{display:block !important;}
+  body{background:#fff;color:#111;}
+  .report-header{border-color:#c9a14b;}
+  .report-header h2{color:#111;}
+  .report-row{border-color:#ddd;}
+  .report-name{color:#111;}
+  .report-tag{color:#555;}
+}
+@media(max-width:640px){
+  .report-row{grid-template-columns:24px 1fr 80px;}
+  .report-row .respcol{display:none;}
+  table{font-size:12px;}
+
+  /* 即時檢查結果表格：手機改為卡片式堆疊，不再橫向擠壓 */
+  #resultTable thead{display:none;}
+  #resultTable, #resultTable tbody, #resultTable tr, #resultTable td{display:block;width:100%;}
+  #resultTable tr{border-bottom:1px solid #232A36;padding:12px 0;}
+  #resultTable td{padding:4px 0;border-bottom:none;}
+  #resultTable td.ver::before{content:"版本：";color:#5e7099;}
+  #resultTable td:last-child::before{content:"回應時間：";color:#5e7099;}
+
+  /* 甘特圖：標籤與時間軸改為上下堆疊，避免擠壓 */
+  .gantt-row, .gantt-axis{grid-template-columns:1fr;}
+  .gantt-label{margin-bottom:6px;}
+  .gantt-axis-track{margin-left:0;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <h1>專案分析後台</h1>
+    <div style="display:flex;gap:16px;align-items:center;">
+      <a class="back" href="admin.html">← 後台管理</a>
+      <a class="back" href="governance.html">專案治理後台 →</a>
+      <a class="back" href="index.html">返回作品集首頁</a>
+      <a class="back" href="#" onclick="__adminLogout();return false;">登出</a>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <div id="dashboardView">
+    <div class="panel controls">
+      <h2>即時健康與版本檢查</h2>
+      <div class="sub">從伺服器端連線到六個網站，抓取目前版本號與存活狀態，並自動與上次檢查結果比對。</div>
+      <div class="actions">
+        <button class="btn" id="checkBtn">立即分析六個網站</button>
+        <button class="btn ghost" id="reportBtn" disabled>產出執行報告</button>
+      </div>
+      <div class="status-line" id="statusLine">尚未執行過檢查。</div>
+    </div>
+
+    <div class="panel">
+      <h2>本次檢查結果</h2>
+      <div class="sub">version 為從網站原始碼中偵測到的版本號；「有更新」代表版本號跟上一次檢查不同。</div>
+      <table id="resultTable" style="display:none;">
+        <thead><tr><th>專案</th><th>版本</th><th>狀態</th><th>回應時間</th></tr></thead>
+        <tbody id="resultBody"></tbody>
+      </table>
+      <div class="empty" id="resultEmpty">按下「立即分析」開始第一次檢查。</div>
+    </div>
+
+    <div class="panel">
+      <h2>歷史檢查紀錄</h2>
+      <div class="sub">最多保留最近 30 次檢查紀錄。</div>
+      <div class="history" id="historyList"><div class="empty">尚無歷史紀錄。</div></div>
+    </div>
+
+    <div class="panel">
+      <h2>功能時間軸（Gantt）</h2>
+      <div class="sub">填入各專案的 GitHub Repository，抓取 Commit 紀錄，畫出過往的開發活動時間軸。資料直接由你的瀏覽器呼叫 GitHub API，不經過任何伺服器。</div>
+
+      <div class="gh-config" id="ghConfig"></div>
+
+      <div class="remember-row" style="margin-top:4px;">
+        <label class="remember-label"><input type="checkbox" id="ganttRemember"> 記住這些設定在本機（含選填的 GitHub Token）</label>
+        <button type="button" class="btn ghost" id="ganttClear" style="padding:6px 14px;font-size:12px;">清除已儲存設定</button>
+      </div>
+      <label for="ghToken" style="margin-top:14px;">GitHub Token（選填，可用之前申請的那組；不填則每小時限 60 次請求，通常也夠用）</label>
+      <input type="password" id="ghToken" placeholder="ghp_xxxxxxxxxxxxxxxxxxxx" autocomplete="off">
+
+      <div class="actions" style="margin-top:6px;">
+        <button class="btn" id="ganttBtn">抓取並產生時間軸</button>
+      </div>
+      <div class="status-line" id="ganttStatus"></div>
+
+      <div id="ganttChartWrap" style="display:none;margin-top:20px;">
+        <div id="ganttChart"></div>
+        <div id="ganttDetail" class="empty">點選時間軸上的圓點，查看該次 commit 的說明。</div>
+      </div>
+    </div>
+  </div>
+
+  <div id="reportView">
+    <div class="report-header">
+      <h2>AI 產品矩陣｜專案進度執行報告</h2>
+      <div class="date" id="reportDate"></div>
+    </div>
+    <div id="reportBody"></div>
+    <div class="actions" style="margin-top:24px;">
+      <button class="btn" onclick="window.print()">列印／儲存為 PDF</button>
+      <button class="btn ghost" id="backToDashboard">返回後台</button>
+    </div>
+  </div>
+
+</main>
+
+<footer class="wrap">系統開發者：游士賢　｜　此頁面透過 Netlify Functions 於伺服器端讀取六個網站的公開頁面內容</footer>
+
+<script>
+(function(){
+  var PROJECT_INFO = {
+    stratedge:   { tagline: "把行銷焦慮，轉換成看得懂的策略地圖" },
+    aiops:       { tagline: "凌晨三點的告警，也有人替你看懂" },
+    hrmatch:     { tagline: "把履歷篩選，還給公平與效率" },
+    career:      { tagline: "求職前，先看懂一份職缺、看懂自己" },
+    lifecompass: { tagline: "在最親近的關係裡，學會好好說話" },
+    omniastro:   { tagline: "五套命理系統交叉驗證，不再各說各話" }
+  };
+
+  var checkBtn = document.getElementById('checkBtn');
+  var reportBtn = document.getElementById('reportBtn');
+  var statusLine = document.getElementById('statusLine');
+  var resultTable = document.getElementById('resultTable');
+  var resultBody = document.getElementById('resultBody');
+  var resultEmpty = document.getElementById('resultEmpty');
+  var historyList = document.getElementById('historyList');
+  var dashboardView = document.getElementById('dashboardView');
+  var reportView = document.getElementById('reportView');
+  var reportBody = document.getElementById('reportBody');
+  var reportDate = document.getElementById('reportDate');
+  var backToDashboard = document.getElementById('backToDashboard');
+
+  var lastResults = null;
+
+  function fmtTime(iso){
+    var d = new Date(iso);
+    return d.toLocaleString('zh-TW', { hour12:false });
+  }
+
+  function renderResults(results){
+    resultTable.style.display = 'table';
+    resultEmpty.style.display = 'none';
+    resultBody.innerHTML = '';
+    results.forEach(function(r){
+      var tr = document.createElement('tr');
+      var statusBadge = r.ok
+        ? '<span class="badge ok">正常</span>'
+        : '<span class="badge err">異常</span>';
+      var changeBadge;
+      if(r.versionUnknown){
+        changeBadge = '<span class="badge same">版本無法判斷（本次或上次未偵測到版本號，非「無變化」）</span>';
+      } else if(r.changed){
+        changeBadge = '<span class="badge changed">有更新（原：'+(r.previousVersion||'—')+'）</span>';
+      } else {
+        changeBadge = '<span class="badge same">無變化</span>';
+      }
+      tr.innerHTML =
+        '<td><div class="pname">'+r.name+'</div><div class="pline">'+(PROJECT_INFO[r.id]?PROJECT_INFO[r.id].tagline:'')+'</div></td>' +
+        '<td class="ver">'+(r.version || '未偵測到') + '</td>' +
+        '<td>'+statusBadge+' '+changeBadge+'</td>' +
+        '<td class="ver">'+(r.responseMs!=null ? r.responseMs+' ms' : '—')+'</td>';
+      resultBody.appendChild(tr);
+    });
+  }
+
+  function renderHistory(history){
+    if(!history || history.length === 0){
+      historyList.innerHTML = '<div class="empty">尚無歷史紀錄。</div>';
+      return;
+    }
+    historyList.innerHTML = '';
+    history.forEach(function(h){
+      var changedCount = h.summary.filter(function(s){ return s.changed; }).length;
+      var okCount = h.summary.filter(function(s){ return s.ok; }).length;
+      var div = document.createElement('div');
+      div.className = 'hist-item';
+      div.innerHTML =
+        '<b>'+fmtTime(h.checkedAt)+'</b>　' +
+        okCount+'/'+h.summary.length+' 個網站正常' +
+        (changedCount>0 ? '　<span class="changed-tag">・'+changedCount+' 個專案版本有更新</span>' : '');
+      historyList.appendChild(div);
+    });
+  }
+
+  function runCheck(){
+    checkBtn.disabled = true;
+    statusLine.textContent = '正在連線六個網站，請稍候（約需 5–15 秒）...';
+    fetch('/.netlify/functions/check-sites')
+      .then(function(res){
+        if(!res.ok) throw new Error('伺服器回應錯誤：' + res.status);
+        return res.json();
+      })
+      .then(function(data){
+        if(data.error) throw new Error(data.error);
+        lastResults = data;
+        renderResults(data.results);
+        renderHistory(data.history);
+        var changedCount = data.results.filter(function(r){ return r.changed; }).length;
+        statusLine.textContent = '完成於 ' + fmtTime(data.checkedAt) + '　｜　' +
+          (changedCount>0 ? changedCount+' 個專案偵測到版本更新' : '本次檢查沒有偵測到版本變化');
+        reportBtn.disabled = false;
+      })
+      .catch(function(err){
+        statusLine.textContent = '檢查失敗：' + err.message + '（若剛部署，Netlify Functions 可能需要 1-2 分鐘才會生效，請稍後再試）';
+      })
+      .finally(function(){
+        checkBtn.disabled = false;
+      });
+  }
+
+  function buildReport(){
+    if(!lastResults) return;
+    reportDate.textContent = '報告產生時間：' + fmtTime(lastResults.checkedAt);
+    reportBody.innerHTML = '';
+    lastResults.results.forEach(function(r, i){
+      var row = document.createElement('div');
+      row.className = 'report-row';
+      var statusText = r.ok ? '正常運作' : '需要留意';
+      var verText = r.version || '未偵測到';
+      if(r.changed) verText += '（較上次更新）';
+      row.innerHTML =
+        '<div class="idx">'+String(i+1).padStart(2,'0')+'</div>' +
+        '<div><div class="report-name">'+r.name+'</div><div class="report-tag">'+(PROJECT_INFO[r.id]?PROJECT_INFO[r.id].tagline:'')+'</div></div>' +
+        '<div class="ver">'+verText+'</div>' +
+        '<div class="respcol">'+statusText+'</div>';
+      reportBody.appendChild(row);
+    });
+  }
+
+  checkBtn.addEventListener('click', runCheck);
+  reportBtn.addEventListener('click', function(){
+    buildReport();
+    dashboardView.classList.add('hide');
+    reportView.classList.add('show');
+  });
+  backToDashboard.addEventListener('click', function(){
+    dashboardView.classList.remove('hide');
+    reportView.classList.remove('show');
+  });
+
+  // 防呆：如果使用者沒按「產出執行報告」，而是直接用瀏覽器內建的列印功能（Ctrl+P／右鍵列印），
+  // 也要確保印出來的是有內容的報告，而不是空白頁
+  window.addEventListener('beforeprint', function(){
+    if(lastResults && !reportView.classList.contains('show')){
+      buildReport();
+      reportView.classList.add('show');
+    }
+  });
+
+  // ============ 功能時間軸（Gantt） ============
+  var PROJECT_ORDER = ['stratedge','aiops','hrmatch','career','lifecompass','omniastro'];
+  var PROJECT_NAMES = {
+    stratedge:   '策引 AI｜Strat Edge',
+    aiops:       'AIOps 智慧巡檢平台',
+    hrmatch:     '人資媒合決策系統',
+    career:      '職透',
+    lifecompass: '人生羅盤 LifeCompass',
+    omniastro:   '真命盤'
+  };
+
+  var ghConfigEl = document.getElementById('ghConfig');
+  var ghToken = document.getElementById('ghToken');
+  var ganttRemember = document.getElementById('ganttRemember');
+  var ganttClear = document.getElementById('ganttClear');
+  var ganttBtn = document.getElementById('ganttBtn');
+  var ganttStatus = document.getElementById('ganttStatus');
+  var ganttChartWrap = document.getElementById('ganttChartWrap');
+  var ganttChart = document.getElementById('ganttChart');
+  var ganttDetail = document.getElementById('ganttDetail');
+
+  // 產生六列 owner/repo 輸入框
+  PROJECT_ORDER.forEach(function(id){
+    var row = document.createElement('div');
+    row.className = 'gh-row';
+    row.innerHTML =
+      '<span class="pname-label">'+PROJECT_NAMES[id]+'</span>' +
+      '<input type="text" data-pid="'+id+'" placeholder="owner/repo，例如 yushihhsien168/stratedge">';
+    ghConfigEl.appendChild(row);
+  });
+  var repoInputs = Array.prototype.slice.call(ghConfigEl.querySelectorAll('input'));
+
+  // 還原本機設定
+  (function restoreGanttConfig(){
+    var persisted = localStorage.getItem('gantt_config');
+    if(persisted){
+      try{
+        var cfg = JSON.parse(persisted);
+        repoInputs.forEach(function(inp){ if(cfg.repos && cfg.repos[inp.dataset.pid]) inp.value = cfg.repos[inp.dataset.pid]; });
+        if(cfg.token) ghToken.value = cfg.token;
+        ganttRemember.checked = true;
+      }catch(e){}
+    } else {
+      var sessCfg = sessionStorage.getItem('gantt_config_session');
+      if(sessCfg){
+        try{
+          var cfg2 = JSON.parse(sessCfg);
+          repoInputs.forEach(function(inp){ if(cfg2.repos && cfg2.repos[inp.dataset.pid]) inp.value = cfg2.repos[inp.dataset.pid]; });
+          if(cfg2.token) ghToken.value = cfg2.token;
+        }catch(e){}
+      }
+    }
+  })();
+
+  function saveGanttConfig(){
+    var repos = {};
+    repoInputs.forEach(function(inp){ repos[inp.dataset.pid] = inp.value.trim(); });
+    var cfg = { repos: repos, token: ghToken.value.trim() };
+    if(ganttRemember.checked){
+      localStorage.setItem('gantt_config', JSON.stringify(cfg));
+      sessionStorage.removeItem('gantt_config_session');
+    } else {
+      sessionStorage.setItem('gantt_config_session', JSON.stringify(cfg));
+      localStorage.removeItem('gantt_config');
+    }
+  }
+  repoInputs.forEach(function(inp){ inp.addEventListener('input', saveGanttConfig); });
+  ghToken.addEventListener('input', saveGanttConfig);
+  ganttRemember.addEventListener('change', saveGanttConfig);
+  ganttClear.addEventListener('click', function(){
+    localStorage.removeItem('gantt_config');
+    sessionStorage.removeItem('gantt_config_session');
+    repoInputs.forEach(function(inp){ inp.value = ''; });
+    ghToken.value = '';
+    ganttRemember.checked = false;
+  });
+
+  function fetchCommits(owner, repo, token){
+    var headers = { 'Accept': 'application/vnd.github+json' };
+    if(token) headers['Authorization'] = 'Bearer ' + token;
+    var pages = [1, 2]; // 最多抓兩頁（約 200 筆）
+    return Promise.all(pages.map(function(p){
+      return fetch('https://api.github.com/repos/'+owner+'/'+repo+'/commits?per_page=100&page='+p, { headers: headers })
+        .then(function(res){
+          if(!res.ok){
+            return res.json().then(function(j){ throw new Error(j.message || ('HTTP ' + res.status)); });
+          }
+          return res.json();
+        });
+    })).then(function(pagesData){
+      var all = [].concat.apply([], pagesData);
+      return all.map(function(c){
+        return {
+          date: c.commit && c.commit.author ? c.commit.author.date : c.commit.committer.date,
+          message: c.commit ? c.commit.message.split('\n')[0] : '',
+          sha: c.sha ? c.sha.slice(0,7) : ''
+        };
+      });
+    });
+  }
+
+  // 允許使用者直接貼完整 GitHub 網址，自動轉換成 owner/repo 格式，避免解析錯誤
+  function normalizeRepoInput(val){
+    val = (val || '').trim();
+    var m = val.match(/github\.com[:/]+([^/\s]+)\/([^/\s#?]+)/i);
+    if(m){
+      return m[1] + '/' + m[2].replace(/\.git$/i, '');
+    }
+    return val;
+  }
+
+  function buildGantt(){
+    saveGanttConfig();
+    var token = ghToken.value.trim();
+    var invalidInputs = [];
+    var jobs = repoInputs.map(function(inp){
+      var raw = inp.value.trim();
+      if(!raw) return { id: inp.dataset.pid, skip: true };
+      var val = normalizeRepoInput(raw);
+      if(val.indexOf('/') === -1 || val.split('/').length !== 2){
+        invalidInputs.push(PROJECT_NAMES[inp.dataset.pid] || inp.dataset.pid);
+        return { id: inp.dataset.pid, skip: true };
+      }
+      var parts = val.split('/');
+      return { id: inp.dataset.pid, owner: parts[0], repo: parts[1], skip: false };
+    });
+
+    if(invalidInputs.length > 0){
+      ganttStatus.textContent = '格式看起來不正確：' + invalidInputs.join('、') + '　（請填 owner/repo，例如 yushihhsien168/project；也可以直接貼完整 GitHub 網址，系統會自動轉換）';
+      return;
+    }
+
+    var activeJobs = jobs.filter(function(j){ return !j.skip; });
+    if(activeJobs.length === 0){
+      ganttStatus.textContent = '請至少填一個專案的 owner/repo（例如 yushihhsien168/project，或直接貼完整 GitHub 網址）';
+      return;
+    }
+
+    ganttBtn.disabled = true;
+    ganttStatus.textContent = '正在讀取 ' + activeJobs.length + ' 個 repo 的 commit 紀錄...';
+
+    Promise.allSettled(activeJobs.map(function(j){
+      return fetchCommits(j.owner, j.repo, token).then(function(commits){
+        return { id: j.id, owner: j.owner, repo: j.repo, commits: commits, ok: true };
+      }).catch(function(err){
+        return { id: j.id, owner: j.owner, repo: j.repo, error: err.message, ok: false };
+      });
+    })).then(function(settled){
+      var dataById = {};
+      jobs.forEach(function(j){ dataById[j.id] = j.skip ? { skip: true } : null; });
+      settled.forEach(function(s){ dataById[s.value.id] = s.value; });
+
+      var errCount = 0, okCount = 0;
+      Object.keys(dataById).forEach(function(id){
+        var d = dataById[id];
+        if(d && d.skip) return;
+        if(d && d.ok) okCount++; else errCount++;
+      });
+      ganttStatus.textContent = '完成：' + okCount + ' 個專案成功讀取' + (errCount>0 ? '，' + errCount + ' 個失敗或未設定' : '') + '。';
+
+      renderGantt(dataById);
+      ganttBtn.disabled = false;
+    });
+  }
+
+  function renderGantt(dataById){
+    // 找出所有成功抓到的 commit，計算整體時間範圍
+    var allDates = [];
+    PROJECT_ORDER.forEach(function(id){
+      var d = dataById[id];
+      if(d && d.ok){
+        d.commits.forEach(function(c){ allDates.push(new Date(c.date).getTime()); });
+      }
+    });
+
+    if(allDates.length === 0){
+      ganttStatus.textContent += '　（沒有任何 repo 成功取得 commit 資料，請確認 owner/repo 是否正確、或是否為私有 repo 需要填 Token）';
+      ganttChartWrap.style.display = 'none';
+      return;
+    }
+
+    var minT = Math.min.apply(null, allDates);
+    var maxT = Math.max.apply(null, allDates);
+    if(minT === maxT) maxT = minT + 24*3600*1000; // 避免除以零
+
+    function xPct(t){ return ((t - minT) / (maxT - minT)) * 100; }
+
+    ganttChart.innerHTML = '';
+
+    PROJECT_ORDER.forEach(function(id){
+      var d = dataById[id];
+      var row = document.createElement('div');
+      row.className = 'gantt-row';
+
+      var label = document.createElement('div');
+      label.className = 'gantt-label';
+      var subText = '尚未設定';
+      if(d && d.ok) subText = d.commits.length + ' 筆 commit';
+      else if(d && d.error) subText = '讀取失敗：' + d.error;
+      label.innerHTML = PROJECT_NAMES[id] + '<small>' + subText + '</small>';
+      row.appendChild(label);
+
+      var track = document.createElement('div');
+      track.className = 'gantt-track';
+
+      if(d && d.ok && d.commits.length > 0){
+        var sorted = d.commits.slice().sort(function(a,b){ return new Date(a.date) - new Date(b.date); });
+        // 依 21 天間隔分群，畫出活動區間的連接線
+        var GAP_MS = 21 * 24 * 3600 * 1000;
+        var clusters = [];
+        var cur = [sorted[0]];
+        for(var i=1;i<sorted.length;i++){
+          if(new Date(sorted[i].date) - new Date(sorted[i-1].date) > GAP_MS){
+            clusters.push(cur); cur = [sorted[i]];
+          } else { cur.push(sorted[i]); }
+        }
+        clusters.push(cur);
+
+        clusters.forEach(function(cluster){
+          if(cluster.length > 1){
+            var startX = xPct(new Date(cluster[0].date).getTime());
+            var endX = xPct(new Date(cluster[cluster.length-1].date).getTime());
+            var bar = document.createElement('div');
+            bar.className = 'gantt-bar';
+            bar.style.left = startX + '%';
+            bar.style.width = Math.max(endX - startX, 0.5) + '%';
+            track.appendChild(bar);
+          }
+        });
+
+        sorted.forEach(function(c){
+          var dot = document.createElement('div');
+          dot.className = 'gantt-dot';
+          dot.style.left = xPct(new Date(c.date).getTime()) + '%';
+          dot.title = c.date.slice(0,10) + '｜' + c.message;
+          dot.addEventListener('click', function(){
+            ganttDetail.innerHTML =
+              '<b>' + PROJECT_NAMES[id] + '</b>　' + new Date(c.date).toLocaleString('zh-TW',{hour12:false}) + '　(' + c.sha + ')' +
+              '<div class="commit-msg">' + c.message.replace(/</g,'&lt;') + '</div>';
+          });
+          track.appendChild(dot);
+        });
+      }
+
+      row.appendChild(track);
+      ganttChart.appendChild(row);
+    });
+
+    // 畫時間軸刻度（5 個點）
+    var axisWrap = document.createElement('div');
+    axisWrap.className = 'gantt-axis';
+    axisWrap.innerHTML = '<div></div>';
+    var axisTrack = document.createElement('div');
+    axisTrack.className = 'gantt-axis-track';
+    for(var k=0;k<=4;k++){
+      var t = minT + (maxT - minT) * (k/4);
+      var tick = document.createElement('span');
+      tick.className = 'gantt-axis-tick';
+      tick.style.left = (k/4*100) + '%';
+      tick.textContent = new Date(t).toLocaleDateString('zh-TW', {year:'numeric', month:'short'});
+      axisTrack.appendChild(tick);
+    }
+    axisWrap.appendChild(axisTrack);
+    ganttChart.appendChild(axisWrap);
+
+    ganttChartWrap.style.display = 'block';
+  }
+
+  ganttBtn.addEventListener('click', buildGantt);
+})();
+</script>
+
+<script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+<script src="assets/auth.js"></script>
+<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+</body>
+</html>

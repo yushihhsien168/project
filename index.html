@@ -3,65 +3,167 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>作品集｜企業簡報・深藍金奢版型</title>
+<title>作品集｜企業簡報・活力珊瑚版型</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:#0c1830;color:#e8edf5;line-height:1.9}
-a{color:inherit}
+:root{
+  --coral:#FF5B39;
+  --coral-deep:#E8472A;
+  --indigo:#4B3F9E;
+  --indigo-soft:#6E5AC4;
+  --bg:#FFF6F1;
+  --bg-card:#FFFFFF;
+  --ink:#241C35;
+  --ink-soft:#6B6480;
+  --border:#F2DED4;
+  --border-soft:#EAE3F5;
+}
 
-header{position:relative;background:linear-gradient(180deg,#0c1830,#142850);padding:70px 6% 60px;border-bottom:4px solid #c9a14b;overflow:hidden}
-header::after{content:"PORTFOLIO 2026";position:absolute;bottom:20px;right:6%;font-size:80px;font-weight:900;color:rgba(201,161,75,.08);letter-spacing:-2px;pointer-events:none}
-.eyebrow{display:inline-flex;align-items:center;gap:10px;background:rgba(201,161,75,.15);border:1px solid #c9a14b;color:#c9a14b;padding:6px 16px;border-radius:4px;font-size:12px;letter-spacing:3px;font-weight:700;margin-bottom:20px}
-header h1{font-size:58px;background:linear-gradient(135deg,#fff,#c9a14b);-webkit-background-clip:text;background-clip:text;color:transparent;font-weight:900;line-height:1.15;max-width:900px;margin-bottom:20px}
-header .lead{font-size:18px;color:#a8b8d4;max-width:720px;margin-bottom:30px}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:"PingFang TC","Microsoft JhengHei",sans-serif;background:var(--bg);color:var(--ink);line-height:1.9}
+a{color:inherit}
+.view{display:none}
+.view.active{display:block}
+h1,h2,h3,.eyebrow,.kpi .num,.card-num,.card-cat,.hero-num,.hero-cat{font-family:"Space Grotesk","PingFang TC","Microsoft JhengHei",sans-serif}
+
+header{position:relative;background:linear-gradient(180deg,#FFF9F6,#FFF1EA);padding:70px 6% 60px;border-bottom:1px solid var(--border);overflow:hidden}
+header::after{content:"PORTFOLIO 2026";position:absolute;bottom:20px;right:6%;font-size:80px;font-weight:700;color:rgba(75,63,158,.05);letter-spacing:-2px;pointer-events:none}
+.hero-glow{position:absolute;top:-100px;right:-40px;width:560px;height:560px;background:radial-gradient(circle,rgba(255,91,57,.20) 0%,rgba(75,63,158,.10) 55%,transparent 72%);filter:blur(6px);border-radius:50%;pointer-events:none;z-index:1}
+.hero-orbit{position:absolute;top:36px;right:7%;width:220px;height:220px;pointer-events:none;z-index:2}
+.eyebrow{position:relative;z-index:3;display:inline-flex;align-items:center;gap:10px;background:rgba(255,91,57,.12);border:1px solid rgba(255,91,57,.35);color:var(--coral-deep);padding:6px 16px;border-radius:20px;font-size:12px;letter-spacing:3px;font-weight:700;margin-bottom:20px;white-space:nowrap}
+header h1{position:relative;z-index:3;font-size:58px;color:var(--ink);font-weight:700;line-height:1.15;max-width:760px;margin-bottom:20px;text-wrap:balance}
+header h1 .hl{color:var(--coral)}
+header h1 .nowrap,.hero-cat,.card-cat{white-space:nowrap}
+header h1,.hero-title-wrap h1,.card-body h3,.invest-head h2,.vision h2,.cta-box h2,.section h2{text-wrap:balance}
+header .lead{position:relative;z-index:3;font-size:18px;color:var(--ink-soft);max-width:640px;margin-bottom:30px}
 .kpi-bar{max-width:1400px;margin:-40px auto 40px;padding:0 6%;display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;z-index:3}
-.kpi{background:#142850;border:1px solid #2a3d6b;padding:24px;border-radius:8px;position:relative;overflow:hidden}
-.kpi::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:#c9a14b}
-.kpi .num{font-size:36px;font-weight:900;color:#c9a14b;line-height:1}
-.kpi .label{font-size:12px;letter-spacing:2px;color:#a8b8d4;margin-top:8px}
-.kpi .desc{font-size:13px;color:#dbe3f3;margin-top:6px}
+.kpi{background:var(--bg-card);border:1px solid var(--border);padding:24px;border-radius:12px;position:relative;overflow:hidden;box-shadow:0 4px 18px rgba(75,63,158,.07)}
+.kpi::before{content:"";position:absolute;top:0;left:0;width:4px;height:100%;background:linear-gradient(180deg,var(--coral),var(--indigo))}
+.kpi .num{font-size:36px;font-weight:700;color:var(--coral);line-height:1}
+.kpi .label{font-size:12px;letter-spacing:2px;color:var(--indigo);margin-top:8px;font-weight:700}
+.kpi .desc{font-size:13px;color:var(--ink-soft);margin-top:6px}
 .grid{max-width:1400px;margin:0 auto;padding:60px 6% 30px;display:grid;grid-template-columns:repeat(2,1fr);gap:28px}
-.card{background:#142850;border-radius:12px;overflow:hidden;border:1px solid #2a3d6b;position:relative;transition:transform .2s}
-.card:hover{transform:translateY(-4px);border-color:#c9a14b}
+.card{background:var(--bg-card);border-radius:14px;overflow:hidden;border:1px solid var(--border);position:relative;transition:transform .2s,box-shadow .2s,border-color .2s;--cat:#E8472A;box-shadow:0 2px 12px rgba(36,28,53,.05)}
+.card:hover{transform:translateY(-4px);border-color:var(--cat);box-shadow:0 16px 32px rgba(36,28,53,.12)}
 .card-head{position:relative;height:220px;overflow:hidden}
-.card-head img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85)}
-.card-head::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 30%,#142850 100%)}
-.card-num{position:absolute;top:14px;left:14px;background:rgba(201,161,75,.95);color:#0c1830;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:20px;z-index:2}
-.card-cat{position:absolute;top:14px;right:14px;background:rgba(12,24,48,.85);color:#c9a14b;padding:6px 12px;border-radius:4px;font-size:11px;letter-spacing:2px;font-weight:700;z-index:2}
+.card-head img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.98)}
+.card-head::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,#fff 100%)}
+.card-num{position:absolute;top:14px;left:14px;background:var(--cat);color:#fff;width:46px;height:46px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:20px;z-index:2}
+.card-cat{position:absolute;top:14px;right:14px;background:rgba(255,255,255,.92);color:var(--cat);padding:6px 12px;border-radius:20px;font-size:11px;letter-spacing:2px;font-weight:700;z-index:2;border:1px solid var(--cat)}
 .card-body{padding:28px}
-.card-body h3{font-size:24px;color:#fff;margin-bottom:8px;font-weight:800;line-height:1.3}
-.card-body .value-line{color:#c9a14b;font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid #2a3d6b}
-.card-body p{color:#dbe3f3;font-size:14px;margin-bottom:10px}
-.card-body p strong{color:#c9a14b}
-.card-cta{display:inline-flex;align-items:center;gap:8px;color:#c9a14b;text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid #c9a14b;padding-bottom:4px}
+.card-body h3{font-size:24px;color:var(--ink);margin-bottom:8px;font-weight:700;line-height:1.3}
+.card-body .value-line{color:var(--cat);font-size:14px;font-weight:700;margin-bottom:14px;padding-bottom:14px;border-bottom:1px solid var(--border)}
+.card-body p{color:var(--ink-soft);font-size:14px;margin-bottom:10px}
+.card-body p strong{color:var(--cat)}
+.card-cta{display:inline-flex;align-items:center;gap:8px;color:var(--cat);text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid var(--cat);padding-bottom:4px;background:none;cursor:pointer;font-family:inherit}
 .invest{max-width:1400px;margin:0 auto;padding:50px 6% 20px}
 .invest-head{text-align:center;margin-bottom:40px}
-.invest-head h2{font-size:32px;color:#fff;font-weight:900;margin-bottom:12px}
-.invest-head p{color:#a8b8d4;font-size:16px;max-width:780px;margin:0 auto}
+.invest-head h2{font-size:32px;color:var(--ink);font-weight:700;margin-bottom:12px}
+.invest-head p{color:var(--ink-soft);font-size:16px;max-width:780px;margin:0 auto}
 .invest-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
-.invest-item{background:#142850;border:1px solid #2a3d6b;border-top:4px solid #c9a14b;border-radius:10px;padding:26px}
+.invest-item{background:var(--bg-card);border:1px solid var(--border);border-top:4px solid var(--coral);border-radius:12px;padding:26px;box-shadow:0 2px 12px rgba(36,28,53,.05)}
 .invest-item .icon{font-size:30px;margin-bottom:12px}
-.invest-item h3{color:#c9a14b;font-size:17px;font-weight:800;margin-bottom:10px}
-.invest-item p{color:#dbe3f3;font-size:14px}
+.invest-item h3{color:var(--indigo);font-size:17px;font-weight:700;margin-bottom:10px}
+.invest-item p{color:var(--ink-soft);font-size:14px}
 .vision{max-width:1400px;margin:0 auto;padding:60px 6% 80px;text-align:center}
-.vision .box{background:linear-gradient(135deg,#142850,#0c1830);border:1px solid #c9a14b;border-radius:14px;padding:50px 40px}
-.vision h2{font-size:30px;color:#fff;font-weight:900;margin-bottom:16px;line-height:1.4}
-.vision p{color:#a8b8d4;font-size:16px;max-width:760px;margin:0 auto 26px}
-.vision .cta{display:inline-flex;align-items:center;gap:10px;background:#c9a14b;color:#0c1830;font-weight:800;padding:14px 34px;border-radius:6px;text-decoration:none;font-size:16px;letter-spacing:1px}
-footer{background:#070d1c;padding:50px 6%;text-align:center;border-top:1px solid #2a3d6b;color:#5e7099;font-size:13px;letter-spacing:1px}
-@media(max-width:820px){.kpi-bar,.grid,.invest-grid{grid-template-columns:1fr}header h1{font-size:36px}}
+.vision .box{background:linear-gradient(135deg,#FFF1EA,#F1EDFB);border:1px solid var(--border-soft);border-radius:16px;padding:50px 40px}
+.vision h2{font-size:30px;color:var(--ink);font-weight:700;margin-bottom:16px;line-height:1.4}
+.vision p{color:var(--ink-soft);font-size:16px;max-width:760px;margin:0 auto 26px}
+.vision .cta{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(120deg,var(--coral),var(--indigo));color:#fff;font-weight:700;padding:14px 34px;border-radius:30px;text-decoration:none;font-size:16px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
+footer{background:#FBF2EE;padding:50px 6%;text-align:center;border-top:1px solid var(--border);color:var(--ink-soft);font-size:13px;letter-spacing:1px}
+
+/* ---- 詳細頁（合併後共用一份樣式，套用各專案自己的 --cat 色） ---- */
+.detail-view{--cat:#E8472A}
+.topnav{max-width:1100px;margin:0 auto;padding:24px 6% 0}
+.back-link{display:inline-flex;align-items:center;gap:8px;color:var(--cat);text-decoration:none;font-weight:700;font-size:13px;letter-spacing:1px;border-bottom:2px solid var(--cat);padding-bottom:2px;background:none;cursor:pointer;font-family:inherit}
+.hero{position:relative;max-width:1100px;margin:20px auto 0;padding:0 6%}
+.hero-img-wrap{position:relative;border-radius:14px;overflow:hidden;border:1px solid var(--border);height:340px;background:var(--bg-card)}
+.hero-img-wrap img{width:100%;height:100%;object-fit:cover;display:block;filter:brightness(.85)}
+.hero-img-wrap::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 38%,rgba(28,18,46,.86) 100%)}
+.hero-num{position:absolute;top:18px;left:18px;background:var(--cat);color:#fff;width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:22px;z-index:2}
+.hero-cat{position:absolute;top:18px;right:18px;background:rgba(255,255,255,.92);color:var(--cat);padding:7px 14px;border-radius:20px;font-size:12px;letter-spacing:2px;font-weight:700;z-index:2;border:1px solid var(--cat)}
+.hero-title-wrap{position:absolute;bottom:24px;left:28px;right:28px;z-index:2}
+.hero-title-wrap h1{font-size:34px;color:#fff;font-weight:700;line-height:1.3;margin-bottom:8px}
+.hero-title-wrap .value-line{color:#fff;opacity:.92;font-size:15px;font-weight:700}
+main.detail-main{max-width:900px;margin:0 auto;padding:50px 6% 20px}
+.section{margin-bottom:52px}
+.section h2{font-size:22px;color:var(--cat);font-weight:700;letter-spacing:1px;margin-bottom:18px;padding-bottom:12px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:10px}
+.section h2::before{content:"";width:6px;height:22px;background:var(--cat);border-radius:2px;display:inline-block}
+.section p{color:var(--ink-soft);font-size:16px;margin-bottom:14px}
+.persona{background:var(--bg-card);border:1px solid var(--border);border-left:4px solid var(--cat);border-radius:8px;padding:22px 26px;margin-bottom:20px;box-shadow:0 2px 10px rgba(36,28,53,.04)}
+.persona .persona-name{color:var(--cat);font-weight:700;font-size:16px;margin-bottom:10px}
+.persona p{margin-bottom:0;font-size:15px;color:var(--ink-soft)}
+ul.plain-list{list-style:none;padding:0}
+ul.plain-list li{position:relative;padding-left:24px;margin-bottom:14px;color:var(--ink-soft);font-size:16px}
+ul.plain-list li::before{content:"›";position:absolute;left:0;color:var(--cat);font-weight:900;font-size:18px}
+ul.plain-list li strong{color:var(--cat)}
+.tech-tags{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.tech-tags span{font-size:12px;background:#fff;color:var(--cat);padding:6px 14px;border-radius:20px;border:1px solid var(--cat)}
+.cta-box{background:linear-gradient(135deg,#fff,var(--bg));border:1px solid var(--cat);border-radius:12px;padding:36px 34px;text-align:center;margin-top:10px}
+.cta-box h2{color:var(--ink);font-size:24px;font-weight:700;margin-bottom:12px;line-height:1.4;border:none;padding:0}
+.cta-box h2::before{display:none}
+.cta-box p{color:var(--ink-soft);font-size:15px;margin-bottom:22px}
+.cta-box .cta{display:inline-flex;align-items:center;gap:10px;background:var(--cat);color:#fff;font-weight:700;padding:12px 30px;border-radius:24px;text-decoration:none;font-size:15px;letter-spacing:1px;border:none;cursor:pointer;font-family:inherit}
+
+/* ---- RWD：多段斷點，涵蓋平板與常見手機尺寸 ---- */
+@media(max-width:1100px){
+  .hero-orbit{display:none}
+}
+@media(max-width:820px){
+  .kpi-bar,.grid,.invest-grid{grid-template-columns:1fr}
+  header h1{font-size:36px}
+  .hero-glow{width:360px;height:360px;top:-70px;right:-90px}
+  .hero-img-wrap{height:220px}
+  .hero-title-wrap h1{font-size:24px}
+}
+@media(max-width:480px){
+  header{padding:50px 6% 44px}
+  header h1{font-size:28px}
+  header .lead{font-size:15px}
+  .eyebrow{font-size:10px;letter-spacing:2px;padding:5px 12px}
+  .kpi .num{font-size:26px}
+  .kpi{padding:18px}
+  .card-body{padding:20px}
+  .card-body h3{font-size:20px}
+  .hero-img-wrap{height:170px}
+  .hero-title-wrap h1{font-size:19px}
+  .hero-title-wrap{left:18px;right:18px;bottom:16px}
+  .section h2{font-size:18px}
+  .section p,.persona p{font-size:14px}
+  .cta-box{padding:26px 20px}
+  .cta-box h2{font-size:19px}
+  .invest-head h2,.vision h2{font-size:22px}
+  main.detail-main{padding:36px 6% 10px}
+}
 </style>
 </head>
 <body>
+
+<div id="view-home" class="view active">
 <header>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <svg class="hero-orbit" viewBox="0 0 220 220" aria-hidden="true">
+    <circle cx="110" cy="110" r="86" fill="none" stroke="#4B3F9E" stroke-opacity=".28" stroke-width="1.5"/>
+    <circle cx="110" cy="110" r="52" fill="none" stroke="#FF5B39" stroke-opacity=".22" stroke-width="1.5"/>
+    <circle cx="110" cy="24" r="7" fill="#FF5B39"/>
+    <circle cx="196" cy="110" r="7" fill="#FF5B39"/>
+    <circle cx="110" cy="196" r="7" fill="#FF5B39"/>
+    <circle cx="24" cy="110" r="7" fill="#FF5B39"/>
+    <circle cx="171" cy="49" r="4.5" fill="#4B3F9E"/>
+    <circle cx="171" cy="171" r="4.5" fill="#4B3F9E"/>
+    <circle cx="49" cy="171" r="4.5" fill="#4B3F9E"/>
+    <circle cx="49" cy="49" r="4.5" fill="#4B3F9E"/>
+  </svg>
   <span class="eyebrow">★ ENTERPRISE AI PORTFOLIO</span>
-  <h1>六個 AI 夥伴，<br>陪你把「不確定」變成「下一步」</h1>
-  <p class="lead">決策焦慮、招募疲勞、凌晨告警、轉職迷惘、說不出口的話、人生抉擇——這些每天真實上演的時刻，六支 AI 工具用溫暖而專業的方式接住你。不是冷冰冰的系統，而是懂你、陪你的決策副駕駛。</p>
+  <h1>八個 AI 夥伴，<br>陪你把<span class="hl nowrap">「不確定」</span>變成<span class="nowrap">「下一步」</span></h1>
+  <p class="lead">決策焦慮、招募疲勞、凌晨告警、轉職迷惘、說不出口的話、人生抉擇、一個人忙不過來的瑣事、還有盯盤盯到心累的股市焦慮——這些每天真實上演的時刻，八支 AI 工具用溫暖而專業的方式接住你。不是冷冰冰的系統，而是懂你、陪你的決策副駕駛。</p>
 </header>
 
 <section class="kpi-bar">
-  <div class="kpi"><div class="num">6</div><div class="label">AI 夥伴</div><div class="desc">行銷、資安、人資、職涯、心理、命理六大生活與商業場景</div></div>
+  <div class="kpi"><div class="num">8</div><div class="label">AI 夥伴</div><div class="desc">行銷、資安、自動化、股市交易、人資、職涯、心理、命理八大生活與商業場景</div></div>
   <div class="kpi"><div class="num">171.5萬</div><div class="label">中小企業</div><div class="desc">台灣 98% 企業都是中小企業，專業決策力從此不再高不可攀</div></div>
   <div class="kpi"><div class="num">600億+</div><div class="label">資安市場</div><div class="desc">台灣資安產值持續成長，合規與防護是企業的剛性需求</div></div>
   <div class="kpi"><div class="num">4.1倍</div><div class="label">命理市場成長</div><div class="desc">2024 年產值 2.9 億元，五年成長 4.1 倍，需求正在爆發</div></div>
@@ -69,95 +171,123 @@ footer{background:#070d1c;padding:50px 6%;text-align:center;border-top:1px solid
 
 <section class="grid" id="portfolio">
 
-  <article class="card">
+  <article class="card" style="--cat:#E8472A">
     <div class="card-head">
       <div class="card-num">01</div>
       <div class="card-cat">MARKETING AI</div>
-      <img src="assets/small_01-stratedge.png" alt="策引 AI｜Strat Edge">
+      <img src="assets/small_01-stratedge.png" alt="策引 StratEdge｜行銷決策副駕駛">
     </div>
     <div class="card-body">
-      <h3>策引 AI｜Strat Edge</h3>
+      <h3>策引 StratEdge｜行銷決策副駕駛</h3>
       <div class="value-line">企業價值：把「多花 100 萬多賺多少」變成 3 分鐘有答案</div>
       <p><strong>解決什麼：</strong>深夜獨自面對數據、卻說不出「為什麼轉換掉了」的決策焦慮——把專業判斷力交到沒有專職策略師的老闆手上。</p><p><strong>核心價值：</strong>五層分析（現況→原因→預測→外部變因→建議）+ CFO 級增量 ROI 引擎，策略擬定從「以週計算」壓縮到「以小時計算」。</p>
-      <a href="project-01-stratedge.html" class="card-cta">→ 認識這個夥伴</a>
+      <a href="#p1" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
 
-  <article class="card">
+  <article class="card" style="--cat:#2F6FB0">
     <div class="card-head">
       <div class="card-num">02</div>
       <div class="card-cat">SECURITY AI</div>
-      <img src="assets/small_02-aiops.png" alt="AIOps 智慧巡檢通報平台">
+      <img src="assets/small_02-nightsentry.png" alt="鎮夜 NightSentry｜智慧資安守夜">
     </div>
     <div class="card-body">
-      <h3>AIOps 智慧巡檢通報平台</h3>
+      <h3>鎮夜 NightSentry｜智慧資安守夜</h3>
       <div class="value-line">企業價值：凌晨告警不再孤軍奮戰，稽核季不再全員熬夜</div>
-      <p><strong>解決什麼：</strong>凌晨三點看不懂告警、只能獨自猜測的壓力，與上市櫃公司稽核加班的惡夢。</p><p><strong>核心價值：</strong>把冷冰冰的 Log 翻譯成白話，一鍵產出 8 份符合《上市上櫃資安管理辦法》第 7 條與 ISO 27001 的角色別報表。</p>
-      <a href="project-02-aiops.html" class="card-cta">→ 認識這個夥伴</a>
+      <p><strong>解決什麼：</strong>凌晨三點看不懂告警、只能獨自猜測的壓力，資安資產／弱點散落各處看不清全貌，以及上市櫃公司稽核加班的惡夢。</p><p><strong>核心價值：</strong>把冷冰冰的 Log 翻譯成白話，整合 CVE 弱點掃描、區網資產盤點、威脅情資查詢與 IP 封鎖治理於同一平台，一鍵產出 8 份符合《上市上櫃資安管理辦法》第 7 條與 ISO 27001 的角色別報表——且不說謊，AI 分析是真呼叫還是規則引擎，畫面上清楚標示。</p>
+      <a href="#p2" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
 
-  <article class="card">
+  <article class="card" style="--cat:#4B3F9E">
     <div class="card-head">
       <div class="card-num">03</div>
-      <div class="card-cat">HR AI</div>
-      <img src="assets/small_03-hrmatch.png" alt="人資履歷 AI 媒合決策系統">
+      <div class="card-cat">AUTOMATION AI</div>
+      <img src="assets/small_03-converge.png" alt="匯流 Converge｜自動化工作流平台">
     </div>
     <div class="card-body">
-      <h3>人資履歷 AI 媒合決策系統</h3>
-      <div class="value-line">企業價值：每一份履歷都被認真看過，公平雇用・符合 ESG</div>
-      <p><strong>解決什麼：</strong>招募疲勞導致的偏見，與「漏看真正人才」的恐懼——讓 HR 睡得安穩。</p><p><strong>核心價值：</strong>主動排除年齡、性別、婚姻、宗教等無關個資，依董事長／部門主管／HR 三層角色自動產出不同深度的分層報告。</p>
-      <a href="project-03-hrmatch.html" class="card-cta">→ 認識這個夥伴</a>
+      <h3>匯流 Converge｜自動化工作流平台</h3>
+      <div class="value-line">企業價值：一個人也能撐起一整條自動化管線</div>
+      <p><strong>解決什麼：</strong>中小企業主一人身兼業務、客服、財務、IT 四個角色，靠人腦記住 Email、LINE、審批不能漏接的焦慮。</p><p><strong>核心價值：</strong>事件標準化→規則引擎→動作執行的核心管線，加上 Agent 任務鏈、異常示警、每日晨報等 8 項進階自動化，147 個自動化測試全數通過，並內建多租戶、RBAC、SSO 等 10 項企業就緒模組。</p>
+      <a href="#p3" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
 
-  <article class="card">
+  <article class="card" style="--cat:#1F8A4C">
     <div class="card-head">
       <div class="card-num">04</div>
-      <div class="card-cat">CAREER AI</div>
-      <img src="assets/small_04-career.png" alt="職透｜求職者履歷 AI 媒合系統">
+      <div class="card-cat">TRADING AI</div>
+      <img src="assets/small_04-pulsetrade.png" alt="脈策 PulseTrade｜六脈診斷選股">
     </div>
     <div class="card-body">
-      <h3>職透｜求職者履歷 AI 媒合系統</h3>
-      <div class="value-line">企業價值：52 萬個職缺背後的求職者，都值得一位職涯教練</div>
-      <p><strong>解決什麼：</strong>求職者「不知道自己哪裡不夠好」的焦慮——把企業端評估邏輯攤開來看。</p><p><strong>核心價值：</strong>媒合分數 + 履歷健診 + ATS 相容度 + 模擬面試出題 + 反問清單 + 客製化履歷改寫，一份履歷串聯六大模組。</p>
-      <a href="project-04-career.html" class="card-cta">→ 認識這個夥伴</a>
+      <h3>脈策 PulseTrade｜六脈診斷選股</h3>
+      <div class="value-line">企業價值：把盯盤的焦慮，交給一套誠實的評分系統</div>
+      <p><strong>解決什麼：</strong>散戶沒有分析師團隊，只能靠感覺追高殺低，還要提心吊膽會不會漏看重要訊號、會不會忘記停損的焦慮。</p><p><strong>核心價值：</strong>技術面＋籌碼面＋估值面六脈共振評分＋觸價停損停利守門員，訊號附白話理由、下單前必須你親自確認，847 個自動化測試全數通過，沒有券商 API 也能先用免費資料看盤。</p>
+      <a href="#p4" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
-
-  <article class="card">
+<article class="card" style="--cat:#2E8F79">
     <div class="card-head">
       <div class="card-num">05</div>
-      <div class="card-cat">WELL-BEING AI</div>
-      <img src="assets/small_05-lifecompass.png" alt="人生羅盤 LifeCompass">
+      <div class="card-cat">HR AI</div>
+      <img src="assets/small_05-fairview.png" alt="公鑑 FairView｜公平履歷篩選">
     </div>
     <div class="card-body">
-      <h3>人生羅盤 LifeCompass</h3>
-      <div class="value-line">企業價值：低成本 EAP，留住人才最溫柔的方式</div>
-      <p><strong>解決什麼：</strong>現代人說不出口的人際焦慮，與企業留才困境。</p><p><strong>核心價值：</strong>人格／依戀／核心價值觀測驗 + 溝通教練 + CBT 自信重建 + ABC 行為紀錄 + 善意練習所 + 團隊脈動。</p>
-      <a href="project-05-lifecompass.html" class="card-cta">→ 認識這個夥伴</a>
+      <h3>公鑑 FairView｜公平履歷篩選</h3>
+      <div class="value-line">企業價值：每一份履歷都被認真看過，公平雇用・符合 ESG</div>
+      <p><strong>解決什麼：</strong>招募疲勞導致的偏見，與「漏看真正人才」的恐懼——讓 HR 睡得安穩。</p><p><strong>核心價值：</strong>主動排除年齡、性別、婚姻、宗教等無關個資，依董事長／部門主管／HR 三層角色自動產出不同深度的分層報告。</p>
+      <a href="#p5" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
 
-  <article class="card">
+  <article class="card" style="--cat:#C97A2E">
     <div class="card-head">
       <div class="card-num">06</div>
-      <div class="card-cat">ASTROLOGY AI</div>
-      <img src="assets/small_06-omniastro.png" alt="真命盤">
+      <div class="card-cat">CAREER AI</div>
+      <img src="assets/small_06-career.png" alt="職透 CareerMatch｜履歷媒合教練">
     </div>
     <div class="card-body">
-      <h3>真命盤</h3>
-      <div class="value-line">企業價值：接住 2.9 億市場裡，被時間與金錢擋住的人</div>
-      <p><strong>解決什麼：</strong>想理解自己、卻被命理館高價與預約門檻擋在門外的人。</p><p><strong>核心價值：</strong>八字/紫微/占星/姓名學/易經五套交叉驗證 + 12 種擇日 Copilot + 行銷個人化引擎，不是算命，是陪你做決策。</p>
-      <a href="project-06-omniastro.html" class="card-cta">→ 認識這個夥伴</a>
+      <h3>職透 CareerMatch｜履歷媒合教練</h3>
+      <div class="value-line">企業價值：52 萬個職缺背後的求職者，都值得一位職涯教練</div>
+      <p><strong>解決什麼：</strong>求職者「不知道自己哪裡不夠好」的焦慮——把企業端評估邏輯攤開來看。</p><p><strong>核心價值：</strong>媒合分數 + 履歷健診 + ATS 相容度 + 模擬面試出題 + 反問清單 + 客製化履歷改寫，一份履歷串聯六大模組。</p>
+      <a href="#p6" class="card-cta">→ 認識這個夥伴</a>
     </div>
   </article>
-</section>
+
+  <article class="card" style="--cat:#6E5AC4">
+    <div class="card-head">
+      <div class="card-num">07</div>
+      <div class="card-cat">WELL-BEING AI</div>
+      <img src="assets/small_07-lifecompass.png" alt="人生羅盤 LifeCompass｜自我覺察教練">
+    </div>
+    <div class="card-body">
+      <h3>人生羅盤 LifeCompass｜自我覺察教練</h3>
+      <div class="value-line">企業價值：低成本 EAP，留住人才最溫柔的方式</div>
+      <p><strong>解決什麼：</strong>現代人說不出口的人際焦慮，與企業留才困境。</p><p><strong>核心價值：</strong>人格／依戀／核心價值觀測驗 + 溝通教練 + CBT 自信重建 + ABC 行為紀錄 + 善意練習所 + 團隊脈動。</p>
+      <a href="#p7" class="card-cta">→ 認識這個夥伴</a>
+    </div>
+  </article>
+
+  <article class="card" style="--cat:#B23A5B">
+    <div class="card-head">
+      <div class="card-num">08</div>
+      <div class="card-cat">ASTROLOGY AI</div>
+      <img src="assets/small_08-fivelens.png" alt="五象 FiveLens｜五術交叉解盤">
+    </div>
+    <div class="card-body">
+      <h3>五象 FiveLens｜五術交叉解盤</h3>
+      <div class="value-line">企業價值：接住 2.9 億市場裡，被時間與金錢擋住的人</div>
+      <p><strong>解決什麼：</strong>想理解自己、卻被命理館高價與預約門檻擋在門外的人。</p><p><strong>核心價值：</strong>八字/紫微/占星/姓名學/易經五套交叉驗證 + 12 種擇日 Copilot + 行銷個人化引擎，不是算命，是陪你做決策。</p>
+      <a href="#p8" class="card-cta">→ 認識這個夥伴</a>
+    </div>
+  </article>
+
+  </section>
 
 <section class="invest">
   <div class="invest-head">
     <h2>為什麼現在投資 AI 決策工具？</h2>
-    <p>台灣市場正站在一個關鍵轉折點：中小企業渴望專業決策力、資安與合規成為剛需、心理健康與自我成長需求爆發——六支工具正好卡在這些需求的交會點。</p>
+    <p>台灣市場正站在一個關鍵轉折點：中小企業渴望專業決策力、資安與合規成為剛需、心理健康與自我成長需求爆發、超過千萬股民渴望不被割韭菜的投資工具——八支工具正好卡在這些需求的交會點。</p>
   </div>
   <div class="invest-grid">
     <div class="invest-item"><div class="icon">🎯</div><h3>切中真實痛點</h3><p>不是「錦上添花」的工具，而是每天都會被需要的決策夥伴——從老闆的預算分配，到 HR 的招募疲勞，都是高頻、高情緒、高價值的使用場景。</p></div>
@@ -168,12 +298,148 @@ footer{background:#070d1c;padding:50px 6%;text-align:center;border-top:1px solid
 
 <section class="vision">
   <div class="box">
-    <h2>我們相信，AI 的價值不是取代人，<br>而是讓每個人都能做出更好的決定</h2>
-    <p>從一間美妝店的預算分配，到一位大夜班工程師的安心，再到一個求職者的自信——六支工具背後是同一個信念：把專業的判斷力，交還給每一個需要它的人。</p>
-    <a href="#portfolio" class="cta">→ 認識六位 AI 夥伴</a>
+    <h2>我們相信，AI 的價值不是取代人，而是讓每個人都能做出更好的決定</h2>
+    <p>從一間美妝店的預算分配，到一位大夜班工程師的安心，再到一個求職者的自信，再到一位散戶投資人不再徹夜盯盤的安心——八支工具背後是同一個信念：把專業的判斷力，交還給每一個需要它的人。</p>
+    <a href="#portfolio" class="cta">→ 認識八位 AI 夥伴</a>
   </div>
 </section>
+</div>
 
-<footer>© 2026 PORTFOLIO · 讓每個決定，都更有底氣</footer>
+<div id="view-p1" class="view detail-view" style="--cat:#E8472A">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">01</div><div class="hero-cat">MARKETING AI</div><img src="assets/01-stratedge.png" alt="策引 StratEdge｜行銷決策副駕駛"><div class="hero-title-wrap"><h1>策引 StratEdge｜行銷決策副駕駛</h1><div class="value-line">企業價值：策略擬定從週壓到小時</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>決策副駕駛</span><span>五層分析</span><span>ROI 引擎</span><span>11 種產業</span></div>
+  <section class="section"><h2>商業價值</h2><p>深夜十一點，數據攤在螢幕上，你卻說不出「為什麼轉換掉了」；月底要交策略簡報，卻還在土法煉鋼拼湊 Excel。這種「決策焦慮」，是每一位沒有專職策略師的老闆每天都在經歷的孤獨時刻。策引 AI 不是「多一個報表工具」，而是那個隨時在線、懂你生意的策略夥伴——它把受眾、預算、創意訊號即時匯流，用五層分析（現況→原因→預測→外部變因→建議）取代過去需要顧問公司數週才能交付的策略推演，並內建 CFO 級增量 ROI 引擎，直接回答老闆最在意的那句話：「多花 100 萬，到底多賺多少毛利？」對企業而言，這代表策略擬定週期從「以週計算」壓縮到「以小時計算」，讓團隊把時間花在執行與創意，而不是在數據泥沼裡打轉；對決策者而言，一份可下載、可交付、甚至可用 3–5 分鐘語音摘要在通勤時聽完的策略報告，讓「看懂自己的生意」這件事，第一次變得從容不迫。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">阿明，美妝保養品牌創辦人</div><p>阿明一個人身兼創辦人、行銷、客服三個角色，每個月三萬元的廣告預算，他只能憑感覺分配在 Facebook 跟 Google 之間，投完才發現轉換率慘不忍睹，卻說不出問題出在客群、創意還是渠道。用策引 AI 輸入品牌與產品資料後，五層分析清楚告訴他「你的客單價與目標客群不匹配，建議調整渠道配比」，並附上預估轉換漏斗。他第一次不是憑感覺，而是有數據依據地重新配置預算，兩週後 ROAS 明顯回升——那種「終於看懂自己生意」的踏實感，是他過去付錢請顧問都換不到的。</p></div><div class="persona"><div class="persona-name">佩君，行銷代理商的資深窗口</div><p>佩君同時服務六個客戶，每個月最痛苦的不是提案本身，而是「重新從零開始分析」的時間黑洞——每個客戶的產業、客群、痛點都不同，她卻只有自己一個人。用策引 AI，她把客戶資料輸入後，半天內就能產出原本要花三天才能完成的五層策略分析與素材草稿，剩下的時間她可以真正花在跟客戶討論策略細節，而不是埋首整理 Excel。對她而言，這個工具解決的不是「不會做策略」，而是「時間永遠不夠用」的焦慮。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>中小企業主與品牌經營者</strong>：沒有專職行銷分析師，卻仍要在有限預算裡做出正確判斷的人</li><li><strong>行銷代理商與顧問</strong>：需要在短時間內為多個客戶產出專業級策略提案，取代部分人力分析作業</li><li><strong>企業行銷主管</strong>：需要用數據說服老闆與跨部門，而不是憑經驗喊價</li><li><strong>產業別涵蓋</strong>：美妝保養、服飾配件、食品飲料、零售電商、B2B／SaaS、醫療健康、金融保險、教育培訓、旅遊住宿、房地產、娛樂媒體等，系統會依產業別自動切換分析框架與基準數據</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>171.5 萬家中小企業的決策外包需求</strong>：多數老闆沒有專職策略師，卻每天都要做高風險的預算與渠道決策——這是一個被長期忽略的巨大市場</li><li><strong>可量化的 ROI 主張</strong>：把「多花 100 萬多賺多少毛利」變成 3 分鐘內有答案的問題，讓付費決策從「感覺」變成「數據」</li><li><strong>高黏著度使用節奏</strong>：每月預算週期、每季策略檢討，都是自然回訪的場景，用戶會主動回來</li><li><strong>可擴充的商業模式</strong>：從單店品牌到代理商、顧問公司，再到跨境電商與多語言市場，客單價與服務深度都能逐級放大</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一位老闆，都擁有一位懂生意的策略夥伴</h2><p>決策的底氣，來自看得懂的數據與說得出的理由。策引 AI 把這份底氣，交還給每一個正在為生意打拚的人。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p2" class="view detail-view" style="--cat:#2F6FB0">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">02</div><div class="hero-cat">SECURITY AI</div><img src="assets/02-nightsentry.png" alt="鎮夜 NightSentry｜智慧資安守夜"><div class="hero-title-wrap"><h1>鎮夜 NightSentry｜智慧資安守夜</h1><div class="value-line">企業價值：從告警到弱點，資安維運不再單打獨鬥</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>白話告警</span><span>CVE 弱點掃描</span><span>威脅情資整合</span><span>IP 封鎖治理</span><span>8 份稽核報表</span></div>
+  <section class="section"><h2>商業價值</h2><p>凌晨三點，整棟大樓只剩你一個人醒著。告警跳出看不懂的規則代碼，你必須在不確定「這是不是真的緊急」的狀態下，決定要不要叫醒主管——這是每一位值班 IT 人員都懂的孤獨與壓力。資安事件從來不是「會不會發生」的問題，而是「多快發現、多快反應」的問題。鎮夜平台把冷冰冰的 Log 數據，翻譯成任何人都看得懂的語言：點一下告警，AI 抽屜立刻告訴你「發生了什麼事」與「該怎麼處理」，信心度、處置步驟、相關文章一應俱全，讓非技術背景的主管也能第一時間掌握狀況、做出決策，不必等技術人員睡醒。平台的守備範圍也不再只是「看日誌」：CVE 弱點掃描主動揪出 Zerologon、PrintNightmare 這類高風險漏洞，區網資產盤點掌握每一台設備開了哪些連接埠，串接 AbuseIPDB 威脅情資即時查出可疑 IP 的信譽分數，IP 封鎖治理讓每一次自動封鎖都留下稽核軌跡、可設定時數自動解封，病毒防護巡檢與封包連線分析則補上端點與網路層的最後一塊拼圖——八個模組收斂在同一片儀表板上，值班的人不用再開十個視窗東拼西湊。更關鍵的是，它自動產出 8 份符合《上市上櫃公司資訊安全管理辦法》第 7 條與 ISO 27001 稽核要求的角色別報表——每一次外部稽核，不再是全員加班趕資料的惡夢，而是點幾個按鈕就能交件的日常。而且這個平台對自己誠實：介面上會明確標示這次的 AI 分析是「真的呼叫了 AI」還是「離線規則引擎」，不用猜、不用賭。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">志豪，獨自值大夜班的 IT 工程師</div><p>凌晨三點，志豪是整棟大樓唯一還醒著監控系統的人。告警跳出一堆看不懂的規則代碼與英文縮寫，他必須在不確定「這是不是真的緊急」的狀態下決定要不要叫醒主管。用鎮夜平台，他點下告警的瞬間，右側 AI 抽屜立刻用白話告訴他「phpMyAdmin 管理介面頻繁存取，疑似 SQL Injection 攻擊特徵」，並列出建議處置步驟與信心度；旁邊的威脅情資區塊還會秀出這個來源 IP 過去的信譽分數與被回報次數。他不再需要獨自猜測、獨自承擔判斷錯誤的壓力——那種「有人在背後幫我確認、而且確認的內容不是編出來的」的安心感，讓大夜班不再是一個人的戰鬥。</p></div><div class="persona"><div class="persona-name">建宏，身兼資安與網管的維運工程師</div><p>建宏一個人要顧內網幾十台設備，過去他只能靠手動 ping、靠記憶判斷「哪台機器什麼時候多開了一個連接埠」。用鎮夜的區網設備資產掃描，他排程掃一次就能看到誰新開了 3389、誰的服務版本落在已知風險清單裡；弱點掃描模組主動比對 Zerologon、PrintNightmare 等高風險 CVE 的完整埠清單，不會因為只檢查單一連接埠而漏判。發現可疑對外連線時，他點一下就能封鎖來源 IP，系統自動記下封鎖原因與時數、到期還會自動解封，不用再靠一張隨手寫的便條紙提醒自己「這個 IP 是三天前封的」。</p></div><div class="persona"><div class="persona-name">雅雯，剛升任資安長的管理者</div><p>雅雯的公司是上市公司，每季都要面對法規稽核，過去她的團隊要花一整週手動整理 MIS、資安、網管等八個面向的報表，稽核前總是全員加班到深夜。用鎮夜平台的稽核報表下載中心，她點幾下滑鼠，8 份符合《上市上櫃公司資訊安全管理辦法》與 ISO 27001 要求的角色別報表就自動產出，可直接用 Excel 開啟提交；每一次自動封鎖 IP、每一次弱點掃描，也都留在稽核日誌軌跡裡，禁得起主管機關與董事會追問。她第一次能準時下班回家陪孩子，而不是在稽核季徹夜加班——這個工具還給她的，是原本屬於她自己的時間。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>企業 IT／資安部門</strong>：需要即時掌握系統健康與資安威脅，卻苦於告警數量龐大、難以優先排序的技術團隊</li><li><strong>CISO／CIO 等管理層</strong>：不需要親自看 Log，但必須為整體資安風險負責、需要一目瞭然儀表板的決策者</li><li><strong>上市櫃公司與受監管產業</strong>：金融、醫療等需要定期提交稽核報表、面對主管機關或董事會問責的企業</li><li><strong>中大型企業 NOC／網管團隊</strong>：需要跨系統（Apache、MariaDB、WordPress、FTP、SSH）統一監控，並掌握區網資產、弱點與病毒防護狀態的維運人員</li><li><strong>資安維運中心（SOC）／一人多工的資安兼職者</strong>：需要在同一平台完成弱點掃描、威脅情資查詢、IP 封鎖治理與稽核軌跡留存，沒有多餘人力分頭維護不同工具</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>600 億+ 且持續成長的資安剛需市場</strong>：台灣資安產業產值逐年攀升，合規與防護是企業躲不掉的剛性支出</li><li><strong>把「人」從值班地獄解放出來</strong>：告警翻譯與自動化報表，直接降低企業的人力成本與判斷失誤風險</li><li><strong>合規即賣點</strong>：上市櫃資安法規與 ISO 27001 稽核是強制需求，每一家受監管企業都是潛在客戶</li><li><strong>從單一監控擴展為整合式資安維運平台</strong>：CVE 弱點掃描、區網資產盤點、威脅情資查詢、IP 封鎖治理、病毒防護巡檢收斂在同一片儀表板，並透過唯讀 MCP 網路服務讓內網其他系統也能讀取資料，讓平台不只是工具，而是企業資安決策的入口</li><li><strong>誠實透明，建立資安產品最稀缺的信任資產</strong>：平台移除全部模擬假資料，AI 分析明確標示「真的呼叫 AI」或「離線規則引擎」，每一次自動封鎖與掃描都留下可稽核的軌跡——對資安工具而言，可被信任比功能多寡更關鍵</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一位值班的人，都不再獨自面對凌晨的告警</h2><p>看得懂的告警、按得出來的報表、睡得著的夜晚——這就是鎮夜想還給企業的安心。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p3" class="view detail-view" style="--cat:#4B3F9E">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">03</div><div class="hero-cat">AUTOMATION AI</div><img src="assets/03-converge.png" alt="匯流 Converge｜自動化工作流平台"><div class="hero-title-wrap"><h1>匯流 Converge｜自動化工作流平台</h1><div class="value-line">企業價值：一個人也能撐起一整條自動化管線</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>事件→規則→動作</span><span>8 項進階自動化</span><span>10 項企業模組</span><span>147 個自動化測試</span></div>
+  <section class="section"><h2>商業價值</h2><p>多數中小企業主，其實同時在扮演業務、客服、財務、IT 四個角色——LINE 跳出客戶訊息、Email 收到一份逾期發票、又一筆需要核准的付款，全部靠人腦記住、靠意志力不漏接，一旦哪天忙昏了頭漏看一則訊息，付出的代價常常是一位客戶或一筆生意。匯流把這些散落在 Gmail、LINE、各種通知裡的事件，收斂進同一條「事件標準化→規則引擎→動作執行」的管線：符合條件的事情自動用 LINE 通知，高風險的動作攔下來等你核准，其餘的默默記錄、不打擾你。在核心管線之上，再疊上 8 項進階自動化——多步驟 Agent 任務鏈會失敗自動重試、統計異常示警在事件量暴增時主動示警、每日晨報把一整天的事情摘要成幾行字、聲量監控與成本重複偵測則替你多盯著幾個容易被忽略的角落——把「一個人打十份工」的中小企業主，變成背後有一整條自動化管線撐著的團隊。更重要的是，當企業真的要導入新工具時，多租戶架構、角色權限（RBAC）、SSO 單一登入、稽核日誌、密鑰加密、GDPR 資料清除、每日自動備份——這些採購與資安審查會直接卡關的項目，匯流從架構層就準備好了，不是等出事才臨時補；而且每一項功能都誠實寫出「做了什麼」與「還沒做到什麼」，147 個自動化測試與 10 位人物角色、50 個檢查點的端對端模擬全數通過，不是一份只能看不能用的展示稿。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">阿凱，五人顧問工作室的創辦人</div><p>阿凱每天在 LINE、Email、幾個客戶群組間來回切換，深怕漏掉一則重要訊息或一張逾期發票，晚上躺平了還在想「今天是不是漏看了什麼」。用匯流設定好規則後，含有「合約」關鍵字的信件會自動用 LINE 立即通知他，一般的客服詢問先被記錄下來不用逐字盯著，每天早上還會收到一份晨報，把昨天發生的事情摘要成幾行字。他不用再自己手動巡一輪五、六個帳號才敢放心去忙別的事——那種「有東西在背後幫我盯著」的安心感，是他過去花錢請兼職助理都不見得換得到的。</p></div><div class="persona"><div class="persona-name">品瑄，十人新創裡唯一的維運工程師</div><p>品瑄被交辦「把手動巡檢自動化」，但公司規模小，沒有預算讓她另外養一整套訊息佇列與資料庫。用匯流的 Agent 任務鏈，她能建立多步驟自動化流程，某一步失敗會自動重試三次才標記失敗，不用自己寫重試邏輯；異常示警模組會自己算出「今天的事件量是不是超過過去 7 天平均的兩倍」，不用她手刻閾值判斷。因為整個系統就是一個 Python 程序加一個 SQLite 檔案，她不用另外維護 Redis 或訊息佇列，多出來的時間可以拿去做真正該她做的開發工作。</p></div><div class="persona"><div class="persona-name">曉薇，正在評估要不要導入的企業資安主管</div><p>曉薇每次審查新工具，第一個問題永遠是「有沒有角色權限？有沒有稽核日誌？資料外洩了怎麼辦？」過去不少好用的小工具，都是卡在這一關被她打回票。看匯流的文件時，她發現多租戶隔離、RBAC 角色權限、SSO 單一登入、append-only 稽核日誌、Fernet 加密的密鑰保存、資料保存政策與 GDPR 被遺忘權清除、每天凌晨自動備份、Prometheus 格式的系統監控，全部都已經內建，而且文件誠實列出目前哪些模組的多租戶隔離還沒做完——她第一次不用因為「這只是個小工具」就把資安檢核表整張跳過，反而能安心地把它排進正式導入評估清單。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>中小企業主／工作室經營者</strong>：沒有專職 IT 與行政人力，卻要同時盯著 Email、LINE、審批不能漏接的人</li><li><strong>自動化／維運工程師</strong>：需要在有限資源下把重複性巡檢與通知自動化，卻不想額外維護一整套中介軟體的人</li><li><strong>中大型企業 IT／資安採購評估者</strong>：導入新工具前，第一關永遠是多租戶、RBAC、SSO、稽核日誌、GDPR 這些企業就緒基礎設施是否到位</li><li><strong>需要串接 LINE／Gmail 等既有溝通管道的團隊</strong>：不需要自行從零開發 webhook 或輪詢邏輯，直接用現成連接器</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>單機部署、零額外基礎設施</strong>：一個 Python 程序＋一個 SQLite 檔案就能跑起 8 項進階自動化功能，大幅降低中小企業的導入門檻與維運成本</li><li><strong>147 個自動化測試＋10 人物角色 50 檢查點端對端模擬</strong>：不是「看起來能動」，而是連角色權限、跨租戶隔離、失敗重試這些邊界情況都真的驗證過</li><li><strong>企業就緒基礎設施從架構層內建</strong>：多租戶、RBAC、SSO、稽核日誌、密鑰管理、備份、GDPR——這些正是多數自動化小工具進不了大型企業採購清單的關卡，匯流第一天就準備好了</li><li><strong>誠實的範圍界定本身就是信任資產</strong>：每項功能都明確寫出做了什麼、還沒做到什麼，甚至主動揭露尚未完成的多租戶隔離範圍——對企業採購而言，這種透明度比誇大的功能清單更值得信賴</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓一個人的團隊，也擁有一整條自動化管線</h2><p>不用漏接、不用死記、不用另外養一套基礎設施——這就是匯流想還給每一位身兼多職的經營者的餘裕。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p4" class="view detail-view" style="--cat:#1F8A4C">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">04</div><div class="hero-cat">TRADING AI</div><img src="assets/04-pulsetrade.png" alt="脈策 PulseTrade｜六脈診斷選股"><div class="hero-title-wrap"><h1>脈策 PulseTrade｜六脈診斷選股</h1><div class="value-line">企業價值：把盯盤的焦慮，交給一套誠實的評分系統</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>六脈診斷框架</span><span>觸價停損守門員</span><span>847 個自動化測試</span><span>零門檻免費看盤</span></div>
+  <section class="section"><h2>商業價值</h2><p>多數散戶投資人沒有分析師團隊、沒有即時籌碼系統，只能憑感覺追高殺低，晚上還要擔心「今天是不是有什麼訊號我漏看了」「停損點到了我卻沒發現」。脈策把技術面、籌碼面、估值面三大面向收斂成一套「六脈診斷框架」（趨勢／動能／量能／型態／籌碼／位階），每次掃描都附上白話理由與風險報酬比，而不是丟一個燈號叫你自己猜。系統最核心的設計原則是「有訊號、你確認、才下單」——不管評分多高，系統都不會自己送出委託，這是為了不讓自動化交易變成失控的黑箱。在核心評分邏輯之上，再疊上觸價停損停利守門員（移動停損只升不降、停損優先於停利）、Kill Switch 緊急停止鈕、下單前錯價與頻率防護、條件警報中心等資金保護機制，加上大盤指數看板、昨夜國際行情、K線圖視覺化等決策背景資訊。更重要的是，還沒申請券商 API 也能先用證交所公開資料把整套技術面／籌碼面分析用起來，不用先繳錢、先開戶才能感受這套系統對不對你的胃口；而且每一項功能都誠實寫出「做到什麼」與「還沒做到什麼」——例如目前仍需手動維護自選股清單、尚未支援全市場自動選股——847 個自動化測試全數通過，不是一份只能看不能真的上場的展示稿。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">家瑋，白天上班、沒空盯盤的存股族</div><p>家瑋手上有幾檔長期定期定額的 ETF 跟權值股，但白天開會、根本沒空看盤，最怕的就是盤中出現重大訊號卻完全不知道，等晚上打開手機才發現已經錯過。設定好自選股跟 LINE 通知後，符合條件的訊號會直接推播到手機，附上白話理由跟六脈共振燈號；他不用整天緊盯 App，收到通知才點進去看，確認要不要下單——那種「系統在幫我盯著、不用整天心神不寧」的安心感，是他過去自己土法煉鋼設價格提醒完全比不上的。</p></div><div class="persona"><div class="persona-name">承翰，會寫程式、卻不想被情緒左右進出場的技術派投資人</div><p>承翰懂技術分析，但每次真的到了要按下買賣的那一刻，情緒還是會蓋過理性——賺了捨不得停利、虧了不甘心停損。他最在意的是移動停損守門員：設定好百分比或點數後，停損價只會往有利方向調整、不會因為一時心軟改回去，而且停損永遠優先於停利，不會出現自相矛盾的委託邏輯。系統的回測績效指標（Sharpe、Sortino、最大回撤）也讓他能誠實檢視自己的策略到底有沒有用，而不是憑印象覺得「我最近手感不錯」。</p></div><div class="persona"><div class="persona-name">育萱，剛開始想學投資、卻怕被割韭菜的新手</div><p>育萱對投資有興趣，但完全沒有券商 API、也還沒準備好開戶下單，最怕的是一堆工具都要先繳費或先綁券商才能用，等於還沒學會走路就被推著跑。她打開系統後，不需要任何券商帳號就能加自選股、看到完整的技術面／籌碼面分析，也能直接在「即時查詢」頁面打股票代號或中文名稱看六脈全貌。系統老實告訴她哪些是「證交所公開資料能做到的」、哪些是「外資等級才有的即時報價、目前還做不到」，這種不誇大的誠實，反而讓她第一次覺得投資工具沒有在唬弄新手。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>沒有時間整天盯盤的上班族投資人</strong>：需要系統代為掃描、只在符合條件時才推播通知的人</li><li><strong>有技術分析基礎、但想要紀律化停損停利的投資人</strong>：需要移動停損守門員與 Kill Switch 這類資金保護機制，避免情緒化操作的人</li><li><strong>還沒開通券商 API、想先熟悉系統再決定要不要投入</strong>的潛在使用者：不需要先開戶、先付費就能用免費公開資料完整體驗核心分析功能</li><li><strong>重視「系統誠實揭露限制」而非「誇大功能清單」</strong>的謹慎型投資人：每項功能都明確寫出做了什麼、還沒做到什麼</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>六脈診斷框架收斂複雜指標</strong>：把技術面、籌碼面、估值面十幾項分散指標整合成一張總結論卡片，共振度達門檻才標記「⚡強力訊號」，量化訊號可信度而非單純羅列數字</li><li><strong>資金保護機制從架構層內建</strong>：觸價停損停利＋移動停損守門員、Kill Switch 緊急停止鈕、下單前錯價與頻率防護、防重複下單原子狀態轉移，四層防護不是事後補丁，是設計之初就規劃好的</li><li><strong>零門檻免費看盤模式</strong>：沒有券商 API 也能用證交所公開資料完整體驗技術面／籌碼面分析，大幅降低新手的試用門檻與心理負擔</li><li><strong>847 個自動化測試＋誠實的範圍界定</strong>：每一輪功能迭代都有對應回歸測試，且文件主動揭露「還沒做到什麼」（例如全市場自動選股、觸價自動出場仍需手動確認），這種透明度對投資工具而言，比誇大的勝率宣傳更值得信賴</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>把盯盤的焦慮，交給一套講理由、也講誠實的系統</h2><p>不用整天盯盤、不用靠感覺追高殺低、不用擔心漏接停損——這就是脈策想還給每一位散戶投資人的從容。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p5" class="view detail-view" style="--cat:#2E8F79">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">05</div><div class="hero-cat">HR AI</div><img src="assets/05-fairview.png" alt="公鑑 FairView｜公平履歷篩選"><div class="hero-title-wrap"><h1>公鑑 FairView｜公平履歷篩選</h1><div class="value-line">企業價值：公平雇用・符合 ESG</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>公平雇用</span><span>分層報告</span><span>ESG 加分</span><span>招募效率</span></div>
+  <section class="section"><h2>商業價值</h2><p>每一份被隨手滑過的履歷背後，都是一個真實的人生與職涯期待；而每一次因為疲勞或偏見做出的用人誤判，付出代價的不只是求職者，更是企業自己——重新招募的成本、團隊磨合的時間、錯失真正人才的機會。這套系統的核心價值，不是「幫 HR 少做事」，而是「幫 HR 做出更公平、更一致的判斷」：它在評分邏輯中主動排除年齡、性別、婚姻狀況、宗教信仰、外貌等與職務能力無關的個人資訊，把焦點拉回「這個人能不能勝任這份工作」；同時依閱讀對象自動產出四種分層報告——董事長／總座要的是一頁摘要，部門主管要的是團隊契合度，HR 要的是操作明細，最終錄用決策仍交回人與人的面談判斷，AI 只負責把海量履歷整理成「值得你花時間深談的那幾份」。對企業而言，這代表招募週期縮短、篩選品質提升，更代表一種對每一位應徵者的尊重——他們的履歷真的被認真看過了。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">淑芬，同時要處理三個職缺的 HR 招募專員</div><p>淑芬桌上堆著三百多份履歷，眼睛看到花，卻還是不敢隨便刷掉任何一份——萬一漏看了真正合適的人怎麼辦？用這套系統上傳履歷與職缺後，AI 自動排除年齡、性別、婚姻等無關個資，只依硬性條件與軟性配對分數排序，一天之內她就篩出了值得深談的候選人清單，而不是熬夜到眼睛痠痛還在逐份比對。更重要的是，她知道這個篩選過程是公平的，不會因為自己太累而錯放偏見進去——這讓她睡得比較安穩。</p></div><div class="persona"><div class="persona-name">建宏，只想快速決定要不要面談的部門主管</div><p>建宏每天行程排滿會議，HR 傳來的候選人清單他常常來不及細看，只能憑履歷抬頭的公司名稱粗略判斷，錯過不少真正合適的人。拿到系統產出的「部門主管檢視」報告後，他十分鐘內就能看懂每位候選人與團隊的契合重點與推薦理由，不用再讀落落長的完整履歷。對他而言，這個工具幫他把「有限的注意力」精準用在真正該花時間的候選人身上。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>企業人資部門</strong>：面對大量履歷、需要快速且公平地完成初步篩選的招募團隊</li><li><strong>獵頭與人力仲介公司</strong>：需要同時為多個職缺、多位候選人進行交叉媒合分析</li><li><strong>需對外／對上呈交招募成果的組織</strong>：可自訂公司名稱與 Logo，讓決策報告書具備正式對外呈現的品牌質感</li><li><strong>重視法遵與 ESG 的企業</strong>：需要證明招募流程排除不當歧視因素、符合公平雇用原則的組織</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>招募成本與流失風險的雙重解方</strong>：每一次用人誤判，背後都是重新招募、團隊磨合與錯失人才的隱形成本——公平篩選直接降低這三項</li><li><strong>ESG 與雇主品牌的現代化需求</strong>：公平雇用已是投資人與求職者都在看的指標，系統讓企業「可證明」自己的招募是公平的</li><li><strong>三層決策者一次滿足</strong>：董事長看摘要、主管看契合、HR 看明細——一份系統服務整個決策鏈，採購價值自然放大</li><li><strong>可延伸的企業服務生態</strong>：從履歷篩選延伸到面試安排、結果通知，是進入企業人力資源流程的入口</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一份履歷都被認真對待，讓每一次用人都有理有據</h2><p>公平，不只是口號；它讓人才被看見，也讓企業睡得安穩。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p6" class="view detail-view" style="--cat:#C97A2E">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">06</div><div class="hero-cat">CAREER AI</div><img src="assets/06-career.png" alt="職透 CareerMatch｜履歷媒合教練"><div class="hero-title-wrap"><h1>職透 CareerMatch｜履歷媒合教練</h1><div class="value-line">企業價值：人力銀行加值服務入口</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>職涯教練</span><span>履歷健診</span><span>模擬面試</span><span>誠實原則</span></div>
+  <section class="section"><h2>商業價值</h2><p>求職路上最讓人焦慮的，往往不是「我不夠好」，而是「我不知道自己哪裡不夠好」——投了履歷卻石沉大海，連被拒絕的原因都不清楚。職透要做的，是把企業端的評估邏輯攤開在求職者面前：不只是給一個媒合分數，而是告訴你「面試官可能會怎麼看你」、「你的履歷中哪些成就被你自己低估了」、「哪些反問問題能幫你看穿這份工作真正的樣貌」。它甚至會示範一個「建議回答」給你，讓你在真正上戰場之前，先在安全的地方練習把經驗說得具體、有說服力。對求職者而言，這是一位隨時待命、不會不耐煩、不收費的職涯教練；對人力銀行或教育機構而言，這是一個能大幅提升用戶黏著度與轉換率的加值服務入口——因為它解決的不是「找到職缺」，而是「贏得那份職缺」。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">小雨，投了二十份履歷卻石沉大海的應屆畢業生</div><p>小雨不知道問題出在哪——履歷寫得認真，卻連一封回覆都沒收到，越投越懷疑是不是自己不夠好。用職透的履歷健診功能，她才發現原來自己的履歷關鍵字跟職缺說明完全對不上，ATS 系統可能連看都沒看到她的履歷就篩掉了。健診報告具體指出缺口與修改建議後，她調整了幾個段落重新投遞，很快就收到了第一封面試邀約——那一刻，她終於不再懷疑自己的能力，而是明白了「方法」的重要。</p></div><div class="persona"><div class="persona-name">志明，四十五歲準備轉職的中年上班族</div><p>志明在同一個產業做了二十年，卻在準備轉職面試時緊張到手心冒汗——他不知道該怎麼把過去的經驗，講得讓一個比他年輕十歲的面試官聽得懂、覺得有說服力。用職透的模擬面試功能，系統挑出他履歷中「保守帶過」的部分出題，並直接示範一個具體的建議回答，讓他反覆練習怎麼把資歷說得有分量。面試當天，他不再結結巴巴，而是有條理地講出自己的價值——那份重新找回的自信，比任何一份錄取通知都先到來。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>求職者本人</strong>：尤其是新鮮人／轉職者，面對不熟悉的產業或職務時，需要建立信心與具體論述的人</li><li><strong>技術／業務／管理／新鮮人等不同職務類型</strong>：系統會依職務類型自動調整語氣與強調重點——技術職強調解決問題與成果指標，業務職強調數字與客戶影響，管理職強調團隊與決策成果</li><li><strong>職涯顧問與教育機構</strong>：可作為求職輔導工具，協助學員系統性準備履歷與面試</li><li><strong>人力銀行平台</strong>：可作為會員加值服務，提升平台差異化競爭力</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>52 萬個新鮮人職缺背後的巨大需求</strong>：每年畢業季都有大量求職者需要「被看懂」與「被肯定」——這是一個高頻、高情緒的使用場景</li><li><strong>人力銀行的差異化武器</strong>：把「找到職缺」升級為「贏得職缺」，直接提升會員黏著度與付費轉換率</li><li><strong>誠實原則建立信任</strong>：AI 只調整表達、不捏造經歷，讓使用者放心把履歷交給它——信任是求職工具最稀缺的資產</li><li><strong>六大模組一次串聯</strong>：一份履歷打通健診、媒合、面試、改寫全流程，用戶體驗完整，商業變現空間大</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一位求職者，都有一位隨時待命的職涯教練</h2><p>被看見、被肯定、被準備好——職透陪你把「石沉大海」變成「收到邀約」。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p7" class="view detail-view" style="--cat:#6E5AC4">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">07</div><div class="hero-cat">WELL-BEING AI</div><img src="assets/07-lifecompass.png" alt="人生羅盤 LifeCompass｜自我覺察教練"><div class="hero-title-wrap"><h1>人生羅盤 LifeCompass｜自我覺察教練</h1><div class="value-line">企業價值：低成本 EAP 員工協助方案</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>自我覺察</span><span>溝通教練</span><span>團隊脈動</span><span>留才溫度</span></div>
+  <section class="section"><h2>商業價值</h2><p>我們常常對外人客氣，卻對最親近的人說出最傷人的話；我們渴望被理解，卻不知道如何開口說出真正的感受。人生羅盤想陪伴的，正是這些說不出口的時刻——透過人格傾向測驗、依戀類型測驗、核心價值觀盤點，幫助使用者先看懂自己；再透過溝通教練、情境範例產生器、CBT 自信重建、ABC 行為紀錄，把「看懂自己」轉化為「更好地與人相處」的具體練習。特別是「善意練習所」與「一致性檢查」這類功能，回應的是現代人越來越普遍的內在渴望：不是要變成另一個人，而是活得更誠實、更靠近自己真正相信的價值。對企業而言，內建的「團隊脈動（企業版）」與好友配對分析，讓這套工具能延伸成為員工協助方案（EAP）或團隊建立活動的載體——當一個組織願意投資員工的自我覺察，往往也是留住人才最溫柔卻最有效的方式。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">思穎，總是在關係中說出傷人話語卻不明白為什麼的人</div><p>思穎每次吵架後都很後悔——明明不是真心那樣想，話一出口卻總是最傷人的那句。她不知道自己為什麼會這樣，只覺得越親近的人，越容易成為她情緒的出口。做完依戀類型測驗後，她第一次看懂自己在關係中「害怕被拋棄所以先攻擊」的模式，再透過溝通教練練習如何把真實感受說出口而不是用刺人的話包裝。她沒有變成另一個人，只是終於能誠實地說：「我剛剛其實是在害怕」——這句話，改變了她跟伴侶之間很多次差點爆炸的對話。</p></div><div class="persona"><div class="persona-name">怡君，想低成本照顧員工心理健康的 HR 主管</div><p>怡君所在的公司規模不大，沒有預算聘請專職心理諮商師，但她親眼看著幾位優秀同仁因為壓力與人際摩擦陸續離職，心裡很不是滋味。用人生羅盤的企業版「團隊脈動」功能，她讓團隊成員自願參與測驗與溝通練習，用不高的成本為團隊提供了一個自我覺察與溝通改善的起點。半年後，她發現團隊內部的摩擦少了，同仁也更願意主動表達需求——這讓她相信，關心員工的心理狀態，不一定需要龐大的預算，而是願不願意開始。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>一般大眾</strong>：在感情、職涯、人際關係中感到困惑，渴望自我理解與成長的每一個人</li><li><strong>企業 HR 與教育訓練部門</strong>：想為員工提供心理健康與溝通能力提升資源、打造更有溫度組織文化的團隊</li><li><strong>伴侶與好友</strong>：透過合盤配對分析，理解彼此差異、減少不必要的衝突與誤解</li><li><strong>心理諮商輔助情境</strong>：作為諮商前的自我覺察暖身工具（非醫療診斷，仍需專業心理師介入判斷）</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>留才議題的溫柔解方</strong>：員工因壓力與摩擦離職的成本遠高於任何工具——投資自我覺察，是最划算的留才方式</li><li><strong>EAP 的普惠化機會</strong>：多數中小企業負擔不起專職諮商師，人生羅盤以極低成本提供心理支持起點，市場缺口明顯</li><li><strong>從個人到組織的雙引擎</strong>：個人測驗＋企業版團隊脈動，一條產品線同時服務 C 端使用者與 B 端企業</li><li><strong>回應時代的情緒需求</strong>：現代人對「被理解、被陪伴」的渴望持續升溫，這是一個有溫度的長期需求市場</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一句說不出口的話，都有被好好接住的機會</h2><p>看懂自己，是改變關係的第一步；而企業願意開始，就是最溫柔的留才。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<div id="view-p8" class="view detail-view" style="--cat:#B23A5B">
+<div class="topnav"><a href="#" class="back-link">← 返回作品集總覽</a></div>
+<div class="hero"><div class="hero-img-wrap"><div class="hero-num">08</div><div class="hero-cat">ASTROLOGY AI</div><img src="assets/08-fivelens.png" alt="五象 FiveLens｜五術交叉解盤"><div class="hero-title-wrap"><h1>五象 FiveLens｜五術交叉解盤</h1><div class="value-line">企業價值：瞄準 2.9 億元台灣命理市場</div></div></div></div>
+<main class="detail-main">
+  <div class="tech-tags"><span>五套交叉驗證</span><span>擇日 Copilot</span><span>決策陪伴</span><span>透明信任</span></div>
+  <section class="section"><h2>商業價值</h2><p>凌晨十二點半，一位行銷專員又滑起了手機——工作卡關快三個月、感情也不上不下，她很想找人聊聊，命理館最快的預約卻要等兩週，開口就是三千元起跳。五象存在的意義，正是要接住這群「想理解自己、卻被時間與金錢門檻擋在外面」的人。它用真實天文演算（真太陽時、24節氣、朔望月、行星軌道根數）取代市售 App 常見的固定對照表估算，把八字、紫微斗數、西洋占星、姓名學、易經五套系統同時排出，讓使用者能自己交叉驗證，而不是只聽單一說法各自表述、越看越迷惘。更進一步，它不只是「算命」，而是陪你「做決策」——擇日 Copilot 涵蓋面試、簽約、求婚等 12 種真實人生場景，直接給出可執行建議；目標導向行動看板把命盤洞察轉化為每月待辦事項，讓使用者不是看完就忘，而是真正被陪伴著往前走。這正對應著台灣命理服務近 5 年成長 4.1 倍、2024 年產值達 2.9 億元的市場趨勢，而五象選擇用「精度公開透明」與「基礎功能免費」的姿態切入，賺得的不只是使用者的付費意願，更是信任。</p></section>
+  <section class="section"><h2>人物故事｜這個工具主要幫誰解決問題</h2><div class="persona"><div class="persona-name">心怡，工作卡關又約不到命理館的行銷專員</div><p>心怡的工作卡關快三個月，感情也不上不下，她很想找人聊聊，翻開行事曆卻發現命理館最快的預約要等兩週，開口就是三千元起跳。打開手機 App 商店，跳出來的不是介面停留在十年前的產品，就是每套系統講的完全兜不攏——八字說她今年適合轉職，星座 App 卻說水逆諸事不宜，反而讓她更迷惘。用五象同時排出五套系統交叉比對後，她第一次不是被單一片面的說法牽著走，而是自己看懂了哪些訊號是多系統一致指向的重點，那種「終於有人把話講清楚」的安心感，是她過去滑手機滑再久都找不到的。</p></div><div class="persona"><div class="persona-name">家豪，即將求婚卻不知道該挑哪一天的準新郎</div><p>家豪想給女友一個難忘的求婚驚喜，卻在挑日子這件事上卡關——長輩說要看農民曆，朋友說隨便哪天都行，他自己毫無頭緒，又不想花大錢跑一趟命理館只為問一個日子。用五象的擇日 Copilot，他選擇「求婚」這個決策場景，系統依他的命盤給出具體的推薦日期與時辰、附上可執行建議，甚至交叉核對了傳統日禁忌口訣。求婚當天一切順利，他事後笑說，真正讓他安心的不是「這天真的比較好」，而是「我做了功課、盡了心」——那份準備周全的踏實感，才是他真正想要的。</p></div></section>
+  <section class="section"><h2>適用範圍</h2><ul class="plain-list"><li><strong>25–40 歲都會區使用者，尤其女性</strong>：重視隱私、追求自我成長與心理療癒，願意為精準且個人化的內容付費，卻對實體命理館的高價與預約門檻卻步</li><li><strong>人生重大決策前的一般大眾</strong>：面試、簽約、開店、求婚等關鍵時刻，需要多一份參考與安心感的人</li><li><strong>雙人與團隊關係經營者</strong>：情侶、夫妻、創業夥伴或主管與下屬，希望透過合盤理解彼此差異、找到更順暢的相處與分工方式</li><li><strong>企業延伸應用</strong>：品牌行銷團隊（行銷個人化引擎，將命盤五行分析轉換為 EDM／推播文案模板）、企業擇日（團隊或品牌適用的批次擇日服務）</li></ul></section>
+  <section class="section"><h2>投資亮點｜為什麼值得投入</h2><ul class="plain-list"><li><strong>2.9 億且五年成長 4.1 倍的爆發市場</strong>：台灣命理服務業正經歷爆炸式成長，年輕世代對自我理解的需求持續升溫</li><li><strong>「決策陪伴」的差異化定位</strong>：不是算命，而是陪你做人生決策——從擇日到行動看板，把一次性瀏覽變成持續使用</li><li><strong>透明與免費建立信任護城河</strong>：精度公開、基礎免費，讓使用者自己驗證，信任一旦建立就很難被取代</li><li><strong>B 端變現空間明確</strong>：行銷個人化引擎與企業擇日服務，把 C 端熱度轉化為企業端的商用授權收入</li></ul></section>
+  <section class="section"><div class="cta-box"><h2>讓每一個重要決定，都有人陪你好好想過</h2><p>不是替你決定，而是陪你做功課、盡了心——那份踏實感，就是五象想給你的安心。</p><a href="#" class="cta">← 返回作品集總覽</a></div></section>
+</main>
+</div>
+
+<footer>© 2026 PORTFOLIO · 讓每個決定，都更有底氣　｜　澄思AI工作室 LUCIDMIND AI STUDIO　建議信箱:felix670131@gmail.com</footer>
+
+<script>
+(function(){
+  function navigate(){
+    var hash = window.location.hash.replace('#','');
+    var validIds = ['p1','p2','p3','p4','p5','p6','p7','p8'];
+    var views = document.querySelectorAll('.view');
+    var isDetailRoute = validIds.indexOf(hash) > -1;
+
+    views.forEach(function(v){ v.classList.remove('active'); });
+
+    if(isDetailRoute){
+      document.getElementById('view-'+hash).classList.add('active');
+      window.scrollTo(0,0);
+    } else {
+      document.getElementById('view-home').classList.add('active');
+      if(hash === 'portfolio'){
+        // 這是頁內錨點（如「認識八位AI夥伴」按鈕），讓它自然捲動到對應區塊，
+        // 不要被下面的「回到頂部」邏輯搶走
+        var target = document.getElementById('portfolio');
+        if(target) target.scrollIntoView({behavior:'smooth'});
+      } else {
+        window.scrollTo(0,0);
+      }
+    }
+  }
+  window.addEventListener('hashchange', navigate);
+  navigate();
+})();
+</script>
+
 </body>
 </html>

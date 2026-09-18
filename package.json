@@ -1,0 +1,9 @@
+{
+  "name": "ai-portfolio-functions",
+  "private": true,
+  "version": "0.0.19",
+  "description": "Serverless functions for the AI portfolio site (site health & version tracking).",
+  "dependencies": {
+    "@netlify/blobs": "^10.7.0"
+  }
+}
