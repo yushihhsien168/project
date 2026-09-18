@@ -17,7 +17,7 @@
   "use strict";
 
   var ADMIN_EMAIL = "felix670131@gmail.com";
-  var GMAIL_TO = "felix670131@gmail.com";
+  var GMAIL_TO = "project0983487908@gmail.com";
   var GMAIL_SUBJECT = "專案規劃需求建議";
 
   function isAdmin(user) {

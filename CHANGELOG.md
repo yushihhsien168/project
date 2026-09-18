@@ -1,5 +1,13 @@
 # 更新紀錄 CHANGELOG
 
+## v0.0.20 — 2026-09-18
+
+### 變更：建議信箱改為 project0983487908@gmail.com
+- `index.html` footer 顯示的「建議信箱」由 `felix670131@gmail.com` 改為 `project0983487908@gmail.com`
+- `assets/auth.js` 的 `GMAIL_TO`（目前未被任何頁面呼叫，供日後若恢復「建議信箱」按鈕功能時使用）同步改為 `project0983487908@gmail.com`，維持顯示與實際寄送目標一致
+- **`assets/auth.js` 的 `ADMIN_EMAIL`（後台 admin.html／governance.html／analytics.html 的 Google 登入權限管理者信箱）維持 `felix670131@gmail.com` 不變**——這個信箱是完全不同用途（誰能登入後台），與「建議信箱」無關，此次沒有一併更動，如需也一併更新後台管理者信箱請另外告知
+- `package.json` 版本號更新為 0.0.20
+
 ## v0.0.19 — 2026-09-18
 
 ### 修正：CTA 區塊與願景標語在寬版面時被強制斷成不對稱兩行
