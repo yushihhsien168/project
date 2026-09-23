@@ -18,7 +18,7 @@
 
   var ADMIN_EMAIL = "felix670131@gmail.com";
   var GMAIL_TO = "project0983487908@gmail.com";
-  var GMAIL_SUBJECT = "專案規劃需求建議";
+  var GMAIL_SUBJECT = "澄思 AI Studio. 專案需求與建議";
 
   function isAdmin(user) {
     return !!(user && user.email && user.email.toLowerCase() === ADMIN_EMAIL);
@@ -138,4 +138,18 @@
   window.__adminLogout = function () {
     if (window.netlifyIdentity) netlifyIdentity.logout();
   };
+
+  // Public-site Google login helper. Netlify Identity must have Google enabled
+  // in Site settings → Identity → External providers.
+  window.__openGoogleLogin = function () {
+    if (!window.netlifyIdentity) {
+      alert("Google 登入服務載入中，請稍候再試。");
+      return;
+    }
+    netlifyIdentity.open("login");
+  };
+
+  // Backward-compatible aliases used by older admin/governance pages.
+  window.__init管理後台Guard = window.__initAdminGuard;
+  window.__admin登出 = window.__adminLogout;
 })();

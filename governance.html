@@ -98,7 +98,7 @@
       <a href="admin.html">← 後台管理</a>
       <a href="analytics.html">技術健康監控</a>
       <a href="index.html">作品集首頁</a>
-      <a href="#" onclick="__admin登出();return false;">登出</a>
+      <a href="#" onclick="__adminLogout();return false;">登出</a>
     </div>
   </div>
 </header>
@@ -106,7 +106,7 @@
 <main class="wrap">
 
   <div class="notice-banner">
-    ⚠️ 這個頁面目前沒有登入或權限保護——任何知道網址的人都能檢視並修改這裡的資料（含即將加入的預算、法遵、人事資訊）。這是已知且暫時接受的風險（詳見 CHANGELOG），建議近期評估是否補上權限機制（第⑩項）。
+    ⚠️ 此頁面已啟用 Google 身分驗證；只有授權管理者可進入。若登入服務未啟用，頁面會拒絕存取。
   </div>
 
   <div class="panel">
@@ -866,6 +866,7 @@
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="assets/auth.js"></script>
-<script>window.__init管理後台Guard({redirectTo: 'index.html'});</script>
+<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+<script src="assets/gmail-compose.js" defer></script>
 </body>
 </html>

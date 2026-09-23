@@ -47,7 +47,7 @@
     <h1>🔧 後台管理</h1>
     <div style="display:flex;align-items:center;gap:14px;">
       <div class="who">登入身分：<span data-admin-email>—</span></div>
-      <button class="logout-btn" onclick="__admin登出()">登出</button>
+      <button class="logout-btn" onclick="__adminLogout()">登出</button>
     </div>
   </div>
 </header>
@@ -76,6 +76,7 @@
 
 <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
 <script src="assets/auth.js"></script>
-<script>window.__init管理後台Guard({redirectTo: 'index.html'});</script>
+<script>window.__initAdminGuard({redirectTo: 'index.html'});</script>
+<script src="assets/gmail-compose.js" defer></script>
 </body>
 </html>
