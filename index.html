@@ -189,7 +189,7 @@ ul.plain-list li strong{color:var(--cat)}
 @media(max-width:820px){.audience-grid,.decision-check,.flagship-grid{grid-template-columns:1fr}.flagship-card{grid-template-columns:1fr}.flagship-img{height:190px;min-height:0}.audience-card p{min-height:0}.nav-login{width:100%;text-align:left;border-radius:8px}.site-nav{align-items:stretch}}
 @media(max-width:480px){.decision-check h2{font-size:24px}.audience-split,.decision-check,.flagship{padding-top:35px}.flagship-card>div:last-child{padding:22px}}
 
-/* ===== Problem-first discovery v0.2.3 ===== */
+/* ===== Problem-first discovery v0.2.5 ===== */
 .problem-discovery{display:none;max-width:1080px;margin:0 auto;padding:38px 6% 24px}
 .problem-discovery.active{display:block}
 .problem-discovery-panel{background:#fff;border:1px solid #e6ddd8;border-radius:22px;padding:38px;box-shadow:0 18px 45px rgba(36,28,53,.08)}
@@ -237,11 +237,13 @@ body.audience-locked{overflow:hidden}
 .role-dashboard{display:none;max-width:1400px;margin:0 auto;padding:24px 6% 10px}.role-dashboard.active{display:block}.role-dashboard-inner{border:1px solid #e5ddd8;border-radius:18px;background:linear-gradient(135deg,#fff,#fbf8ff);padding:25px}.role-dashboard .kicker{font-size:10px;letter-spacing:2px;font-weight:900;color:#E8472A}.role-dashboard h2{font-size:30px;margin:6px 0}.role-dashboard p{color:#6B6480;margin:0}.role-intent-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:18px}.role-intent{display:block;width:100%;border:1px solid #e2dbe8;background:#fff;border-radius:12px;padding:13px;text-align:left;cursor:pointer;font:inherit;color:#241C35}.role-intent:hover{border-color:#4B3F9E;box-shadow:0 8px 18px rgba(75,63,158,.08)}.role-intent strong{display:block;font-size:13px}.role-intent span{font-size:11px;color:#777080}.role-dashboard.personal .role-dashboard-inner{background:linear-gradient(135deg,#fff,#fff6f1)}
 @media(max-width:700px){.audience-gate-panel{padding:27px 18px;border-radius:20px}.audience-choice-grid{grid-template-columns:1fr}.role-filter-bar.active{align-items:flex-start;flex-direction:column}.role-intent-grid{grid-template-columns:1fr 1fr}.audience-choice{padding:23px}}
 @media(max-width:420px){.role-intent-grid{grid-template-columns:1fr}}
-</style></head>
-<body class="audience-locked">
+</style><link rel="stylesheet" href="assets/premium-ui.css">
+<link rel="stylesheet" href="assets/b-scheme.css">
+</head>
+<body class="audience-locked b-scheme">
 <div class="audience-gate" id="audienceGate" role="dialog" aria-modal="true" aria-labelledby="audienceGateTitle">
   <div class="audience-gate-panel">
-    <div class="audience-gate-kicker">FAIRVIEW · DECISION AI</div>
+    <div class="audience-gate-kicker">澄思 AI STUDIO · DECISION OS</div>
     <h1 id="audienceGateTitle">先告訴我們：你是企業，還是個人？</h1>
     <p class="lead">這不是註冊，也不是權限限制。先選擇你的使用情境，澄思 AI Studio 才能把真正與你有關的 AI 工具、案例與行動入口排在前面。</p>
     <div class="audience-choice-grid">
@@ -312,16 +314,26 @@ body.audience-locked{overflow:hidden}
 </nav>
 <div aria-hidden="true" class="hero-glow"></div>
 <svg aria-hidden="true" class="hero-orbit" viewbox="0 0 220 220"><circle cx="110" cy="110" fill="none" r="86" stroke="#4B3F9E" stroke-opacity=".28" stroke-width="1.5"></circle><circle cx="110" cy="110" fill="none" r="52" stroke="#FF5B39" stroke-opacity=".22" stroke-width="1.5"></circle><circle cx="110" cy="24" fill="#FF5B39" r="7"></circle><circle cx="196" cy="110" fill="#FF5B39" r="7"></circle><circle cx="110" cy="196" fill="#FF5B39" r="7"></circle><circle cx="24" cy="110" fill="#FF5B39" r="7"></circle></svg>
+<div class="hero-visual" aria-hidden="true">
+<div class="pm-signal">LIVE DECISION LAYER</div>
+<div class="pm-tile t1"><img src="assets/small_01-stratedge.png" alt=""></div>
+<div class="pm-tile t2"><img src="assets/small_03-converge.png" alt=""></div>
+<div class="pm-tile t3"><img src="assets/small_06-career.png" alt=""></div>
+<div class="pm-tile t4"><img src="assets/small_04-pulsetrade.png" alt=""></div>
+<div class="pm-tile t5"><img src="assets/small_08-fivelens.png" alt=""></div>
+<div class="pm-core"><span class="mini-label">LUCIDMIND · AI STUDIO</span><strong>把複雜的事<br>變成下一步。</strong><span>理解 · 分析 · 行動 · 回饋 · 治理</span></div>
+<div class="pm-orbit-dot"></div><div class="pm-trust">Human-in-the-loop · AI 協作</div>
+</div>
 <span class="eyebrow">★ 澄思 AI STUDIO · AI Decision OS</span>
-<h1>真正昂貴的，<br/><span class="hl nowrap">不是 AI，而是做錯決定。</span></h1>
-<p class="lead">企業每天都在決定：錢該花在哪裡、哪個告警要先處理、哪個人值得留下、哪個流程該自動化。人也一樣：要不要轉職、要不要投資、這段關係該怎麼走。問題從來不是沒有資訊，而是資訊太多，真正能把它想清楚的時間太少。</p>
-<p class="hero-empathy">所以我們做的，不是另一個只會回答問題的 AI。<strong>我們想做的是：當事情真的重要時，陪你把問題接住。</strong></p>
+<h1>一個選擇，<br/><span class="hl nowrap">開啟你的無限可能。</span></h1>
+<p class="lead">AI 不只回答問題，也可以把資訊、選項與下一步整理成一個更清楚的決策空間。</p>
+<p class="hero-empathy">讓每一次重要選擇，都有一個更清楚的起點。</p>
 <div class="hero-actions">
 <a class="hero-primary" href="#decision-check">先做 10 秒決策檢測 →</a>
 <a class="hero-secondary" href="#audience">我是企業 →</a>
 <a class="hero-secondary" href="#audience-personal">我是個人 →</a>
 </div>
-<div class="hero-proof"><span>8 個真實決策場景</span><i>·</i><span>1 套共同底層能力</span><i>·</i><span>個人、企業、API、白標</span></div>
+<div class="hero-proof"><span>8 個場景</span><i>·</i><span>1 個共同決策核心</span><i>·</i><span>人保留最後決定權</span></div>
 </header>
 
 <section class="kpi-bar customer-proof" aria-label="產品核心能力">
@@ -650,6 +662,7 @@ body.audience-locked{overflow:hidden}
   document.getElementById('problemReset').addEventListener('click',resetDiscovery);
   openGate();
 })();
-</script><script src="assets/gmail-compose.js" defer></script>
+</script><script src="assets/premium-ui.js" defer></script>
+<script src="assets/gmail-compose.js" defer></script>
 </body>
 </html>
