@@ -1,25 +1,23 @@
-# QC 驗證報告
+# Login Flow QC Report — 2026-09-29
 
-日期：2026-09-29
+## Scope
+Fix the member-login flow so an unauthenticated click on 「會員登入」 immediately starts Netlify Identity Google OAuth instead of opening an intermediate login modal with a missing Google button.
 
-## 本次修正
-- 恢復 STEP 3 的主要適用對象、次要適用對象、限制條件資料與顯示。
-- 保留 STEP 2 → STEP 3 的匹配引擎。
-- 會員登入按鈕增加獨立前端 fallback 綁定，避免 Identity 模組載入失敗時按鈕完全無反應。
-- Netlify Identity 模組初始化失敗會顯示錯誤提示，不再靜默失效。
+## Changes verified
+- Header 「會員登入」 click no longer opens the login modal for unauthenticated users.
+- Unauthenticated click directly executes `oauthLogin('google')`.
+- Authenticated click may open the account/session modal.
+- OAuth callback remains handled by `handleAuthCallback()`.
+- Existing `getUser()`, `updateUser()`, `userMetadata`, journey persistence, and logout logic remain present.
+- Removed the old fallback script that always opened the modal.
+- Removed user-facing Netlify/Identity diagnostic text.
+- Removed the stray literal `\\n` from the page.
+- Preserved STEP 3 `primaryAudience`, `secondaryAudience`, and `restrictions` for all 8 AI applications.
 
-## 自動驗證
-- index.html 結構檢查：PASS
-- src/netlify-auth.js Node syntax check：PASS
-- primaryAudience 8/8：PASS
-- secondaryAudience 8/8：PASS
-- restrictions 8/8：PASS
-- STEP 3 顯示主要／次要適用與限制條件：PASS
-- 會員登入按鈕存在：PASS
-- 會員登入 fallback 綁定：PASS
-- Google OAuth 呼叫 oauthLogin(google)：PASS
-- 8 類需求 × 12 變體 = 96/96 預期第一名命中：PASS
-- ZIP 完整性：PASS
+## Static / logic QC
+121 / 121 PASS
 
-## 部署注意
-Google External Provider 仍需在 Netlify Identity → Registration → External providers → Google 啟用；OAuth 必須在已部署的 HTTPS Netlify 環境驗證。
+This includes 100 deterministic login-state branch cases plus structural checks. It is not a claim of 100 real human/browser OAuth sessions.
+
+## Deployment note
+Actual Google OAuth must be tested on the deployed HTTPS Netlify site. Netlify documents `oauthLogin('google')` as the external-provider login flow and `handleAuthCallback()` as required after the OAuth redirect.

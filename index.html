@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="version" content="3.7.0-leftnav-rwd-google-login">
+<meta name="version" content="3.9.0-netlify-identity-diagnostic-fix">
 <title>澄思 AI Studio｜4 步找到你的下一步｜AI 決策平台</title>
 <meta name="description" content="澄思 AI Studio｜把複雜的問題，變成清楚的下一步。用 4 個步驟帶你從情境、問題，走到對應的 AI 應用、客製化服務與預約展示。">
 <style>
@@ -387,7 +387,7 @@ details>summary{font-size:15px;line-height:1.55}
 .match-summary div{display:flex;align-items:center;gap:12px;justify-content:space-between}.match-summary b{font-size:18px}.match-summary strong{font-size:22px;color:var(--coral)}.match-summary span{display:block;margin-top:6px;color:var(--muted);line-height:1.6}.match-summary small{display:block;margin-top:8px;color:var(--indigo);font-weight:700;line-height:1.5}
 </style>
 <style>button:disabled{opacity:.65;cursor:wait}</style><style>
-.member-login{position:relative;z-index:1003;pointer-events:auto;display:inline-flex;align-items:center;gap:7px;margin-left:14px;padding:9px 14px;border:1px solid var(--coral);border-radius:999px;background:var(--coral);color:#fff;font-size:14px;font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.member-login:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(15,23,42,.10)}.member-login-icon{font-size:16px}.login-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}.login-modal.open{display:flex}.login-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.34);backdrop-filter:blur(4px)}.login-panel{position:relative;width:min(440px,100%);padding:32px;border-radius:24px;background:#fff;box-shadow:0 24px 80px rgba(15,23,42,.22);z-index:1}.login-close{position:absolute;top:12px;right:14px;border:0;background:transparent;font-size:28px;line-height:1;color:#64748b;cursor:pointer}.login-kicker{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--coral);margin-bottom:8px}.login-panel h2{margin:0 0 10px;font-size:28px}.login-copy{margin:0 0 20px;color:var(--muted);line-height:1.7}.login-hint{margin-top:12px;color:var(--muted);font-size:13px;line-height:1.6;min-height:20px}.member-session{display:grid;gap:8px}.member-session-title{font-weight:900;font-size:17px}.member-session-name{font-weight:800}.member-session-email{font-size:13px;color:var(--muted);margin-bottom:8px}.netlify-google-login{width:100%;justify-content:center}.google-g{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:#fff;color:#4285f4;font-weight:900;margin-right:7px}@media(max-width:900px){.member-login{padding:8px 11px;font-size:13px;margin-left:9px}}@media(max-width:680px){.member-login{display:inline-flex}.member-login-label{font-size:12px}.member-login-icon{display:none}}
+.member-login{position:relative;z-index:1003;pointer-events:auto;display:inline-flex;align-items:center;gap:7px;margin-left:14px;padding:9px 14px;border:1px solid var(--coral);border-radius:999px;background:var(--coral);color:#fff;font-size:14px;font-weight:800;line-height:1;white-space:nowrap;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease}.member-login:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(15,23,42,.10)}.member-login-icon{font-size:16px}.login-modal{position:fixed;inset:0;z-index:1000;display:none;align-items:center;justify-content:center;padding:20px}.login-modal.open{display:flex}.login-backdrop{position:absolute;inset:0;background:rgba(15,23,42,.34);backdrop-filter:blur(4px)}.login-panel{position:relative;width:min(440px,100%);padding:32px;border-radius:24px;background:#fff;box-shadow:0 24px 80px rgba(15,23,42,.22);z-index:1}.login-close{position:absolute;top:12px;right:14px;border:0;background:transparent;font-size:28px;line-height:1;color:#64748b;cursor:pointer}.login-kicker{font-size:11px;font-weight:900;letter-spacing:.16em;color:var(--coral);margin-bottom:8px}.login-panel h2{margin:0 0 10px;font-size:28px}.login-copy{margin:0 0 20px;color:var(--muted);line-height:1.7}.member-session{display:grid;gap:8px}.member-session-title{font-weight:900;font-size:17px}.member-session-name{font-weight:800}.member-session-email{font-size:13px;color:var(--muted);margin-bottom:8px}.netlify-google-login{width:100%;justify-content:center}.google-g{display:inline-flex;width:22px;height:22px;align-items:center;justify-content:center;border-radius:50%;background:#fff;color:#4285f4;font-weight:900;margin-right:7px}@media(max-width:900px){.member-login{padding:8px 11px;font-size:13px;margin-left:9px}}@media(max-width:680px){.member-login{display:inline-flex}.member-login-label{font-size:12px}.member-login-icon{display:none}}
 </style>
 <style id="member-login-priority-fix">
 /* Member login layer: modal is mounted outside the sticky/backdrop-filter header so fixed centering is viewport-based. */
@@ -417,7 +417,8 @@ details>summary{font-size:15px;line-height:1.55}
   overflow:auto!important;
 }
 </style>
-<style>.login-modal-open{overflow:hidden}</style>\n</head>
+<style>.login-modal-open{overflow:hidden}</style>
+</head>
 <body id="top">
 
 <header class="site-header">
@@ -425,7 +426,7 @@ details>summary{font-size:15px;line-height:1.55}
     <div class="header-left">
       <button class="menu-toggle" id="menuToggle" type="button" aria-label="開啟導覽選單" aria-controls="sidenav" aria-expanded="false">☰</button>
       <a class="brand" href="#home" aria-label="回到首頁"><span class="brand-mark">澄</span><span>澄思 AI STUDIO<small>DECISION OS</small></span></a>
-      <button type="button" class="member-login" id="memberLoginButton" aria-haspopup="dialog" aria-controls="loginModal"><span class="member-login-icon" aria-hidden="true">◎</span><span class="member-login-label">會員登入</span></button>
+      <button type="button" class="member-login" id="memberLoginButton" aria-haspopup="dialog" aria-controls="loginModal" onclick="window.__memberLoginClick && window.__memberLoginClick(event)"><span class="member-login-icon" aria-hidden="true">◎</span><span class="member-login-label">會員登入</span></button>
     </div>
     
     <nav class="header-actions" aria-label="主要服務">
@@ -440,11 +441,9 @@ details>summary{font-size:15px;line-height:1.55}
       <div class="login-backdrop" data-login-close></div>
       <div class="login-panel" role="document">
         <button type="button" class="login-close" aria-label="關閉會員登入" data-login-close>×</button>
-        <div class="login-kicker">MEMBER ACCESS</div>
         <h2 id="loginModalTitle">會員登入</h2>
-        <p class="login-copy">使用 Google 帳號登入，之後你在 STEP 1～STEP 4 填寫的需求資料可與會員帳號綁定保存。</p>
+        <p class="login-copy">會員帳號</p>
         <div id="googleLoginButton"></div>
-        <div id="googleLoginHint" class="login-hint" role="status" aria-live="polite"></div>
       </div>
     </div>
 <main>
@@ -1097,24 +1096,20 @@ window.addEventListener('resize',()=>{if(window.innerWidth>=1000)setMenu(false)}
 <script type="module" src="https://static.cloudflareinsights.com/beacon.min.js/v31edd6df95cf4e85bb4c19e7a9bdbcba1788362987495" integrity="sha512-iIg7k2xntmwu6/uSb5tpc/hySgZc4eoL31yB29W6tJFo2akwjPWcEqnCEdJvGexCL0KEQwVYv5BlowfhVz26hg==" data-cf-beacon='{"version":"2024.11.0","token":"4edd5f8ec12a48cfa682ab8261b80a79","spa":2}' crossorigin="anonymous"></script>
 <script>
 (function(){
-  function bindMemberLogin(){
-    var btn=document.getElementById('memberLoginButton');
-    var modal=document.getElementById('loginModal');
-    if(!btn||!modal||btn.dataset.boundFallback==='1') return;
-    btn.dataset.boundFallback='1';
-    btn.addEventListener('click',function(){
-      modal.classList.add('open');
-      modal.setAttribute('aria-hidden','false');
-      document.body.classList.add('login-modal-open');
-      var panel=modal.querySelector('.login-panel');
-      if(panel) panel.focus({preventScroll:true});
-      var slot=document.getElementById('googleLoginButton');
-      var hint=document.getElementById('googleLoginHint');
-      if(hint && !slot?.children.length) hint.textContent='登入服務載入中，若稍後仍無 Google 登入按鈕，請確認 Netlify Identity 已啟用。';
-    });
-    modal.querySelectorAll('[data-login-close]').forEach(function(el){el.addEventListener('click',function(){modal.classList.remove('open');modal.setAttribute('aria-hidden','true');document.body.classList.remove('login-modal-open');});});
-  }
-  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindMemberLogin,{once:true}); else bindMemberLogin();
+  window.__memberLoginClick = async function(event){
+    if(event){ event.preventDefault(); event.stopPropagation(); }
+    try {
+      const auth = await import('https://esm.sh/@netlify/identity@2.0.0');
+      const user = await auth.getUser();
+      if (user) {
+        if (typeof window.openLogin === 'function') { window.openLogin(); }
+        return;
+      }
+      auth.oauthLogin('google');
+    } catch (error) {
+      console.error('Member Google login failed:', error);
+    }
+  };
 })();
 </script>
 <script type="module" src="/src/netlify-auth.js"></script>
