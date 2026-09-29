@@ -1,18 +1,47 @@
-import { oauthLogin, getUser, logout, handleAuthCallback, updateUser } from 'https://esm.sh/@netlify/identity@2.0.0';
+import { oauthLogin, getUser, logout, handleAuthCallback, updateUser, refreshSession } from 'https://esm.sh/@netlify/identity@2.0.0';
 
 const modal = () => document.querySelector('#loginModal');
 const slot = () => document.querySelector('#googleLoginButton');
 const hint = () => document.querySelector('#googleLoginHint');
 const headerLogin = () => document.querySelector('.member-login');
 const JOURNEY_KEY = 'chengsi_journey';
+const APPROVED_ROLE = 'member_approved';
+const ADMIN_EMAIL = 'felix670131@gmail.com';
 let saveTimer = null;
 let currentUser = null;
 
-function setHint(message, tone = '') { const el = hint(); if (!el) return; el.textContent = ''; el.dataset.tone = ''; }
+function setHint(message, tone = '') {
+  const el = hint();
+  if (!el) return;
+  el.textContent = message || '';
+  el.dataset.tone = tone;
+}
+function getMemberName(user) {
+  return user?.userMetadata?.full_name ||
+    user?.userMetadata?.name ||
+    user?.name ||
+    user?.userMetadata?.display_name ||
+    '會員';
+}
+function isApproved(user) {
+  const roles = user?.roles || user?.appMetadata?.roles || [];
+  return user?.email?.toLowerCase() === ADMIN_EMAIL || roles.includes(APPROVED_ROLE);
+}
+function showApprovalRequired() {
+  setHint('您的 Google 帳號尚未通過管理員審核，請通知管理員啟用您的帳號後才可使用。', 'warning');
+  alert('您的帳號尚未通過管理員審核。\n\n請通知管理員啟用您的帳號後才可使用。');
+}
 async function openLogin() {
   try {
     currentUser = await getUser();
     if (currentUser) {
+      if (!isApproved(currentUser)) {
+        await logout().catch(() => {});
+        currentUser = null;
+        showApprovalRequired();
+        updateHeader(false);
+        return;
+      }
       const m = modal();
       if (!m) return;
       m.classList.add('open');
@@ -20,11 +49,10 @@ async function openLogin() {
       renderMemberState();
       return;
     }
-    // 未登入：直接進入 Netlify Identity 的 Google OAuth，不開任何中間登入視窗。
     oauthLogin('google');
   } catch (error) {
-    // 技術錯誤只進 Console，不在使用者介面顯示後台資訊。
     console.error('Google OAuth start failed:', error);
+    setHint('Google 登入服務暫時無法使用，請稍後再試。', 'error');
   }
 }
 function closeLogin() { const m=modal(); if(!m)return; m.classList.remove('open'); m.setAttribute('aria-hidden','true'); }
@@ -53,13 +81,21 @@ async function renderMemberState(){
   try{
     currentUser=await getUser();
     if(currentUser){
+      if(!isApproved(currentUser)){
+        await logout().catch(() => {});
+        currentUser=null;
+        if(target) target.innerHTML='';
+        updateHeader(false);
+        return;
+      }
       restoreJourneyFromAccount(currentUser);
+      const memberName = getMemberName(currentUser);
       if(target){
-        target.innerHTML=`<div class="member-session"><div class="member-session-title">已登入澄思會員</div><div class="member-session-name">${escapeHtml(currentUser.userMetadata?.full_name||currentUser.userMetadata?.name||currentUser.name||currentUser.email||'會員')}</div><div class="member-session-email">${escapeHtml(currentUser.email||'')}</div><button type="button" class="btn primary block" id="saveJourneyButton">立即保存目前需求資料</button><button type="button" class="btn ghost block" id="memberLogoutButton">登出會員</button></div>`;
+        target.innerHTML=`<div class="member-session"><div class="member-session-title">已登入澄思會員</div><div class="member-session-name">${escapeHtml(memberName)}</div><div class="member-session-email">${escapeHtml(currentUser.email||'')}</div><button type="button" class="btn primary block" id="saveJourneyButton">立即保存目前需求資料</button><button type="button" class="btn ghost block" id="memberLogoutButton">登出會員</button></div>`;
         document.querySelector('#saveJourneyButton')?.addEventListener('click',async()=>{await saveJourneyToAccount();});
         document.querySelector('#memberLogoutButton')?.addEventListener('click',async()=>{await logout();currentUser=null;closeLogin();updateHeader(false);});
       }
-      updateHeader(true,currentUser.userMetadata?.full_name||currentUser.userMetadata?.name||currentUser.name||currentUser.email||'會員');
+      updateHeader(true,memberName);
       return;
     }
   }catch(error){currentUser=null;console.error('Netlify Identity getUser error:',error);}
@@ -70,6 +106,26 @@ function updateHeader(loggedIn,name=''){const button=headerLogin();if(!button)re
 function escapeHtml(value){return String(value).replace(/[&<>'"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]));}
 window.openLogin=openLogin; window.closeLogin=closeLogin;
 document.addEventListener('DOMContentLoaded',()=>{document.querySelectorAll('[data-login-close]').forEach(el=>el.addEventListener('click',closeLogin));document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLogin();});});
-async function initIdentity(){try{const callback=await handleAuthCallback();}catch(error){console.error('Netlify Identity callback error:',error);}await renderMemberState();}
-window.addEventListener('journey:changed',scheduleJourneySave); window.addEventListener('beforeunload',()=>{if(currentUser)saveJourneyToAccount();});
-document.addEventListener('DOMContentLoaded',()=>{initIdentity().catch(error=>{console.error('Netlify Identity initialization failed:',error);setHint('');});});
+async function initIdentity(){
+  try {
+    const callback=await handleAuthCallback();
+    if (callback?.user && !isApproved(callback.user)) {
+      await logout().catch(() => {});
+      showApprovalRequired();
+      updateHeader(false);
+      return;
+    }
+    await renderMemberState();
+  } catch(error) {
+    console.error('Netlify Identity callback error:',error);
+    const message = String(error?.message || error || '');
+    if (/not approved|approved|401|403/i.test(message)) {
+      showApprovalRequired();
+      await logout().catch(() => {});
+      updateHeader(false);
+    }
+  }
+}
+window.addEventListener('journey:changed',scheduleJourneySave);
+window.addEventListener('beforeunload',()=>{if(currentUser)saveJourneyToAccount();});
+document.addEventListener('DOMContentLoaded',()=>{initIdentity().catch(error=>{console.error('Netlify Identity initialization failed:',error);setHint('Google 登入服務暫時無法使用，請稍後再試。','error');});});

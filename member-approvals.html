@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>會員審核｜澄思 AI Studio</title>
+<style>
+body{margin:0;background:#0c0f14;color:#e7ecf2;font-family:"Noto Sans TC",system-ui,sans-serif}
+.wrap{max-width:1100px;margin:auto;padding:28px 20px}
+header{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #232a36;padding-bottom:18px}
+h1{font-size:22px;margin:0}.muted{color:#8b96a8;font-size:14px}
+a{color:#8ab4f8;text-decoration:none}.btn{border:1px solid #3a4656;background:#151b24;color:#e7ecf2;border-radius:8px;padding:8px 13px;cursor:pointer}.approve{border-color:#4b9b72}.revoke{border-color:#b56b6b}
+table{width:100%;border-collapse:collapse;margin-top:24px;background:#12161d;border:1px solid #232a36;border-radius:12px;overflow:hidden}
+th,td{padding:12px 14px;border-bottom:1px solid #232a36;text-align:left;font-size:14px}th{color:#9da9ba;font-weight:500}
+.status{font-size:12px;padding:4px 8px;border-radius:999px;background:#222a34}.ok{background:#173c2b;color:#9fe0b7}.wait{background:#40361b;color:#e7c96f}
+.actions{display:flex;gap:8px}.empty{padding:30px;color:#8b96a8}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <div><h1>會員審核</h1><div class="muted">只有 felix670131@gmail.com 可操作</div></div>
+  <div><a href="admin.html">← 返回後台</a></div>
+</header>
+<p class="muted">Google 只負責驗證帳號；「核准」後才會成為澄思會員。未核准者會看到：「請通知管理員啟用您的帳號後才可使用」。</p>
+<table>
+<thead><tr><th>中文名稱</th><th>Google 帳號</th><th>狀態</th><th>最後登入</th><th>操作</th></tr></thead>
+<tbody id="users"><tr><td colspan="5" class="empty">載入中…</td></tr></tbody>
+</table>
+</div>
+<script>
+const usersEl=document.getElementById('users');
+function esc(v){return String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));}
+async function load(){
+  const r=await fetch('/.netlify/functions/member-admin',{credentials:'include'});
+  if(!r.ok){usersEl.innerHTML='<tr><td colspan="5" class="empty">沒有管理員權限。</td></tr>';return;}
+  const data=await r.json();
+  const users=(data.users||[]).filter(u=>u.email.toLowerCase()!=='felix670131@gmail.com');
+  if(!users.length){usersEl.innerHTML='<tr><td colspan="5" class="empty">目前沒有其他會員帳號。</td></tr>';return;}
+  usersEl.innerHTML=users.map(u=>`<tr>
+    <td><input id="name-${u.id}" value="${esc(u.name||'')}" placeholder="輸入中文名稱" style="width:150px;background:#0c0f14;border:1px solid #3a4656;color:#e7ecf2;border-radius:6px;padding:7px 9px"></td><td>${esc(u.email)}</td>
+    <td><span class="status ${u.approved?'ok':'wait'}">${u.approved?'已核准':'待審核'}</span></td>
+    <td>${esc(u.lastSignInAt?new Date(u.lastSignInAt).toLocaleString('zh-TW'):'尚未登入')}</td>
+    <td><div class="actions"><button class="btn" onclick="saveName('${u.id}')">儲存中文名</button>${u.approved?`<button class="btn revoke" onclick="change('${u.id}','revoke')">撤銷</button>`:`<button class="btn approve" onclick="change('${u.id}','approve')">核准會員</button>`}</div></td>
+  </tr>`).join('');
+}
+async function saveName(userId){
+  const name=document.getElementById('name-'+userId)?.value.trim();
+  if(!name){alert('請先輸入會員中文名稱。');return;}
+  const r=await fetch('/.netlify/functions/member-admin',{method:'POST',headers:{'content-type':'application/json'},credentials:'include',body:JSON.stringify({userId,action:'setName',name})});
+  if(!r.ok){alert('中文名稱儲存失敗。');return;}
+  await load();
+}
+async function change(userId,action){
+  const r=await fetch('/.netlify/functions/member-admin',{method:'POST',headers:{'content-type':'application/json'},credentials:'include',body:JSON.stringify({userId,action})});
+  if(!r.ok){alert('操作失敗，請重新登入管理員帳號後再試。');return;}
+  await load();
+}
+load();
+</script>
+</body>
+</html>

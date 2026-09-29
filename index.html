@@ -418,6 +418,33 @@ details>summary{font-size:15px;line-height:1.55}
 }
 </style>
 <style>.login-modal-open{overflow:hidden}</style>
+
+<style>
+/* About page: warm editorial storytelling */
+.about-section{padding:clamp(56px,8vw,112px) 0;background:linear-gradient(180deg,#fffaf5 0%,#fff 48%,#fff8f1 100%);overflow:hidden}
+.about-hero{position:relative;min-height:570px;border-radius:30px;overflow:hidden;background:#f5e5dc;box-shadow:0 24px 70px rgba(105,70,48,.10);display:flex;align-items:center}
+.about-hero-art{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%}
+.about-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,249,244,.97) 0%,rgba(255,247,239,.88) 35%,rgba(255,247,239,.16) 72%,transparent 100%)}
+.about-hero-copy{position:relative;z-index:1;max-width:610px;padding:clamp(30px,6vw,82px)}
+.about-eyebrow,.about-story-heading>span,.about-pillar>span,.about-vision-copy>span{font-size:11px;font-weight:850;letter-spacing:.19em;color:#c66b3b}
+.about-hero h2{font-size:clamp(34px,5vw,62px);line-height:1.25;letter-spacing:-.045em;color:#302d3b;margin:20px 0}
+.about-hero h2 em{font-style:normal;color:#d86b31}
+.about-hero-copy>p{font-size:clamp(16px,1.5vw,19px);line-height:1.9;color:#635b5a;max-width:490px}
+.about-cta,.about-signoff>a{display:inline-flex;align-items:center;gap:24px;margin-top:22px;padding:14px 20px;border-radius:999px;background:#e87936;color:#fff;font-weight:800;box-shadow:0 10px 24px rgba(216,107,49,.22);transition:transform .2s,box-shadow .2s}
+.about-cta:hover,.about-signoff>a:hover{transform:translateY(-3px);box-shadow:0 14px 28px rgba(216,107,49,.28)}
+.about-image-caption{position:absolute;z-index:1;right:28px;bottom:22px;color:#fff;font-size:12px;letter-spacing:.08em;text-shadow:0 2px 12px #62453d}
+.about-story{display:grid;grid-template-columns:1fr 1fr;gap:8vw;align-items:start;padding:clamp(68px,9vw,118px) clamp(4px,5vw,60px) 58px}
+.about-story-heading h3{font-size:clamp(27px,3.4vw,42px);line-height:1.45;letter-spacing:-.035em;color:#35313d;margin:15px 0}
+.about-story-text{font-size:17px;line-height:2;color:#6a6260;padding-top:28px}.about-story-text p+p{margin-top:12px}
+.about-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;padding:0 clamp(4px,5vw,60px) 90px}
+.about-pillar{background:#fff;border:1px solid #f2e8e0;border-radius:22px;padding:28px 26px 30px;box-shadow:0 14px 38px rgba(77,54,40,.045);transition:transform .25s,box-shadow .25s}.about-pillar:hover{transform:translateY(-6px);box-shadow:0 20px 45px rgba(77,54,40,.09)}
+.about-pillar-icon{width:46px;height:46px;display:grid;place-items:center;border-radius:15px;background:#fff0e5;color:#d86b31;font-size:25px;margin-bottom:22px}.about-pillar h3{font-size:21px;color:#393440;margin:12px 0}.about-pillar p{font-size:14px;line-height:1.9;color:#77706e;margin:0}
+.about-vision{display:grid;grid-template-columns:1.1fr .9fr;min-height:350px;border-radius:28px;overflow:hidden;background:#fff0df;align-items:stretch}.about-vision img{width:100%;height:100%;min-height:350px;object-fit:cover;object-position:38% center}.about-vision-copy{align-self:center;padding:clamp(28px,5vw,62px)}.about-vision-copy h3{font-size:clamp(25px,3vw,38px);line-height:1.5;color:#393440;margin:16px 0}.about-vision-copy p{font-size:15px;line-height:1.9;color:#70615a}
+.about-signoff{text-align:center;padding:90px 16px 12px}.about-signoff>p{font-size:14px;letter-spacing:.14em;color:#bd754c}.about-signoff h3{font-size:clamp(25px,3.5vw,40px);line-height:1.55;color:#383440;margin:16px 0 8px}.about-signoff>a{margin-top:18px}
+@media(max-width:760px){.about-section{padding:42px 0}.about-hero{min-height:620px;align-items:flex-start;border-radius:22px}.about-hero-art{object-position:62% center}.about-hero:after{background:linear-gradient(180deg,rgba(255,249,244,.97) 0%,rgba(255,247,239,.88) 42%,rgba(255,247,239,.05) 100%)}.about-hero-copy{padding:34px 25px}.about-hero h2{font-size:35px}.about-image-caption{right:16px;bottom:14px;font-size:10px}.about-story{grid-template-columns:1fr;gap:10px;padding:58px 8px 38px}.about-story-text{padding-top:0;font-size:16px}.about-pillars{grid-template-columns:1fr;gap:12px;padding:0 0 54px}.about-pillar{padding:23px}.about-vision{grid-template-columns:1fr}.about-vision img{min-height:250px;max-height:300px}.about-vision-copy{padding:28px}.about-signoff{padding:62px 8px 10px}}
+@media(prefers-reduced-motion:reduce){.about-pillar,.about-cta,.about-signoff>a{transition:none}}
+</style>
+
 </head>
 <body id="top">
 
@@ -430,9 +457,9 @@ details>summary{font-size:15px;line-height:1.55}
     </div>
     
     <nav class="header-actions" aria-label="主要服務">
+      <a class="header-action-btn" href="about.html">關於我們</a>
       <a class="header-action-btn" href="#custom">AI 客製化服務</a>
       <a class="header-action-btn" href="#step3">AI 應用</a>
-      <a class="header-action-btn" href="#step4">提出需求</a>
     </nav>
   </div>
 </header>
@@ -443,7 +470,7 @@ details>summary{font-size:15px;line-height:1.55}
         <button type="button" class="login-close" aria-label="關閉會員登入" data-login-close>×</button>
         <h2 id="loginModalTitle">會員登入</h2>
         <p class="login-copy">會員帳號</p>
-        <div id="googleLoginButton"></div>
+        <div id="googleLoginButton"></div><div id="googleLoginHint" role="status" aria-live="polite"></div>
       </div>
     </div>
 <main>
@@ -658,6 +685,8 @@ details>summary{font-size:15px;line-height:1.55}
 </div>
 </main>
 
+
+
 <footer class="footer">
   <div class="container">
     <div class="footer-grid">
@@ -670,6 +699,7 @@ details>summary{font-size:15px;line-height:1.55}
         <a href="#step3">AI 應用</a>
         <a href="#step2">問題導向入口</a>
         <a href="#custom">AI 客製化服務</a>
+        <a href="about.html">關於我們</a>
         <a href="#step3">平台價值（Decision Layer）</a>
         <a href="#step4">信任與治理</a>
       </div>
@@ -681,7 +711,7 @@ details>summary{font-size:15px;line-height:1.55}
       </div>
     </div>
     <div class="copyright">
-      <span>© 2026 CHENGSI AI STUDIO · DECISION OS · v3.8.0-leftnav-rwd-netlify-identity-google</span>
+      <span>© 2026 CHENGSI AI STUDIO · DECISION OS · v3.8.4</span>
       <span>Human × AI · Keep the final decision human.</span>
     </div>
   </div>
@@ -1099,13 +1129,12 @@ window.addEventListener('resize',()=>{if(window.innerWidth>=1000)setMenu(false)}
   window.__memberLoginClick = async function(event){
     if(event){ event.preventDefault(); event.stopPropagation(); }
     try {
-      const auth = await import('https://esm.sh/@netlify/identity@2.0.0');
-      const user = await auth.getUser();
-      if (user) {
-        if (typeof window.openLogin === 'function') { window.openLogin(); }
-        return;
+      if (typeof window.openLogin === 'function') {
+        await window.openLogin();
+      } else {
+        const auth = await import('https://esm.sh/@netlify/identity@2.0.0');
+        auth.oauthLogin('google');
       }
-      auth.oauthLogin('google');
     } catch (error) {
       console.error('Member Google login failed:', error);
     }

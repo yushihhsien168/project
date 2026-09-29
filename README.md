@@ -77,3 +77,13 @@ https://docs.netlify.com/build/git-workflows/overview/
 This version uses `@netlify/identity` and the Netlify Identity External providers flow. In the Netlify site dashboard, enable **Identity**, then **Identity → Registration → External providers → Google**. `oauthLogin('google')` starts OAuth and `handleAuthCallback()` completes the redirect.
 
 The signed-in member's current STEP 1–STEP 4 journey is stored under `user_metadata.chengsi_journey`. This metadata is user-editable and client-readable; it is not a secure store for passwords, API keys, payment data, or privileged application data.
+
+
+## 會員核准機制（v3.8.1）
+- `felix670131@gmail.com` 是唯一會員審核管理者。
+- Google OAuth 只驗證 Google 身分，不代表自動成為會員。
+- 新 Google 帳號預設為 `member_pending`；未核准者無法完成會員登入。
+- 管理者在 `member-approvals.html` 核准後，帳號取得 `member_approved`，下一次登入即可使用。
+- 會員顯示名稱優先使用 `user_metadata.full_name`，再依序使用 `name` / `display_name`；未設定時顯示「會員」。
+- 未核准帳號會顯示：**「請通知管理員啟用您的帳號後才可使用。」**
+- Netlify Identity 的 Invite only 也可以再開啟，讓只有被邀請的外部 Google 帳號可以註冊；這與本專案的管理員逐一核准是兩道不同的門檻。
