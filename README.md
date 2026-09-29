@@ -71,3 +71,9 @@ https://docs.netlify.com/manage/security/secure-access-to-sites/identity/registr
 
 Git → Netlify Continuous Deployment：
 https://docs.netlify.com/build/git-workflows/overview/
+
+## Member Login / Google OAuth
+
+This version uses `@netlify/identity` and the Netlify Identity External providers flow. In the Netlify site dashboard, enable **Identity**, then **Identity → Registration → External providers → Google**. `oauthLogin('google')` starts OAuth and `handleAuthCallback()` completes the redirect.
+
+The signed-in member's current STEP 1–STEP 4 journey is stored under `user_metadata.chengsi_journey`. This metadata is user-editable and client-readable; it is not a secure store for passwords, API keys, payment data, or privileged application data.
