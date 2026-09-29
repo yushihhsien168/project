@@ -361,6 +361,30 @@ details>summary{font-size:15px;line-height:1.55}
   body{font-size:16px}
 }
 
+
+/* v3.8.6：關於我們作為主站內的獨立面板，與其他內容互斥顯示 */
+.about-panel{border:0!important;box-shadow:none!important;background:#fffaf5!important;padding:clamp(16px,3vw,34px)!important}
+.about-panel .about-wrap{max-width:1120px;margin:auto}
+.about-panel .about-hero{position:relative;min-height:490px;border-radius:26px;overflow:hidden;background:#f5e5dc;display:flex;align-items:center}
+.about-panel .about-hero img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 48%}
+.about-panel .about-hero:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(255,249,244,.97),rgba(255,247,239,.84) 38%,rgba(255,247,239,.08) 80%)}
+.about-panel .about-hero-copy{position:relative;z-index:1;max-width:620px;padding:clamp(28px,6vw,70px)}
+.about-panel .about-eyebrow,.about-panel .about-kicker{font-size:11px;font-weight:850;letter-spacing:.18em;color:#c66b3b}
+.about-panel h2{font-size:clamp(28px,4.3vw,48px);line-height:1.4;color:#35313d;margin:14px 0}
+.about-panel .about-hero h2{font-size:clamp(34px,5vw,58px);line-height:1.27;letter-spacing:-.04em}
+.about-panel .about-hero h2 em{font-style:normal;color:#d86b31}
+.about-panel p{color:#6a6260;line-height:1.9}
+.about-panel .about-story{display:grid;grid-template-columns:1fr 1fr;gap:7%;padding:75px 4% 60px;align-items:start}
+.about-panel .about-quote{border-left:3px solid #e87936;padding:5px 0 5px 18px;font-size:18px;font-weight:700;color:#49434a}
+.about-panel .about-pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;padding:10px 0 70px}
+.about-panel .about-pillar{background:#fff;border:1px solid #f2e8e0;border-radius:20px;padding:25px;box-shadow:0 12px 30px #6b3b170d}
+.about-panel .about-pillar .icon{font-size:26px;color:#d86b31;margin:12px 0}
+.about-panel .about-vision{display:grid;grid-template-columns:1.1fr .9fr;border-radius:24px;overflow:hidden;background:#fff0df;align-items:stretch}
+.about-panel .about-vision img{width:100%;height:100%;min-height:320px;object-fit:cover}
+.about-panel .about-vision-copy{align-self:center;padding:clamp(25px,5vw,55px)}
+.about-panel .about-signoff{text-align:center;padding:65px 10px 30px}
+.about-panel .about-signoff .button{display:inline-flex;margin-top:10px}
+@media(max-width:700px){.about-panel{padding:12px!important}.about-panel .about-hero{min-height:570px;align-items:flex-start;border-radius:18px}.about-panel .about-hero img{object-position:62% center}.about-panel .about-hero:after{background:linear-gradient(180deg,rgba(255,249,244,.97),rgba(255,247,239,.82) 45%,rgba(255,247,239,.04))}.about-panel .about-hero-copy{padding:28px 22px}.about-panel .about-story{grid-template-columns:1fr;gap:12px;padding:48px 6px 38px}.about-panel .about-pillars{grid-template-columns:1fr;padding-bottom:40px}.about-panel .about-vision{grid-template-columns:1fr}.about-panel .about-vision img{min-height:230px;max-height:280px}}
 </style>
 <style>
 
@@ -457,7 +481,7 @@ details>summary{font-size:15px;line-height:1.55}
     </div>
     
     <nav class="header-actions" aria-label="主要服務">
-      <a class="header-action-btn" href="about.html">關於我們</a>
+      <a class="header-action-btn" href="#about">關於我們</a>
       <a class="header-action-btn" href="#custom">AI 客製化服務</a>
       <a class="header-action-btn" href="#step3">AI 應用</a>
     </nav>
@@ -681,6 +705,20 @@ details>summary{font-size:15px;line-height:1.55}
   </div>
 </section>
 
+<section class="panel about-panel" id="about" aria-label="關於我們">
+  <div class="about-wrap">
+    <section class="about-hero">
+      <img src="assets/about-lantern.png" alt="夕陽下將發光燈籠送向天空，象徵希望與新的可能" loading="lazy">
+      <div class="about-hero-copy"><span class="about-eyebrow">ABOUT CHENGSI · 以人為本</span><h2>讓 AI 不只是科技，<br><em>而是每個人都能掌握的力量。</em></h2><p>科技真正的價值，不在於它有多先進，而在於它能為多少人解決問題，為多少生命帶來改變。</p><a class="btn primary" href="#step4">與我們聊聊你的需求　↗</a></div>
+    </section>
+    <section class="about-story"><div><span class="about-kicker">WHY WE EXIST</span><h2>我們看見的，不只是問題，還有尚未被實現的可能。</h2><div class="about-quote">每個人都值得擁有更好的選擇，而不該被資源與資訊的落差限制。</div></div><div><p>我們看見企業在競爭與轉型中，承受著成本、效率與決策的多重壓力；也看見許多個人，懷抱夢想與期待，卻因資源有限、資訊不對稱，而遲遲找不到前進的方向。</p><p>我們希望改變這件事。澄思 AI Studio 因此而生。</p><p>我們以人為本，結合人工智慧、商業思維與實務應用，打造能真正落地的 AI 解決方案。從現有 AI 應用到依據需求量身打造的客製化服務，我們不只關注技術能做到什麼，更在乎它能為你帶來什麼改變。</p></div></section>
+    <div class="about-kicker" style="text-align:center">OUR BELIEFS</div><h2 style="text-align:center">以助人為起點，讓改變真正發生</h2><p style="text-align:center;margin:0 0 25px">不只交付技術，更在意每一次應用背後的人與需求。</p>
+    <section class="about-pillars"><article class="about-pillar"><span class="about-kicker">01 / 理解你</span><div class="icon">♡</div><h3>先理解，再談科技</h3><p>每個人、每間企業都有不同的處境。我們從真實需求出發，讓解決方案回應你真正面對的事。</p></article><article class="about-pillar"><span class="about-kicker">02 / 陪你做</span><div class="icon">✳</div><h3>讓創新真正落地</h3><p>結合 AI、商業思維與實務應用，從現有系統到量身打造的客製化服務，讓想法成為可行的行動。</p></article><article class="about-pillar"><span class="about-kicker">03 / 一起成長</span><div class="icon">↗</div><h3>把更多可能還給人</h3><p>協助企業減輕營運負擔、提升決策品質，也陪伴個人在職涯、生活與重要選擇中，看見更清晰的方向。</p></article></section>
+    <section class="about-vision"><img src="assets/about-journey.png" alt="人們一同走向晨光中的遠方，象徵科技連結每個人的可能" loading="lazy"><div class="about-vision-copy"><span class="about-kicker">HUMAN × AI</span><h2>科技的終點不是取代人，<br>而是讓人有更多時間、更好的選擇。</h2><p>我們希望讓更多人擁有運用科技的能力，讓企業有力量持續成長，讓個人有勇氣追尋理想。</p></div></section>
+    <section class="about-signoff"><p class="about-kicker">以科技為橋，以助人為初心</p><h2>與你一起，讓每一份努力都更有力量，<br>讓每一個可能都值得期待。</h2><p>你的下一步，值得被認真對待。</p><a class="btn primary" href="#step4">開始對話　→</a></section>
+  </div>
+</section>
+
   </div>
 </div>
 </main>
@@ -699,7 +737,7 @@ details>summary{font-size:15px;line-height:1.55}
         <a href="#step3">AI 應用</a>
         <a href="#step2">問題導向入口</a>
         <a href="#custom">AI 客製化服務</a>
-        <a href="about.html">關於我們</a>
+        <a href="#about">關於我們</a>
         <a href="#step3">平台價值（Decision Layer）</a>
         <a href="#step4">信任與治理</a>
       </div>
@@ -711,7 +749,7 @@ details>summary{font-size:15px;line-height:1.55}
       </div>
     </div>
     <div class="copyright">
-      <span>© 2026 CHENGSI AI STUDIO · DECISION OS · v3.8.4</span>
+      <span>© 2026 CHENGSI AI STUDIO · DECISION OS · v3.8.6</span>
       <span>Human × AI · Keep the final decision human.</span>
     </div>
   </div>
@@ -1062,7 +1100,7 @@ renderApps();
 const panels=[...document.querySelectorAll('.stage>.panel')];
 const navItems=[...document.querySelectorAll('.sidenav a')];
 const sidenavNote=document.getElementById('sidenavNote');
-const panelLabels={home:'首頁',step1:'步驟 1／4 · 你的情境',step2:'步驟 2／4 · 你的問題',step3:'步驟 3／4 · 對應應用',step4:'步驟 4／4 · 提出需求'};
+const panelLabels={home:'首頁',about:'關於我們',step1:'步驟 1／4 · 你的情境',step2:'步驟 2／4 · 你的問題',step3:'步驟 3／4 · 對應應用',step4:'步驟 4／4 · 提出需求'};
 function showPanel(id,doScroll){
   if(!panels.some(p=>p.id===id))return;
   if(id==='step2'){
